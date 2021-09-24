@@ -1,0 +1,23 @@
+{
+  "name": "js-sdk",
+  "version": "0.1.0",
+  "description": "The Starlight SDK for JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/starlightcms/js-sdk.git"
+  },
+  "keywords": [
+    "starlight",
+    "sdk"
+  ],
+  "author": "Lucas Varela",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/starlightcms/js-sdk/issues"
+  },
+  "homepage": "https://github.com/starlightcms/js-sdk#readme"
+}
