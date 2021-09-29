@@ -49,10 +49,10 @@ export default class Client {
     return `${this.baseUrl}/workspaces/${this.workspace}`
   }
 
-  public async get(
+  public async get<T = Record<string, unknown>>(
     path: string,
     options?: RequestInit
-  ): Promise<Record<string, unknown>> {
+  ): Promise<T> {
     this.log(`Starlight - GET ${path}`)
 
     const response = await fetch(`${this.getBaseUrl()}${path}`, options)

@@ -1,5 +1,5 @@
 {
-  "name": "js-sdk",
+  "name": "@starlightcms/js-sdk",
   "version": "0.1.0",
   "description": "The Starlight SDK for JavaScript",
   "main": "dist/index.js",
