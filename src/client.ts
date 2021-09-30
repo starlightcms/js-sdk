@@ -1,76 +1,63 @@
-import { StarlightConfig } from './types'
+import {
+  ProxiedStarlightClient,
+  StarlightClient,
+  StarlightConfig,
+  WorkspaceModelDefinition,
+} from './types'
 import StarlightError from './errors'
 import EntrySelector from './selectors/EntrySelector'
 import ModelSelector from './selectors/ModelSelector'
 
-export default class Client {
-  private debug = false
-  private baseUrl = 'https://query.starlight.sh/v2'
-  private workspace = ''
+export function makeClient<D extends WorkspaceModelDefinition>(
+  config: StarlightConfig = {}
+): ProxiedStarlightClient<D> {
+  let baseUrl = config.baseUrl ?? 'https://query.starlight.sh/v2'
+  let workspace = config.workspace ?? ''
+  let debug = config.debug ?? false
 
-  constructor(config?: StarlightConfig) {
-    this.configure(config)
+  const client: StarlightClient = {
+    configure(config: StarlightConfig) {
+      baseUrl = config.baseUrl ?? baseUrl
+      workspace = config.workspace ?? workspace
+      debug = config.debug ?? debug
+    },
+    log(message, ...optionalParams) {
+      if (debug) console.log(message, ...optionalParams)
+    },
+    getBaseUrl(): string {
+      return `${baseUrl}/workspaces/${workspace}`
+    },
+    async get<T = Record<string, unknown>>(
+      path: string,
+      options?: RequestInit
+    ): Promise<T> {
+      this.log(`Starlight - GET ${path}`)
 
-    return new Proxy(this, {
-      get(target: Client, prop) {
-        if (typeof prop === 'string' && !(prop in target)) {
-          return target.getEntrySelector(prop)
-        }
+      const response = await fetch(`${this.getBaseUrl()}${path}`, options)
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        return target[prop]
-      },
-    })
+      if (response.status >= 200 && response.status < 300) {
+        return await response.json()
+      } else {
+        const message = `Starlight - GET ${path} returned ${response.status}: ${response.statusText}`
+
+        throw new StarlightError(message)
+      }
+    },
+    getEntrySelector(slug: string): EntrySelector {
+      return new EntrySelector(slug, this)
+    },
+    models(): ModelSelector {
+      return new ModelSelector(this)
+    },
   }
 
-  public configure(config: StarlightConfig = {}): void {
-    this.baseUrl =
-      (process && process.env && process.env.STARLIGHT_BASE_URL) ??
-      config.baseUrl ??
-      this.baseUrl
-    this.workspace =
-      (process && process.env && process.env.STARLIGHT_WORKSPACE) ??
-      config.workspace ??
-      this.workspace
-    this.debug =
-      (process && process.env && process.env.STARLIGHT_DEBUG === 'true') ??
-      config.debug ??
-      this.debug
-  }
+  return new Proxy(client, {
+    get(target, prop) {
+      if (typeof prop === 'string' && !Reflect.has(target, prop)) {
+        return target.getEntrySelector(prop)
+      }
 
-  protected log(message?: unknown, ...optionalParams: unknown[]): void {
-    if (this.debug) {
-      console.log(message, ...optionalParams)
-    }
-  }
-
-  public getBaseUrl(): string {
-    return `${this.baseUrl}/workspaces/${this.workspace}`
-  }
-
-  public async get<T = Record<string, unknown>>(
-    path: string,
-    options?: RequestInit
-  ): Promise<T> {
-    this.log(`Starlight - GET ${path}`)
-
-    const response = await fetch(`${this.getBaseUrl()}${path}`, options)
-
-    if (response.status >= 200 && response.status < 300) {
-      return await response.json()
-    } else {
-      const message = `Starlight - GET ${path} returned ${response.status}: ${response.statusText}`
-
-      throw new StarlightError(message)
-    }
-  }
-
-  private getEntrySelector(slug: string): EntrySelector {
-    return new EntrySelector(slug, this)
-  }
-
-  public models(): ModelSelector {
-    return new ModelSelector(this)
-  }
+      return Reflect.get(target, prop)
+    },
+  }) as ProxiedStarlightClient<D>
 }

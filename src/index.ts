@@ -1,7 +1,7 @@
-import Client from './client'
+import { makeClient } from './client'
 
-const Starlight = new Client()
+const Starlight = makeClient()
 
-export { Client as StarlightClient }
+export { makeClient as makeStarlightClient }
 
 export default Starlight

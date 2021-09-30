@@ -1,20 +1,25 @@
-import Client from '../client'
-import { Entry, StarlightItem, StarlightList } from '../types'
+import {
+  Entry,
+  EntryData,
+  StarlightClient,
+  StarlightItem,
+  StarlightList,
+} from '../types'
 
-export default class EntrySelector {
+export default class EntrySelector<D extends EntryData = undefined> {
   protected model: string
-  protected client: Client
+  protected client: StarlightClient
 
-  constructor(model: string, client: Client) {
+  constructor(model: string, client: StarlightClient) {
     this.model = model
     this.client = client
   }
 
-  public async list(): Promise<StarlightList<Entry>> {
+  public async list(): Promise<StarlightList<Entry<D>>> {
     return this.client.get(`/models/${this.model}/entries`)
   }
 
-  public async get(slug: string): Promise<StarlightItem<Entry>> {
+  public async get(slug: string): Promise<StarlightItem<Entry<D>>> {
     return this.client.get(`/models/${this.model}/entries/${slug}`)
   }
 }

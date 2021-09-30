@@ -1,3 +1,6 @@
+import EntrySelector from './selectors/EntrySelector'
+import ModelSelector from './selectors/ModelSelector'
+
 type BaseUrl = 'https://query.starlight.sh/v2' | string
 
 export type StarlightConfig = {
@@ -5,6 +8,28 @@ export type StarlightConfig = {
   baseUrl?: BaseUrl
   debug?: boolean
 }
+
+export interface StarlightClient {
+  configure(config: StarlightConfig): void
+
+  log(message?: unknown, ...optionalParams: unknown[]): void
+
+  getBaseUrl(): string
+
+  get<T = Record<string, unknown>>(
+    path: string,
+    options?: RequestInit
+  ): Promise<T>
+
+  getEntrySelector(slug: string): EntrySelector
+
+  models(): ModelSelector
+}
+
+export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =
+  StarlightClient & {
+    [K in keyof T]: EntrySelector<T[K]>
+  }
 
 export type StarlightItem<T> = {
   data: T
@@ -50,9 +75,14 @@ interface ModelCategory extends StarlightEntity {
   slug: string
 }
 
-export interface Entry<
-  D extends Record<string, unknown> | undefined = undefined
-> extends Omit<StarlightEntity, 'created_at'> {
+export interface WorkspaceModelDefinition {
+  [slug: string]: EntryData
+}
+
+export type EntryData = Record<string, unknown> | undefined
+
+export interface Entry<D extends EntryData = undefined>
+  extends Omit<StarlightEntity, 'created_at'> {
   title: string
   slug: string
   data: D

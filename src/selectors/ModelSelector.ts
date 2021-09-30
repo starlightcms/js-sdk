@@ -1,14 +1,13 @@
-import Client from '../client'
-import { Model, StarlightItem, StarlightList } from '../types'
+import { Model, StarlightClient, StarlightItem, StarlightList } from '../types'
 
 export default class ModelSelector {
-  protected client: Client
+  protected client: StarlightClient
 
-  constructor(client: Client) {
+  constructor(client: StarlightClient) {
     this.client = client
   }
 
-  public getClient(): Client {
+  public getClient(): StarlightClient {
     return this.client
   }
 
