@@ -1,4 +1,5 @@
 import {
+  DefaultModelDefinition,
   ProxiedStarlightClient,
   StarlightClient,
   StarlightConfig,
@@ -8,9 +9,9 @@ import StarlightError from './errors'
 import EntrySelector from './selectors/EntrySelector'
 import ModelSelector from './selectors/ModelSelector'
 
-export function makeClient<D extends WorkspaceModelDefinition>(
-  config: StarlightConfig = {}
-): ProxiedStarlightClient<D> {
+export function makeClient<
+  D extends WorkspaceModelDefinition = DefaultModelDefinition
+>(config: StarlightConfig = {}): ProxiedStarlightClient<D> {
   let baseUrl = config.baseUrl ?? 'https://query.starlight.sh/v2'
   let workspace = config.workspace ?? ''
   let debug = config.debug ?? false
