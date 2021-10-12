@@ -1,1 +1,1 @@
-export default class StarlightError extends Error {}
+export class StarlightError extends Error {}

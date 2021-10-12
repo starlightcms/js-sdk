@@ -1,12 +1,12 @@
 import {
   Entry,
-  EntryData,
+  SerializedData,
   StarlightClient,
-  StarlightItem,
-  StarlightList,
+  StarlightItemResponse,
+  StarlightListResponse,
 } from '../types'
 
-export default class EntrySelector<D extends EntryData = undefined> {
+export default class EntrySelector<D extends SerializedData = undefined> {
   protected model: string
   protected client: StarlightClient
 
@@ -15,11 +15,11 @@ export default class EntrySelector<D extends EntryData = undefined> {
     this.client = client
   }
 
-  public async list(): Promise<StarlightList<Entry<D>>> {
+  public async list(): Promise<StarlightListResponse<Entry<D>>> {
     return this.client.get(`/models/${this.model}/entries`)
   }
 
-  public async get(slug: string): Promise<StarlightItem<Entry<D>>> {
+  public async get(slug: string): Promise<StarlightItemResponse<Entry<D>>> {
     return this.client.get(`/models/${this.model}/entries/${slug}`)
   }
 }

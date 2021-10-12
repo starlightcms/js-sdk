@@ -1,5 +1,7 @@
 import { makeClient } from './client'
-export { DefaultModelDefinition, WorkspaceModelDefinition } from './types'
+export { DefaultModelDefinition } from './types'
+export { StarlightError } from './errors'
+export * from './types/fields'
 
 const Starlight = makeClient()
 

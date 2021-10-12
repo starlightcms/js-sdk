@@ -1,4 +1,9 @@
-import { Model, StarlightClient, StarlightItem, StarlightList } from '../types'
+import {
+  Model,
+  StarlightClient,
+  StarlightItemResponse,
+  StarlightListResponse,
+} from '../types'
 
 export default class ModelSelector {
   protected client: StarlightClient
@@ -11,11 +16,11 @@ export default class ModelSelector {
     return this.client
   }
 
-  public async list(): Promise<StarlightList<Model>> {
+  public async list(): Promise<StarlightListResponse<Model>> {
     return this.client.get('/models')
   }
 
-  public async get(slug: string): Promise<StarlightItem<Model>> {
+  public async get(slug: string): Promise<StarlightItemResponse<Model>> {
     return this.client.get(`/models/${slug}`)
   }
 }

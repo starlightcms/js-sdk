@@ -1,5 +1,9 @@
-import EntrySelector from './selectors/EntrySelector'
-import ModelSelector from './selectors/ModelSelector'
+import EntrySelector from '../selectors/EntrySelector'
+import ModelSelector from '../selectors/ModelSelector'
+import { SerializedData } from './entities'
+
+export * from './fields'
+export * from './entities'
 
 type BaseUrl = 'https://query.starlight.sh/v2' | string
 
@@ -31,11 +35,11 @@ export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =
     [K in keyof T]: EntrySelector<T[K]>
   }
 
-export type StarlightItem<T> = {
+export type StarlightItemResponse<T> = {
   data: T
 }
 
-export type StarlightList<T> = {
+export type StarlightListResponse<T> = {
   data: T[]
   links: {
     first: string
@@ -53,44 +57,9 @@ export type StarlightList<T> = {
   }
 }
 
-interface StarlightEntity {
-  id: number
-  created_at: string
-  updated_at?: string
-}
-
-export interface Model extends StarlightEntity {
-  title: string
-  slug: string
-  entry_count?: number
-}
-
-interface Author {
-  id: number
-  name: string
-}
-
-interface ModelCategory extends StarlightEntity {
-  title: string
-  slug: string
-}
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DefaultModelDefinition extends WorkspaceModelDefinition {}
 
 export interface WorkspaceModelDefinition {
-  [slug: string]: EntryData
-}
-
-export type EntryData = Record<string, unknown> | undefined
-
-export interface Entry<D extends EntryData = undefined>
-  extends Omit<StarlightEntity, 'created_at'> {
-  title: string
-  slug: string
-  data: D
-  author: Author
-  category: ModelCategory | null
-  model?: Model
-  published_at: string | null
+  [slug: string]: SerializedData
 }

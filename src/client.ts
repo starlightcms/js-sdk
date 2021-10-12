@@ -5,7 +5,7 @@ import {
   StarlightConfig,
   WorkspaceModelDefinition,
 } from './types'
-import StarlightError from './errors'
+import { StarlightError } from './errors'
 import EntrySelector from './selectors/EntrySelector'
 import ModelSelector from './selectors/ModelSelector'
 
