@@ -19,7 +19,11 @@ export default class EntrySelector<D extends SerializedData = undefined> {
     return this.client.get(`/models/${this.model}/entries`)
   }
 
-  public async get(slug: string): Promise<StarlightItemResponse<Entry<D>>> {
-    return this.client.get(`/models/${this.model}/entries/${slug}`)
+  public async get(slug: string): Promise<Entry<D>> {
+    const response: StarlightItemResponse<Entry<D>> = await this.client.get(
+      `/models/${this.model}/entries/${slug}`
+    )
+
+    return response.data
   }
 }
