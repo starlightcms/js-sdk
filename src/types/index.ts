@@ -35,11 +35,11 @@ export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =
     [K in keyof T]: EntrySelector<T[K]>
   }
 
-export type StarlightItemResponse<T> = {
+export interface StarlightItemResponse<T> {
   data: T
 }
 
-export type StarlightListResponse<T> = {
+export interface StarlightListResponse<T> {
   data: T[]
   links: {
     first: string
