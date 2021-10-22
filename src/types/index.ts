@@ -4,6 +4,7 @@ import { SerializedData } from './entities'
 
 export * from './fields'
 export * from './entities'
+export * from './visual'
 
 type BaseUrl = 'https://query.starlight.sh/v2' | string
 
