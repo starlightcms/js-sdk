@@ -21,7 +21,7 @@ export interface ImageBlock extends BlockData {
   url: string
 }
 
-export interface Block<D extends BlockData = BlockData> {
+export interface VisualDataBlock<D extends BlockData = BlockData> {
   type: string
   data: D
 }
@@ -29,5 +29,5 @@ export interface Block<D extends BlockData = BlockData> {
 export interface VisualData {
   time?: number
   version?: string
-  blocks: Block[]
+  blocks: VisualDataBlock[]
 }
