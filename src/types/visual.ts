@@ -1,3 +1,5 @@
+type BlockType = 'paragraph' | 'quote' | 'header' | 'image'
+
 interface BlockData {
   [key: string]: unknown
 }
@@ -22,7 +24,7 @@ export interface ImageBlock extends BlockData {
 }
 
 export interface VisualDataBlock<D extends BlockData = BlockData> {
-  type: string
+  type: BlockType
   data: D
 }
 
