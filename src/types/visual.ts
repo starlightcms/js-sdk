@@ -1,4 +1,4 @@
-type BlockType = 'paragraph' | 'quote' | 'header' | 'image'
+export type BlockType = 'paragraph' | 'quote' | 'header' | 'image'
 
 interface BlockData {
   [key: string]: unknown
