@@ -1,6 +1,6 @@
 import { SerializedData } from './entities'
-import { ProxiedModelSelector } from 'selectors/Model'
-import { ModelElement } from 'elements/Model'
+import { ProxiedModelSelector } from '../selectors/Model'
+import { ModelElement } from '../elements/Model'
 
 export * from './fields'
 export * from './entities'

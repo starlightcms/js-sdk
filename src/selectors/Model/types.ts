@@ -3,8 +3,8 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
   WorkspaceModelDefinition,
-} from 'types'
-import { ModelElement } from 'elements/Model'
+} from '../../types'
+import { ModelElement } from '../../elements/Model'
 
 export interface ModelSelector {
   list(): Promise<StarlightListResponse<Model>>

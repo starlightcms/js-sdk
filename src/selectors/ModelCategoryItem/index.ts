@@ -4,7 +4,7 @@ import {
   StarlightClient,
   StarlightItemResponse,
   StarlightListResponse,
-} from 'types'
+} from '../../types'
 import { ModelCategoryItemSelector } from './types'
 
 export default function makeModelCategoryItemSelector<D extends SerializedData>(

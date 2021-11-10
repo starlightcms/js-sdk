@@ -3,8 +3,8 @@ import {
   SerializedData,
   StarlightItemResponse,
   StarlightListResponse,
-} from 'types'
-import { ModelCategoryElement } from 'elements/ModelCategory'
+} from '../../types'
+import { ModelCategoryElement } from '../../elements/ModelCategory'
 
 export interface ModelCategorySelector {
   list(): Promise<StarlightListResponse<ModelCategory>>

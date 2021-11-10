@@ -3,11 +3,11 @@ import {
   SerializedData,
   StarlightClient,
   StarlightItemResponse,
-} from 'types'
+} from '../../types'
 import { ModelCategoryElement } from './types'
 import makeModelCategoryItemSelector, {
   ModelCategoryItemSelector,
-} from 'selectors/ModelCategoryItem'
+} from '../../selectors/ModelCategoryItem'
 
 export default function makeModelCategoryElement<D extends SerializedData>(
   client: StarlightClient,

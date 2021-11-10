@@ -4,7 +4,7 @@ import {
   StarlightClient,
   StarlightItemResponse,
   StarlightListResponse,
-} from 'types'
+} from '../../types'
 import { EntrySelector } from './types'
 
 export default function makeEntrySelector<D extends SerializedData>(

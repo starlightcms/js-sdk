@@ -4,11 +4,11 @@ import {
   StarlightClient,
   StarlightConfig,
   WorkspaceModelDefinition,
-} from 'types'
-import { StarlightError } from 'errors'
-import makeModelSelector from 'selectors/Model'
-import { ProxiedModelSelector } from 'selectors/Model'
-import makeModelElement from 'elements/Model'
+} from './types'
+import { StarlightError } from './errors'
+import makeModelSelector from './selectors/Model'
+import { ProxiedModelSelector } from './selectors/Model'
+import makeModelElement from './elements/Model'
 
 export function makeClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition

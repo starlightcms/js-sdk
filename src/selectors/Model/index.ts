@@ -4,9 +4,9 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
   WorkspaceModelDefinition,
-} from 'types'
+} from '../../types'
 import { ModelSelector, ProxiedModelSelector } from './types'
-import makeModelElement from 'elements/Model'
+import makeModelElement from '../../elements/Model'
 
 export default function makeModelSelector<D extends WorkspaceModelDefinition>(
   client: StarlightClient

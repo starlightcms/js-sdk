@@ -3,12 +3,12 @@ import {
   SerializedData,
   StarlightClient,
   StarlightItemResponse,
-} from 'types'
+} from '../../types'
 import { ModelElement } from './types'
-import makeEntrySelector, { EntrySelector } from 'selectors/Entry'
+import makeEntrySelector, { EntrySelector } from '../../selectors/Entry'
 import makeModelCategorySelector, {
   ProxiedModelCategorySelector,
-} from 'selectors/ModelCategory'
+} from '../../selectors/ModelCategory'
 
 export default function makeModelElement<D extends SerializedData>(
   client: StarlightClient,
