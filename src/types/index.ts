@@ -1,6 +1,6 @@
-import EntrySelector from '../selectors/EntrySelector'
-import ModelSelector from '../selectors/ModelSelector'
 import { SerializedData } from './entities'
+import { ProxiedModelSelector } from 'selectors/Model'
+import { ModelElement } from 'elements/Model'
 
 export * from './fields'
 export * from './entities'
@@ -14,7 +14,9 @@ export type StarlightConfig = {
   debug?: boolean
 }
 
-export interface StarlightClient {
+export interface StarlightClient<
+  D extends WorkspaceModelDefinition = DefaultModelDefinition
+> {
   configure(config: StarlightConfig): void
 
   log(message?: unknown, ...optionalParams: unknown[]): void
@@ -26,14 +28,12 @@ export interface StarlightClient {
     options?: RequestInit
   ): Promise<T>
 
-  getEntrySelector(slug: string): EntrySelector
-
-  models(): ModelSelector
+  get models(): ProxiedModelSelector<D>
 }
 
 export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =
-  StarlightClient & {
-    [K in keyof T]: EntrySelector<T[K]>
+  StarlightClient<T> & {
+    [K in keyof T]: ModelElement<T[K]>
   }
 
 export interface StarlightItemResponse<T> {
@@ -63,4 +63,8 @@ export interface DefaultModelDefinition extends WorkspaceModelDefinition {}
 
 export interface WorkspaceModelDefinition {
   [slug: string]: SerializedData
+}
+
+export interface StarlightSelector {
+  getClient(): StarlightClient
 }

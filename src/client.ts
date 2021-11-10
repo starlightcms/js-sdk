@@ -4,10 +4,11 @@ import {
   StarlightClient,
   StarlightConfig,
   WorkspaceModelDefinition,
-} from './types'
-import { StarlightError } from './errors'
-import EntrySelector from './selectors/EntrySelector'
-import ModelSelector from './selectors/ModelSelector'
+} from 'types'
+import { StarlightError } from 'errors'
+import makeModelSelector from 'selectors/Model'
+import { ProxiedModelSelector } from 'selectors/Model'
+import makeModelElement from 'elements/Model'
 
 export function makeClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition
@@ -22,12 +23,15 @@ export function makeClient<
       workspace = config.workspace ?? workspace
       debug = config.debug ?? debug
     },
+
     log(message, ...optionalParams) {
       if (debug) console.log(message, ...optionalParams)
     },
+
     getBaseUrl(): string {
       return `${baseUrl}/workspaces/${workspace}`
     },
+
     async get<T = Record<string, unknown>>(
       path: string,
       options?: RequestInit
@@ -44,18 +48,16 @@ export function makeClient<
         throw new StarlightError(message)
       }
     },
-    getEntrySelector(slug: string): EntrySelector {
-      return new EntrySelector(slug, this)
-    },
-    models(): ModelSelector {
-      return new ModelSelector(this)
+
+    get models(): ProxiedModelSelector<D> {
+      return makeModelSelector<D>(this)
     },
   }
 
   return new Proxy(client, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return target.getEntrySelector(prop)
+        return makeModelElement(target, prop)
       }
 
       return Reflect.get(target, prop)
