@@ -4,7 +4,7 @@ import {
   StarlightListResponse,
   WorkspaceModelDefinition,
 } from '../../types'
-import { ModelElement } from '../../elements/Model'
+import { ModelInstance } from '../../instances/Model'
 
 export interface ModelSelector {
   list(): Promise<StarlightListResponse<Model>>
@@ -13,5 +13,5 @@ export interface ModelSelector {
 
 export type ProxiedModelSelector<T extends WorkspaceModelDefinition> =
   ModelSelector & {
-    [K in keyof T]: ModelElement<T[K]>
+    [K in keyof T]: ModelInstance<T[K]>
   }

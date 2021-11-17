@@ -1,6 +1,9 @@
 import { SerializedData } from './entities'
 import { ProxiedModelSelector } from '../selectors/Model'
-import { ModelElement } from '../elements/Model'
+import { ModelInstance } from '../instances/Model'
+import { SingletonSelector } from '../selectors/Singleton'
+import { ProxiedCollectionSelector } from '../selectors/Collection'
+import { MediaSelector } from '../selectors/Media'
 
 export * from './fields'
 export * from './entities'
@@ -25,16 +28,27 @@ export interface StarlightClient<
 
   get<T = Record<string, unknown>>(
     path: string,
+    params?: Record<string, string | number | boolean | undefined>,
     options?: RequestInit
   ): Promise<T>
 
   get models(): ProxiedModelSelector<D>
+
+  get singletons(): SingletonSelector
+
+  get collections(): ProxiedCollectionSelector
+
+  get media(): MediaSelector
 }
 
 export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =
   StarlightClient<T> & {
-    [K in keyof T]: ModelElement<T[K]>
+    [K in keyof T]: ModelInstance<T[K]>
   }
+
+export interface RequestOptions {
+  [key: string]: unknown
+}
 
 export interface StarlightItemResponse<T> {
   data: T

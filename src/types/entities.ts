@@ -7,6 +7,7 @@ interface StarlightEntity {
 export interface ModelCategory extends StarlightEntity {
   title: string
   slug: string
+  entry_count?: number
 }
 
 export interface MediaFile extends StarlightEntity {
@@ -37,6 +38,10 @@ export interface Model extends StarlightEntity {
 }
 
 export type SerializedData = Record<string, unknown> | undefined
+
+export type ModelFieldOptions<D extends SerializedData> = {
+  [K in keyof D as `field:${string & K}`]?: string
+}
 
 export interface Entry<D extends SerializedData>
   extends Omit<StarlightEntity, 'created_at'> {

@@ -12,8 +12,8 @@ export default function makeEntrySelector<D extends SerializedData>(
   model: string
 ): EntrySelector<D> {
   return {
-    list(): Promise<StarlightListResponse<Entry<D>>> {
-      return client.get(`/models/${model}/entries`)
+    list(options): Promise<StarlightListResponse<Entry<D>>> {
+      return client.get(`/models/${model}/entries`, options)
     },
 
     get(slug: string): Promise<StarlightItemResponse<Entry<D>>> {

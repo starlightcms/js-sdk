@@ -6,18 +6,18 @@ import {
   StarlightListResponse,
 } from '../../types'
 import { ModelCategorySelector, ProxiedModelCategorySelector } from './types'
-import makeModelCategoryElement from '../../elements/ModelCategory'
+import makeModelCategoryInstance from '../../instances/ModelCategory'
 
 export default function makeModelCategorySelector<D extends SerializedData>(
   client: StarlightClient,
   model: string
 ): ProxiedModelCategorySelector<D> {
-  const selector = {
-    list(): Promise<StarlightListResponse<ModelCategory>> {
-      return client.get(`/models/${model}/categories`)
+  const selector: ModelCategorySelector = {
+    list(options): Promise<StarlightListResponse<ModelCategory>> {
+      return client.get(`/models/${model}/categories`, options)
     },
 
-    get(slug: string): Promise<StarlightItemResponse<ModelCategory>> {
+    get(slug): Promise<StarlightItemResponse<ModelCategory>> {
       return client.get(`/models/${model}/categories/${slug}`)
     },
   }
@@ -25,7 +25,7 @@ export default function makeModelCategorySelector<D extends SerializedData>(
   return new Proxy(selector, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return makeModelCategoryElement(client, model, prop)
+        return makeModelCategoryInstance(client, model, prop)
       }
 
       return Reflect.get(target, prop)

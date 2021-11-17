@@ -6,7 +6,7 @@ import {
   WorkspaceModelDefinition,
 } from '../../types'
 import { ModelSelector, ProxiedModelSelector } from './types'
-import makeModelElement from '../../elements/Model'
+import makeModelInstance from '../../instances/Model'
 
 export default function makeModelSelector<D extends WorkspaceModelDefinition>(
   client: StarlightClient
@@ -16,7 +16,7 @@ export default function makeModelSelector<D extends WorkspaceModelDefinition>(
       return client.get('/models')
     },
 
-    get(slug: string): Promise<StarlightItemResponse<Model>> {
+    get(slug): Promise<StarlightItemResponse<Model>> {
       return client.get(`/models/${slug}`)
     },
   }
@@ -24,7 +24,7 @@ export default function makeModelSelector<D extends WorkspaceModelDefinition>(
   return new Proxy(modelClient, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return makeModelElement(client, prop)
+        return makeModelInstance(client, prop)
       }
 
       return Reflect.get(target, prop)

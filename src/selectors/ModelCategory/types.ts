@@ -4,14 +4,23 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
-import { ModelCategoryElement } from '../../elements/ModelCategory'
+import { ModelCategoryInstance } from '../../instances/ModelCategory'
+
+export type ListModelCategoriesOptions = {
+  query?: string
+  page?: number
+  limit?: number
+  order?: 'title:asc' | 'title:desc' | 'entry_count:asc' | 'entry_count:desc'
+}
 
 export interface ModelCategorySelector {
-  list(): Promise<StarlightListResponse<ModelCategory>>
+  list(
+    options?: ListModelCategoriesOptions
+  ): Promise<StarlightListResponse<ModelCategory>>
   get(slug: string): Promise<StarlightItemResponse<ModelCategory>>
 }
 
 export type ProxiedModelCategorySelector<D extends SerializedData> =
   ModelCategorySelector & {
-    [slug: string]: ModelCategoryElement<D>
+    [slug: string]: ModelCategoryInstance<D>
   }

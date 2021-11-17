@@ -7,8 +7,10 @@ import {
 } from './types'
 import { StarlightError } from './errors'
 import makeModelSelector from './selectors/Model'
-import { ProxiedModelSelector } from './selectors/Model'
-import makeModelElement from './elements/Model'
+import makeModelInstance from './instances/Model'
+import makeSingletonSelector from './selectors/Singleton'
+import makeCollectionSelector from './selectors/Collection'
+import makeMediaSelector from './selectors/Media'
 
 export function makeClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition
@@ -18,7 +20,7 @@ export function makeClient<
   let debug = config.debug ?? false
 
   const client: StarlightClient = {
-    configure(config: StarlightConfig) {
+    configure(config) {
       baseUrl = config.baseUrl ?? baseUrl
       workspace = config.workspace ?? workspace
       debug = config.debug ?? debug
@@ -28,36 +30,49 @@ export function makeClient<
       if (debug) console.log(message, ...optionalParams)
     },
 
-    getBaseUrl(): string {
+    getBaseUrl() {
       return `${baseUrl}/workspaces/${workspace}`
     },
 
-    async get<T = Record<string, unknown>>(
-      path: string,
-      options?: RequestInit
-    ): Promise<T> {
-      this.log(`Starlight - GET ${path}`)
+    async get(path, params, options) {
+      const searchParams = new URLSearchParams(
+        params as Record<string, string>
+      ).toString()
+      const finalPath = searchParams ? `${path}?${searchParams}` : path
 
-      const response = await fetch(`${this.getBaseUrl()}${path}`, options)
+      this.log(`Starlight - GET ${finalPath}`)
+
+      const response = await fetch(`${this.getBaseUrl()}${finalPath}`, options)
 
       if (response.status >= 200 && response.status < 300) {
         return await response.json()
       } else {
         const message = `Starlight - GET ${path} returned ${response.status}: ${response.statusText}`
-
-        throw new StarlightError(message)
+        throw new StarlightError(message, response)
       }
     },
 
-    get models(): ProxiedModelSelector<D> {
-      return makeModelSelector<D>(this)
+    get models() {
+      return makeModelSelector(this)
+    },
+
+    get singletons() {
+      return makeSingletonSelector(this)
+    },
+
+    get collections() {
+      return makeCollectionSelector(this)
+    },
+
+    get media() {
+      return makeMediaSelector(this)
     },
   }
 
   return new Proxy(client, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return makeModelElement(target, prop)
+        return makeModelInstance(target, prop)
       }
 
       return Reflect.get(target, prop)

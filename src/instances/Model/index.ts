@@ -4,16 +4,16 @@ import {
   StarlightClient,
   StarlightItemResponse,
 } from '../../types'
-import { ModelElement } from './types'
+import { ModelInstance } from './types'
 import makeEntrySelector, { EntrySelector } from '../../selectors/Entry'
 import makeModelCategorySelector, {
   ProxiedModelCategorySelector,
 } from '../../selectors/ModelCategory'
 
-export default function makeModelElement<D extends SerializedData>(
+export default function makeModelInstance<D extends SerializedData>(
   client: StarlightClient,
   model: string
-): ModelElement<D> {
+): ModelInstance<D> {
   return {
     get(): Promise<StarlightItemResponse<Model>> {
       return client.get(`/models/${model}`)
@@ -29,4 +29,4 @@ export default function makeModelElement<D extends SerializedData>(
   }
 }
 
-export { ModelElement }
+export { ModelInstance }

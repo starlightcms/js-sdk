@@ -1,12 +1,13 @@
 import {
   Entry,
+  ModelCategory,
   ModelFieldOptions,
   SerializedData,
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
 
-export type ListEntriesOptions<D extends SerializedData> = {
+export type ModelCategoryEntryListOptions<D extends SerializedData> = {
   page?: number
   limit?: number
   query?: string
@@ -22,9 +23,9 @@ export type ListEntriesOptions<D extends SerializedData> = {
   except?: number
 } & ModelFieldOptions<D>
 
-export interface EntrySelector<D extends SerializedData> {
-  get(slug: string): Promise<StarlightItemResponse<Entry<D>>>
-  list(
-    options?: ListEntriesOptions<D>
+export interface ModelCategoryInstance<D extends SerializedData> {
+  get(): Promise<StarlightItemResponse<ModelCategory>>
+  entries(
+    options?: ModelCategoryEntryListOptions<D>
   ): Promise<StarlightListResponse<Entry<D>>>
 }
