@@ -1,6 +1,12 @@
-export type BlockType = 'paragraph' | 'quote' | 'header' | 'image'
+export type BlockType =
+  | 'paragraph'
+  | 'quote'
+  | 'header'
+  | 'image'
+  | 'raw'
+  | 'list'
 
-interface BlockData {
+export interface BlockData {
   [key: string]: unknown
 }
 
@@ -19,11 +25,36 @@ export interface QuoteBlock extends BlockData {
   alignment: 'left' | 'center'
 }
 
-export interface ImageBlock extends BlockData {
+type ImageFile = {
   url: string
+  width: number
+}
+
+export interface ImageBlock extends BlockData {
+  id: number
+  url: string
+  files: ImageFile[]
+  caption?: string
+  alt?: string
+  href?: string
+}
+
+export interface HTMLBlock extends BlockData {
+  html: string
+}
+
+export interface ListItem {
+  content: string
+  items?: ListItem[]
+}
+
+export interface ListBlock extends BlockData {
+  style: 'ordered' | 'unordered'
+  items: ListItem[]
 }
 
 export interface VisualDataBlock<D extends BlockData = BlockData> {
+  id: string
   type: BlockType
   data: D
 }

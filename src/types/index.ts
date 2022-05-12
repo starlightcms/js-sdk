@@ -34,6 +34,8 @@ export interface StarlightClient<
 
   get models(): ProxiedModelSelector<D>
 
+  model<S extends keyof D>(slug: S): ModelInstance<D[S]>
+
   get singletons(): SingletonSelector
 
   get collections(): ProxiedCollectionSelector
@@ -45,10 +47,6 @@ export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =
   StarlightClient<T> & {
     [K in keyof T]: ModelInstance<T[K]>
   }
-
-export interface RequestOptions {
-  [key: string]: unknown
-}
 
 export interface StarlightItemResponse<T> {
   data: T
@@ -77,8 +75,4 @@ export interface DefaultModelDefinition extends WorkspaceModelDefinition {}
 
 export interface WorkspaceModelDefinition {
   [slug: string]: SerializedData
-}
-
-export interface StarlightSelector {
-  getClient(): StarlightClient
 }

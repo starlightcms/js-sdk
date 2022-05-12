@@ -56,6 +56,10 @@ export function makeClient<
       return makeModelSelector(this)
     },
 
+    model(slug) {
+      return makeModelInstance(this, slug as string)
+    },
+
     get singletons() {
       return makeSingletonSelector(this)
     },
