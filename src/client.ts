@@ -34,10 +34,16 @@ export function makeClient<
       return `${baseUrl}/workspaces/${workspace}`
     },
 
-    async get(path, params, options) {
-      const searchParams = new URLSearchParams(
-        params as Record<string, string>
-      ).toString()
+    async get(path, params = {}, options) {
+      const filteredParams = Object.keys(params).reduce((accumulator, key) => {
+        const param = params[key]
+
+        if (param || param === false) accumulator[key] = String(param)
+
+        return accumulator
+      }, {} as Record<string, string>)
+
+      const searchParams = new URLSearchParams(filteredParams).toString()
       const finalPath = searchParams ? `${path}?${searchParams}` : path
 
       this.log(`Starlight - GET ${finalPath}`)
