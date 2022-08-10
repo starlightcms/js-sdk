@@ -22,8 +22,16 @@ export type ListEntriesOptions<D extends SerializedData> = {
   except?: number
 } & ModelFieldOptions<D>
 
+export type GetEntryParams = {
+  preview?: string
+}
+
 export interface EntrySelector<D extends SerializedData> {
-  get(slug: string): Promise<StarlightItemResponse<Entry<D>>>
+  get(
+    slug: string,
+    params?: GetEntryParams,
+    options?: RequestInit
+  ): Promise<StarlightItemResponse<Entry<D>>>
   list(
     options?: ListEntriesOptions<D>
   ): Promise<StarlightListResponse<Entry<D>>>
