@@ -1,6 +1,6 @@
 {
   "name": "@starlightcms/js-sdk",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "The Starlight SDK for JavaScript",
   "main": "dist/cjs/index.js",
   "exports": {
