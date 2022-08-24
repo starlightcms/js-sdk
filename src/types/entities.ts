@@ -24,6 +24,8 @@ export interface MediaObject extends StarlightEntity {
   extension: string
   mime: string
   files: MediaFile[]
+  alt?: string
+  description?: string
 }
 
 export interface Author {
