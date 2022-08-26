@@ -9,6 +9,9 @@ import makeEntrySelector, { EntrySelector } from '../../selectors/Entry'
 import makeModelCategorySelector, {
   ProxiedModelCategorySelector,
 } from '../../selectors/ModelCategory'
+import makeModelCategoryInstance, {
+  ModelCategoryInstance,
+} from '../ModelCategory'
 
 export default function makeModelInstance<D extends SerializedData>(
   client: StarlightClient,
@@ -17,6 +20,10 @@ export default function makeModelInstance<D extends SerializedData>(
   return {
     get(): Promise<StarlightItemResponse<Model>> {
       return client.get(`/models/${model}`)
+    },
+
+    category(slug: string): ModelCategoryInstance<D> {
+      return makeModelCategoryInstance(client, model, slug)
     },
 
     get entries(): EntrySelector<D> {

@@ -12,6 +12,7 @@ export type ListEntriesOptions<D extends SerializedData> = {
   query?: string
   'query:word'?: string
   fields?: string
+  categories?: string
   order?:
     | 'title:asc'
     | 'title:desc'

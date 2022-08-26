@@ -4,6 +4,7 @@ import { ModelInstance } from '../instances/Model'
 import { SingletonSelector } from '../selectors/Singleton'
 import { ProxiedCollectionSelector } from '../selectors/Collection'
 import { MediaSelector } from '../selectors/Media'
+import { SearchSelector } from '../selectors/Search'
 
 export * from './fields'
 export * from './entities'
@@ -41,6 +42,8 @@ export interface StarlightClient<
   get collections(): ProxiedCollectionSelector
 
   get media(): MediaSelector
+
+  get search(): SearchSelector
 }
 
 export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =

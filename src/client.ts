@@ -11,6 +11,7 @@ import makeModelInstance from './instances/Model'
 import makeSingletonSelector from './selectors/Singleton'
 import makeCollectionSelector from './selectors/Collection'
 import makeMediaSelector from './selectors/Media'
+import makeSearchSelector from './selectors/Search'
 
 export function makeClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition
@@ -76,6 +77,10 @@ export function makeClient<
 
     get media() {
       return makeMediaSelector(this)
+    },
+
+    get search() {
+      return makeSearchSelector(this)
     },
   }
 
