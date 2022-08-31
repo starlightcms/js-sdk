@@ -1,10 +1,9 @@
-import { StarlightClient } from '../../types'
+import { CollectionTypes, StarlightClient } from '../../types'
 import { CollectionInstance } from './types'
 
-export default function makeCollectionInstance(
-  client: StarlightClient,
-  collection: string
-): CollectionInstance {
+export default function makeCollectionInstance<
+  T extends CollectionTypes = string
+>(client: StarlightClient, collection: string | number): CollectionInstance<T> {
   return {
     get() {
       return client.get(`/collections/${collection}`)

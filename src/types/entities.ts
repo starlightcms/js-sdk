@@ -64,15 +64,33 @@ export interface Singleton<D extends SerializedData>
   published_at: string | null
 }
 
-export interface Collection extends StarlightEntity {
+export type CollectionTypes = 'entry' | 'singleton' | 'media' | string
+
+export interface Collection<T extends CollectionTypes = string>
+  extends StarlightEntity {
   title: string
   slug: string
-  type: 'entry' | 'singleton' | 'media' | string
+  type: T
   item_count?: number
 }
 
-export interface Relation<D extends SerializedData = Record<string, unknown>> {
-  type: 'entry' | 'media' | 'singleton' | 'collection' | string
+type RelationTypes =
+  | Entry<never>
+  | Singleton<never>
+  | MediaObject
+  | Collection
+  | unknown
+
+export interface Relation<T extends RelationTypes> {
+  type: T extends Entry<never>
+    ? 'entry'
+    : T extends Singleton<never>
+    ? 'singleton'
+    : T extends MediaObject
+    ? 'media'
+    : T extends Collection
+    ? 'collection'
+    : string
   id: number
-  object: Entry<D> | Singleton<D> | MediaObject | Collection
+  object: T
 }

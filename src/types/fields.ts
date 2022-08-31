@@ -7,7 +7,7 @@ export type HtmlField = string
 
 export type MediaField = MediaObject
 
-export type RelationField = Relation
+export type RelationField<T> = Relation<T>
 
 export type StringField = string
 

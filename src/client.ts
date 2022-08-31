@@ -12,6 +12,7 @@ import makeSingletonSelector from './selectors/Singleton'
 import makeCollectionSelector from './selectors/Collection'
 import makeMediaSelector from './selectors/Media'
 import makeSearchSelector from './selectors/Search'
+import makeCollectionInstance from './instances/Collection'
 
 export function makeClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition
@@ -73,6 +74,10 @@ export function makeClient<
 
     get collections() {
       return makeCollectionSelector(this)
+    },
+
+    collection(slug: string | number) {
+      return makeCollectionInstance(this, slug)
     },
 
     get media() {

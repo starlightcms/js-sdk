@@ -16,7 +16,7 @@ export interface CollectionSelector {
   list(
     options?: ListCollectionsOptions
   ): Promise<StarlightListResponse<Collection>>
-  get(slug: string): Promise<StarlightItemResponse<Collection>>
+  get(slug: string | number): Promise<StarlightItemResponse<Collection>>
 }
 
 export type ProxiedCollectionSelector = CollectionSelector & {

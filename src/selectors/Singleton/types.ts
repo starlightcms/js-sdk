@@ -1,12 +1,13 @@
 import {
+  SerializedData,
   Singleton,
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
 
 export interface SingletonSelector {
-  get(
+  get<D extends SerializedData>(
     slug: string
-  ): Promise<StarlightItemResponse<Singleton<Record<string, unknown>>>>
+  ): Promise<StarlightItemResponse<Singleton<D>>>
   list(): Promise<StarlightListResponse<Singleton<Record<string, unknown>>>>
 }

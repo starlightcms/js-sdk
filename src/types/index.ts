@@ -1,10 +1,11 @@
-import { SerializedData } from './entities'
+import { CollectionTypes, SerializedData } from './entities'
 import { ProxiedModelSelector } from '../selectors/Model'
 import { ModelInstance } from '../instances/Model'
 import { SingletonSelector } from '../selectors/Singleton'
 import { ProxiedCollectionSelector } from '../selectors/Collection'
 import { MediaSelector } from '../selectors/Media'
 import { SearchSelector } from '../selectors/Search'
+import { CollectionInstance } from '../instances/Collection'
 
 export * from './fields'
 export * from './entities'
@@ -40,6 +41,10 @@ export interface StarlightClient<
   get singletons(): SingletonSelector
 
   get collections(): ProxiedCollectionSelector
+
+  collection<T extends CollectionTypes = string>(
+    slug: string | number
+  ): CollectionInstance<T>
 
   get media(): MediaSelector
 

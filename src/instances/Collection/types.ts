@@ -1,5 +1,6 @@
 import {
   Collection,
+  CollectionTypes,
   ModelFieldOptions,
   SerializedData,
   StarlightItemResponse,
@@ -22,8 +23,8 @@ export type ListCollectionItemsOptions<T> = {
   except?: number
 } & (T extends SerializedData ? ModelFieldOptions<T> : unknown)
 
-export interface CollectionInstance {
-  get(): Promise<StarlightItemResponse<Collection>>
+export interface CollectionInstance<C extends CollectionTypes = string> {
+  get(): Promise<StarlightItemResponse<Collection<C>>>
   items<T>(
     options?: ListCollectionItemsOptions<T>
   ): Promise<StarlightListResponse<T>>
