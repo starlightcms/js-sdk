@@ -7,10 +7,8 @@ import TabItem from '@theme/TabItem'
 
 # Introdução
 
-Nesse guia, aprenderemos como utilizar o JS SDK do Starlight, uma ferramenta oficial que automatiza o processo
+Nesse guia, aprenderemos a utilizar o JS SDK do Starlight, uma ferramenta oficial que automatiza o processo
 de integração de sites e aplicações JavaScript com as APIs do Starlight.
-
-{/* asdasd */}
 
 :::tip Dica
 
@@ -18,11 +16,19 @@ Quer ver exemplos de uso ou lembrar rapidamente como utilizar uma API específic
 
 :::
 
-O JS SDK pode ser usado em qualquer aplicação JavaScript e TypeScript. Porém, os seguintes SDKs podem ser melhores
+O JS SDK pode ser usado em qualquer aplicação JavaScript e TypeScript. Porém, se sua aplicação usa React, você pode
+utilizar o Starlight React SDK, que provê componentes React que facilitam a integração com o Starlight, além de todas
+as funcionalidades do JS SDK.
+
+:::info Versão da API
+
+O JS SDK requisita informações do Starlight utilizando a versão 2 da Query API.
+
+:::
 
 ## Instalação
 
-Antes de continuar para as próximas páginas, instale o SDK no seu projeto:
+Para começar a utilizar o JS SDK, instale-o no seu projeto:
 
 <Tabs>
   <TabItem value="npm" label="npm" default>
@@ -40,3 +46,27 @@ Antes de continuar para as próximas páginas, instale o SDK no seu projeto:
 
   </TabItem>
 </Tabs>
+
+## Configuração
+
+Antes de começar a utilizar o JS SDK, você precisa configurar qual área de trabalho deve ser utilizada para requisitar
+dados. Utilize o método `configure` para isso:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+Starlight.configure({
+  workspace: '1234567890'
+})
+```
+
+A configuração do Starlight só precisa ser feita uma vez, idealmente no início do ciclo de vida da sua aplicação.
+
+:::danger Identificador
+
+Atualmente, a versão 2 das APIs do Starlight só identificam áreas de trabalho utilizando seus IDs. O suporte à slugs
+ainda não foi implementado.
+
+Você pode pegar o ID de uma área de trabalho na interface de administração do Starlight, abaixo do nome da área de
+trabalho no menu ao lado esquerdo da interface.
+:::
