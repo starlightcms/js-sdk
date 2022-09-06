@@ -1,0 +1,55 @@
+---
+title: Entradas
+sidebar_position: 2
+---
+
+# Requisitando dados
+
+Um cliente do Starlight provê, dentre outras coisas, vários métodos para requisitar dados de uma área de trabalho no
+Starlight. Na seção de configuração, por exemplo, você utilizou o método `configure` para indicar qual área de trabalho
+o SDK deve utilizar nas requisições.
+
+Existem duas maneiras de interagir com um cliente do Starlight:
+- Utilizando o cliente global do JS SDK; ou
+- Criando uma nova instância do cliente
+
+## Cliente global do SDK
+
+O JS SDK provê um cliente pré-configurado globalmente para usar na sua aplicação. Para usá-lo, basta importar o <i>default export</i>
+do SDK:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+```
+
+Você pode usar esse <i>import</i> em qualquer lugar da sua aplicação. Como esse cliente é global e único, você só
+precisa configurá-lo uma vez, como explicado na seção de configuração.
+
+:::tip Default export
+
+Como o cliente global do SDK é o objeto exportado por padrão pelo módulo do SDK, você pode chamá-lo de qualquer coisa,
+não apenas Starlight. Por exemplo, você pode importá-lo com um nome mais explicativo caso use mais de um cliente
+na sua aplicação:
+
+```js
+import BlogClient from '@starlightcms/js-sdk'
+```
+
+:::
+
+## Instanciando um cliente
+
+Caso sua aplicação precise requisitar dados de mais de uma área de trabalho do Starlight, você pode instanciar novos
+clientes:
+
+```js
+import { makeStarlightClient } from '@starlightcms/js-sdk'
+
+const NewClient = makeStarlightClient({
+  workspace: '1234567890'
+})
+```
+
+A função `makeStarlightClient` recebe as mesmas configurações que o método `configure` do cliente global e retorna uma
+instância única, separada do cliente global. Depois de criado, você pode exportar esse cliente para ser usado no resto
+da sua aplicação.

@@ -1,6 +1,6 @@
 # Cliente
 
-Um cliente do Starlight provê, dentre algumas coisas, vários métodos para requisitar dados de uma área de trabalho no
+Um cliente do Starlight provê, dentre outras coisas, vários métodos para requisitar dados de uma área de trabalho no
 Starlight. Na seção de configuração, por exemplo, você utilizou o método `configure` para indicar qual área de trabalho
 o SDK deve utilizar nas requisições.
 
@@ -32,9 +32,35 @@ import BlogClient from '@starlightcms/js-sdk'
 
 :::
 
-## Instanciando um cliente
+### Configurando o cliente global
 
-Caso sua aplicação precise requisitar dados de mais de uma área de trabalho do Starlight, você pode instanciar novos
+Antes de começar a utilizar o cliente global do SDK, você precisa configurar qual *área de trabalho* deve ser utilizada
+para requisitar dados. Utilize o método `configure` para isso:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+Starlight.configure({
+  workspace: '1234567890'
+})
+```
+
+A configuração do cliente global só precisa ser feita uma vez, idealmente no início do ciclo de vida da sua aplicação.
+Por exemplo, em aplicações React, você pode configurar o cliente global no mesmo arquivo onde você instancia a raíz
+da sua aplicação usando `ReactDOM.createRoot()`.
+
+:::caution Identificador
+
+Atualmente, a versão 2 das APIs do Starlight só identificam áreas de trabalho utilizando seus IDs. O suporte à slugs
+ainda não foi implementado.
+
+Você pode visualizar o ID de uma área de trabalho na interface de administração do Starlight, abaixo do nome da área de
+trabalho no menu ao lado esquerdo da tela.
+:::
+
+## Criando um cliente
+
+Caso sua aplicação precise requisitar dados de mais de uma área de trabalho do Starlight, você pode criar novos
 clientes:
 
 ```js
@@ -46,5 +72,68 @@ const NewClient = makeStarlightClient({
 ```
 
 A função `makeStarlightClient` recebe as mesmas configurações que o método `configure` do cliente global e retorna uma
-instância única, separada do cliente global. Depois de criada, você pode exportar esse cliente para ser usado no resto
+instância única, separada do cliente global. Depois de criado, você pode exportar esse cliente para ser usado no resto
 da sua aplicação.
+
+## Requisições retornam Promises
+
+Todo cliente do SDK provê os mesmos métodos para requisição de dados de sua respectiva *área de trabalho*. Você vai
+aprender como fazer requisições nas próximas páginas, mas aqui vai um exemplo de como requisitar uma *entrada* de um
+*modelo* de slug `posts`:
+
+```js showLineNumbers
+import Starlight from '@starlightcms/js-sdk'
+
+const requestEntry = async (slug) => {
+  // response é do tipo StarlightItemResponse<Entry>
+  const response = await Starlight.posts.entries.get(slug)
+
+  // O parâmetro data é do tipo Entry
+  return response.data
+}
+
+const helloWorldEntry = await requestEntry('hello-world')
+```
+
+Note que usamos a sintaxe `async` do JavaScript ao utilizar o método `get` na linha 5. Fizemos isso porque **todos os
+métodos do SDK que fazem requisições ao Starlight retornam Promises**. Isso quer dizer que você também pode usar a
+sintaxe `.then()` ao invés de `async/await`, se preferir.
+
+## Tratando erros nas requisições
+
+O exemplo acima é útil, mas não deve ser usado em ambientes de produção, já que sua aplicação pode quebrar caso um
+erro aconteça no processo de requisição da entrada, ou caso uma entrada com o slug requisitado não exista.
+
+Para resolver esse problema, você pode usar `try/catch` ou `.catch()` nas requisições. Todos os métodos do SDK que fazem
+requisições retornam um erro do tipo `StarlightError` quando algo errado acontece, inclusive no caso do Starlight não
+encontrar o dado requisitado (404). Por exemplo, podemos melhorar a função acima:
+
+```js
+import Starlight, { StarlightError } from '@starlightcms/js-sdk'
+
+const requestEntry = async (slug) => {
+  try {
+    const response = await Starlight.posts.entries.get(slug)
+
+    return response.data
+  } catch (error) {
+    if (error instanceof StarlightError && error.response.status === 404) {
+      // O Starlight não encontrou uma entrada com esse slug.
+      return false
+    }
+
+    // Se o erro não for 404, apenas o "jogamos" novamente.
+    // Nesse caso, quem usar essa função se responsabiliza em tratar esse erro.
+    throw error
+  }
+}
+
+// Caso a helloWorldEntry seja "false", essa entrada não existe.
+// Caso exista, helloWorldEntry será do tipo Entry.
+const helloWorldEntry = await requestEntry('hello-world')
+```
+
+O StarlightError é um objeto com um parâmetro `response`, que é a resposta retornada pelo método `fetch` do navegador
+(ou do Node, caso você faça a requisição do lado do servidor). Para mais informações sobre a resposta, dê uma olhada
+[nessa página do MDN sobre o objeto Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). Você também
+pode aprender mais sobre o StarlightError [nessa página do guia](../requesting-data/requests-and-responses#starlighterror).

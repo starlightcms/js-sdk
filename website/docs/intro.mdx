@@ -10,19 +10,13 @@ import TabItem from '@theme/TabItem'
 Nesse guia, aprenderemos a utilizar o JS SDK do Starlight, uma ferramenta oficial que automatiza o processo
 de integração de sites e aplicações JavaScript com as APIs do Starlight.
 
-:::tip Dica
-
-Quer ver exemplos de uso ou lembrar rapidamente como utilizar uma API específica? Dê uma olhada na seção Cheatsheet.
-
-:::
-
 O JS SDK pode ser usado em qualquer aplicação JavaScript e TypeScript. Porém, se sua aplicação usa React, você pode
 utilizar o Starlight React SDK, que provê componentes React que facilitam a integração com o Starlight, além de todas
 as funcionalidades do JS SDK.
 
 :::info Versão da API
 
-O JS SDK requisita informações do Starlight utilizando a versão 2 da Query API.
+O JS SDK requisita e envia dados para o Starlight utilizando a versão 2 das APIs.
 
 :::
 
@@ -47,26 +41,19 @@ Para começar a utilizar o JS SDK, instale-o no seu projeto:
   </TabItem>
 </Tabs>
 
+Depois de instalado, você precisa configurar qual área de trabalho deve ser utilizada para requisitar dados. Saiba mais
+na [página sobre o Cliente](./client#configurando-o-cliente-global) desse guia.
+
 ## Configuração
 
 Antes de começar a utilizar o JS SDK, você precisa configurar qual área de trabalho deve ser utilizada para requisitar
-dados. Utilize o método `configure` para isso:
+dados. Para
 
-```js
-import Starlight from '@starlightcms/js-sdk'
+## TypeScript
 
-Starlight.configure({
-  workspace: '1234567890'
-})
-```
+O JS SDK é escrito em TypeScript e "tipa" corretamente todos os seus métodos, o que é útil mesmo que você use JavaScript
+comum na sua aplicação, já que sua IDE pode usar esses tipos para lhe ajudar no desenvolvimento.
 
-A configuração do Starlight só precisa ser feita uma vez, idealmente no início do ciclo de vida da sua aplicação.
+Além disso, o SDK provê uma maneira simples de criar tipos para os dados dos *modelos* e *singletons* da sua *área de trabalho*.
 
-:::danger Identificador
-
-Atualmente, a versão 2 das APIs do Starlight só identificam áreas de trabalho utilizando seus IDs. O suporte à slugs
-ainda não foi implementado.
-
-Você pode pegar o ID de uma área de trabalho na interface de administração do Starlight, abaixo do nome da área de
-trabalho no menu ao lado esquerdo da interface.
-:::
+Para saber mais, consulte a página sobre TypeScript desse guia.

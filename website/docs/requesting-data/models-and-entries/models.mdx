@@ -1,0 +1,49 @@
+---
+sidebar_position: 1
+---
+
+# Modelos
+
+Com o SDK do Starlight, você pode listar *modelos*, requisitar os dados de um modelo específico, ou utilizar uma instância
+de um modelo para requisitar suas entradas e categorias.
+
+O SDK provê três maneiras de trabalhar com modelos:
+
+- Usando um ModelSelector
+- Usando um ModelInstance
+- Usando um ModelInstance via um "atalho mágico"
+
+Um ModelSelector serve para listar e requisitar os dados dos modelos da sua *área de trabalho*. Porém, para acessar
+entradas e categorias, você precisa utilizar um ModelInstance.
+
+O "atalho mágico" é uma maneira mais simples e direta de acessar um ModelInstance, utilizando uma API mais versátil e
+simples de ler.
+
+## Usando um ModelSelector
+
+ModelSelectors são utilizados para listar modelos e requisitar seus dados. Para usar um ModelSelector, basta acessar a
+propriedade `models` do SDK:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// A propriedade models é um ModelSelector
+const modelSelector = Starlight.models
+```
+
+Em geral, você não precisa utilizar um ModelSelector como no exemplo acima. Você pode simplesmente encadear seus métodos
+para requisitar o que você precisa. Por exemplo:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// Listar todos os modelos da área de trabalho
+const models = await Starlight.models.list()
+
+// Requisitar os dados de um modelo específico
+const postsModel = await Starlight.models.get('posts')
+
+// postsModel é um StarlightItemResponse<Model>
+console.log(postsModel)
+//
+```

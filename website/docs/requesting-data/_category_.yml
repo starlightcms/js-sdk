@@ -1,0 +1,7 @@
+label: 'Requisitando dados'
+collapsed: false
+link:
+  type: generated-index
+  slug: /requesting-data
+  description: O SDK do Starlight provê métodos para requisitar todos os tipos de dados disponíveis no Starlight, como 
+    Modelos e Singletons. As páginas dessa categoria lidam com cada um desses tipos.
