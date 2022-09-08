@@ -4,7 +4,7 @@ import {
   StarlightClient,
   StarlightItemResponse,
 } from '../../types'
-import { ModelInstance } from './types'
+import { ProxiedModelInstance } from './types'
 import makeEntrySelector, { EntrySelector } from '../../selectors/Entry'
 import makeModelCategorySelector, {
   ProxiedModelCategorySelector,
@@ -16,8 +16,8 @@ import makeModelCategoryInstance, {
 export default function makeModelInstance<D extends SerializedData>(
   client: StarlightClient,
   model: string
-): ModelInstance<D> {
-  return {
+): ProxiedModelInstance<D> {
+  const instance = {
     get(): Promise<StarlightItemResponse<Model>> {
       return client.get(`/models/${model}`)
     },
@@ -34,6 +34,16 @@ export default function makeModelInstance<D extends SerializedData>(
       return makeModelCategorySelector(client, model)
     },
   }
+
+  return new Proxy(instance, {
+    get(target, prop) {
+      if (typeof prop === 'string' && !Reflect.has(target, prop)) {
+        return makeModelCategoryInstance(client, model, prop)
+      }
+
+      return Reflect.get(target, prop)
+    },
+  }) as ProxiedModelInstance<D>
 }
 
-export { ModelInstance }
+export { ProxiedModelInstance }

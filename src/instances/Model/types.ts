@@ -9,3 +9,8 @@ export interface ModelInstance<D extends SerializedData> {
   get entries(): EntrySelector<D>
   get categories(): ProxiedModelCategorySelector<D>
 }
+
+export type ProxiedModelInstance<D extends SerializedData> =
+  ModelInstance<D> & {
+    [key: string]: ModelCategoryInstance<D>
+  }

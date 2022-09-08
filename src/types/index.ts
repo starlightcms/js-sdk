@@ -1,6 +1,6 @@
 import { CollectionTypes, SerializedData } from './entities'
 import { ProxiedModelSelector } from '../selectors/Model'
-import { ModelInstance } from '../instances/Model'
+import { ProxiedModelInstance } from '../instances/Model'
 import { SingletonSelector } from '../selectors/Singleton'
 import { ProxiedCollectionSelector } from '../selectors/Collection'
 import { MediaSelector } from '../selectors/Media'
@@ -36,7 +36,7 @@ export interface StarlightClient<
 
   get models(): ProxiedModelSelector<D>
 
-  model<S extends keyof D>(slug: S): ModelInstance<D[S]>
+  model<S extends keyof D>(slug: S): ProxiedModelInstance<D[S]>
 
   get singletons(): SingletonSelector
 
@@ -53,7 +53,7 @@ export interface StarlightClient<
 
 export type ProxiedStarlightClient<T extends WorkspaceModelDefinition> =
   StarlightClient<T> & {
-    [K in keyof T]: ModelInstance<T[K]>
+    [K in keyof T]: ProxiedModelInstance<T[K]>
   }
 
 export interface StarlightItemResponse<T> {
