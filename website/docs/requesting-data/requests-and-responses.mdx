@@ -17,7 +17,7 @@ Você pode pular essas definições se quiser, já que elas explicam conceitos q
 Porém, entender esses conceitos pode lhe ajudar bastante a entender a estruturação do SDK. Se você já usou o SDK mas
 ficou confuso em relação ao seu funcionamento, recomendamos a leitura.
 
-## Requisições
+## Requisições {#requests}
 
 Para fazer requisições com um cliente do SDK, você vai utilizar um Selector ou uma Instance, dependendo do tipo de
 dado que você precisa requisitar.
@@ -27,12 +27,12 @@ padrão na maneira como o SDK é estruturado, e conhecer essa estrutura pode ser
 do SDK utilizar para requisitar um dado específico.
 
 Além disso, **na maioria dos casos, você não precisa criar Selectors ou Instances** para utilizá-los. Em vários casos,
-o cliente do SDK cria esses objetos para você "magicamente", e vamos explicar como isso funciona nas seções abaixo.
+o cliente do SDK cria esses objetos para você dinamicamente, e vamos explicar como isso funciona nas seções abaixo.
 
 ### Selectors
 
 Selectors, ou seletores, são objetos que provém métodos para lidar com dados da sua *área de trabalho* que não precisam
-de nenhum detalhe específico além do seu slug para serem encontrados.
+de nenhum detalhe específico além do seu *slug* para serem encontrados.
 
 Por exemplo, para requisitar um *singleton* da sua área de trabalho, você precisa apenas do seu slug, e, logo, você
 utiliza um SingletonSelector para requisitá-lo:
@@ -53,7 +53,7 @@ acessíveis quando criamos Instances.
 ### Instances
 
 Instances, ou instâncias, são objetos que provém métodos para lidar com dados da sua *área de trabalho* que precisam
-de algum detalhe adicional além de seus slugs para serem encontrados.
+de algum detalhe adicional além de seus *slugs* para serem encontrados.
 
 Por exemplo, para requisitar uma *entrada* de um *modelo* você precisa de duas informações: o slug do modelo e o slug da
 entrada. Nesse caso, nós precisamos utilizar um ModelInstance para informar o slug do modelo, e então utilizar o
@@ -77,7 +77,7 @@ Atualmente, você pode criar essas Instances:
 - ModelCategoryInstance (para *categorias de modelo*)
 - CollectionInstance (para *coleções*)
 
-### Instances mágicas
+### Instances dinâmicas {#dynamic-instances}
 
 Para facilitar o desenvolvimento e simplificar a sintaxe do SDK, você pode criar algumas Instances usando apenas o
 *slug* do dado que você quer requisitar. Vamos retomar ao último exemplo:
@@ -101,6 +101,29 @@ const response = await Starlight.posts.entries.get('hello-world')
 
 Bem mais simples, não acha? Com essa sintaxe, é possível escrever linhas menores e mais fluidas.
 
+:::info Slugs de instâncias dinâmicas
+
+No exemplo acima, utilizamos a sintaxe dinâmica para criar um ModelInstance para um modelo de slug `posts`. Tenha em
+mente que, caso o modelo requisitado use um slug com um nome igual a um método do cliente do SDK, o método do cliente
+terá prioridade, e o resultado da função utilizada pode não ser o que você espera.
+
+Por exemplo, se você criar um modelo chamado "Coleções" para um site de moda, e que usa o slug `collections`, você não
+pode utilizar a sintaxe dinâmica:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// ❌ "collections" abaixo é um CollectionSelector, não um ModelInstance!
+const response = await Starlight.collections.entries.list()
+
+// ✅ Nesse caso, use o método `model` para acessar um ModelInstance:
+const response = await Starlight.model('collections').entries.list()
+```
+
+Essa limitação vale para qualquer parte do SDK que aceita a sintaxe dinâmica, não apenas para modelos.
+
+:::
+
 Você também pode criar ModelCategoryInstances e CollectionInstances com essa sintaxe:
 
 ```js
@@ -112,22 +135,23 @@ const response = await Starlight.collections.carousel.items() // Mágica!
 
 // Listar as entradas do modelo `posts`, na categoria `articles`.
 //
-// Note também como, no último exemplo, é possível criar duas Instances
-// magicamente numa mesma linha: `posts` é um ModelInstance
+// Note também como no último exemplo é possível criar duas Instances
+// dinamicamente numa mesma linha: `posts` é um ModelInstance
 // e `articles` é um ModelCategoryInstance.
 //
-// As quatro linhas abaixo são equivalentes
+// As três  linhas abaixo são equivalentes
 const response = await Starlight.model('posts').category('articles').entries()
 const response = await Starlight.posts.category('articles').entries()
-const response = await Starlight.model('posts').categories.articles.entries()
-const response = await Starlight.posts.categories.articles.entries() // Mágica dupla!
+const response = await Starlight.posts.articles.entries() // Mágica dupla!
 ```
 
 Note que você só pode usar essa sintaxe diretamente no cliente para criar ModelInstances. Para criar outros tipos de
-Instance, você usa essa sintaxe em Selectors que dão suporte à ela. Nas próximas páginas, você vai entender quais
-Selectors suportam essa sintaxe, e qual Instance é retornada quando você a usa.
+Instances, você usa essa sintaxe em objetos que dão suporte à ela. Nas próximas páginas, você vai entender quais objetos
+suportam essa sintaxe, e qual Instance é retornada quando você a usa.
 
-Em alguns casos, por exemplo, você pode ter que requisitar dados de um *modelo* do qual você não vai saber o slug de
+#### Slugs dinâmicos {#dynamic-slugs}
+
+Em alguns casos, você pode ter que requisitar dados de um *modelo* do qual você não vai saber o *slug* de
 antemão. Nesses casos, essa sintaxe também funciona, mas não é recomendada. Prefira utilizar a maneira padrão de criar
 Instances:
 
@@ -143,11 +167,11 @@ const entry = Router.getParam('entry')
 // ✅ Recomendamos usar a maneira padrão de criar Instances:
 const response = await Starlight.model(model).entries.get(entry)
 
-// ❌ Não recomendamos usar a sintaxe "mágica":
+// ❌ Não recomendamos usar a sintaxe dinâmica:
 const response = await Starlight.model[model].entries.get(entry)
 ```
 
-Apesar da sintaxe "mágica" funcionar, ela pode parecer esquisita para iniciantes, por parecer que estamos acessando um
+Apesar da sintaxe dinâmica funcionar, ela pode ser esquisita para iniciantes, por parecer que estamos acessando um
 objeto normal do JavaScript, e não um objeto com parâmetros dinâmicos. Além disso, a sintaxe utilizada na maneira padrão
 de criar Instances é mais natural, já que estamos apenas chamando um método do cliente do SDK.
 
@@ -162,14 +186,14 @@ de criar Instances é mais natural, já que estamos apenas chamando um método d
   </div>
 </details>
 
-## Respostas
+## Respostas {#responses}
 
 Como explicamos anteriormente, [todos os métodos que requisitam dados do Starlight retornam Promises](./client#requisições-retornam-promises).
 Ao retornarem, essas Promises contém um desses três tipos:
 
-- [StarlightItemResponse](#starlightitemresponse)
-- [StarlightListResponse](#starlightlistresponse)
-- StarlightError
+- [StarlightItemResponse](#starlight-item-response)
+- [StarlightListResponse](#starlight-list-response)
+- [StarlightError](#starlight-error)
 
 Os dois primeiros tipos dependem do tipo de dado você requisitou: o primeiro para "itens únicos" (como uma entrada
 específica de um modelo), e o segundo para listas (como uma lista de entradas de um modelo). Essas respostas só são
@@ -178,7 +202,7 @@ retornadas em caso de sucesso.
 A terceira resposta é retornada quando acontece qualquer tipo de erro na requisição, como erros 404 ou problemas de
 conexão com a Internet.
 
-### StarlightItemResponse
+### StarlightItemResponse {#starlight-item-response}
 
 Esse tipo de resposta é retornado por métodos que requisitam "dados específicos" da área de trabalho. Por exemplo, ao
 requisitar uma *entrada* de um *modelo*, apenas um item será retornado, e o método utilizado retornará um
@@ -212,7 +236,7 @@ const response = await Starlight.posts.entries.get('hello-world')
 const entry = response.data
 ```
 
-### StarlightListResponse
+### StarlightListResponse {#starlight-list-response}
 
 Esse tipo de resposta é retornado por métodos que listam dados da área de trabalho atual. Ou seja, qualquer resposta das
 APIs do Starlight que retornam um array de dados vão retornar um StarlightListResponse em caso de sucesso. Por exemplo:
@@ -260,7 +284,7 @@ const response = await Starlight.posts.entries.list()
 const entries = response.data
 ```
 
-### StarlightError
+### StarlightError {#starlight-error}
 
 Internamente, os métodos que fazem requisições às APIs do Starlight utilizam a [Fetch API](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
 do navegador ou do Node. Caso algum erro aconteça nessa requisição, seja por conta de algum problema de conexão com à
@@ -286,7 +310,7 @@ const requestEntry = async (slug) => {
 }
 ```
 
-Um objeto StarlightError pode ser definido usando TypeScript dessa maneira:
+Objetos do tipo StarlightError são definidos no TypeScript dessa maneira:
 
 ```ts
 interface StarlightError {
@@ -294,7 +318,7 @@ interface StarlightError {
 }
 ```
 
-O parâmetro `response` desse objeto é o [objeto Response retornado pela chamada fetch](https://developer.mozilla.org/en-US/docs/Web/API/Response)
+O parâmetro `response` desse objeto é o [objeto Response retornado pela chamada fetch](https://developer.mozilla.org/pt-BR/docs/Web/API/Response)
 que gerou o erro. Com esse objeto, você pode, por exemplo, verificar qual erro aconteceu e tratá-lo de maneira diferente:
 
 ```js

@@ -1,8 +1,0 @@
-label: 'Modelos e entradas'
-position: 2
-collapsible: false
-link:
-  type: generated-index
-  description: Modelos são objetos do Starlight que definem um tipo de dado específico que pode se repetir, como posts 
-    de um blog, revistas, pessoas, eventos, marcas, etc. Instâncias de um modelo são chamadas de entradas. 
-    Depois de criadas, entradas podem ser associadas a categorias.

@@ -1,29 +1,36 @@
 /* eslint-disable */
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require('prism-react-renderer/themes/github')
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 const rehypeJargon = require('remark-jargon')
 const jargon = require('./src/jargon')
+const path = require('path')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Starlight JS SDK',
-  tagline: 'The Starlight tools for JavaScript',
+  tagline: 'The official Starlight SDK for JavaScript',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'pt',
     locales: ['pt'],
   },
+
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc-api',
+      {
+        projectRoot: path.join(__dirname, '..'),
+        packages: ['.'],
+      },
+    ],
+  ],
 
   presets: [
     [
@@ -32,10 +39,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/starlightcms/js-sdk/tree/main/website/',
           remarkPlugins: [[rehypeJargon, { jargon }]],
         },
         blog: {
@@ -63,6 +67,11 @@ const config = {
             docId: 'intro',
             position: 'left',
             label: 'Guia',
+          },
+          {
+            to: 'api',
+            label: 'API',
+            position: 'left',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
@@ -116,6 +125,11 @@ const config = {
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      },
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
       },
       prism: {
         theme: lightCodeTheme,
