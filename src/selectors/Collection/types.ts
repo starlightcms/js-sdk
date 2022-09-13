@@ -19,6 +19,6 @@ export interface CollectionSelector {
   get(slug: string | number): Promise<StarlightItemResponse<Collection>>
 }
 
-export type ProxiedCollectionSelector = CollectionSelector & {
+export type DynamicCollectionSelector = CollectionSelector & {
   [key: string]: CollectionInstance
 }

@@ -8,7 +8,7 @@ import { VisualData } from './visual'
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
  * for more info.
  *
- * @category Data Fields
+ * @group Data Fields
  */
 export type BooleanField = boolean
 
@@ -19,7 +19,7 @@ export type BooleanField = boolean
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
  * for more info.
  *
- * @category Data Fields
+ * @group Data Fields
  */
 export type HtmlField = string
 
@@ -30,7 +30,7 @@ export type HtmlField = string
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
  * for more info.
  *
- * @category Data Fields
+ * @group Data Fields
  */
 export type MediaField = MediaObject
 
@@ -41,7 +41,7 @@ export type MediaField = MediaObject
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
  * for more info.
  *
- * @category Data Fields
+ * @group Data Fields
  */
 export type RelationField<T> = Relation<T>
 
@@ -52,7 +52,7 @@ export type RelationField<T> = Relation<T>
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
  * for more info.
  *
- * @category Data Fields
+ * @group Data Fields
  */
 export type StringField = string
 
@@ -63,7 +63,7 @@ export type StringField = string
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
  * for more info.
  *
- * @category Data Fields
+ * @group Data Fields
  */
 export type TextField = string
 
@@ -74,6 +74,6 @@ export type TextField = string
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
  * for more info.
  *
- * @category Data Fields
+ * @group Data Fields
  */
 export type VisualField = VisualData

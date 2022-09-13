@@ -20,7 +20,7 @@ export interface ModelCategorySelector {
   get(slug: string): Promise<StarlightItemResponse<ModelCategory>>
 }
 
-export type ProxiedModelCategorySelector<D extends SerializedData> =
+export type DynamicModelCategorySelector<D extends SerializedData> =
   ModelCategorySelector & {
     [slug: string]: ModelCategoryInstance<D>
   }

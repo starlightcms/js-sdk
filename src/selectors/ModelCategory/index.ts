@@ -5,13 +5,13 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
-import { ModelCategorySelector, ProxiedModelCategorySelector } from './types'
+import { ModelCategorySelector, DynamicModelCategorySelector } from './types'
 import makeModelCategoryInstance from '../../instances/ModelCategory'
 
 export default function makeModelCategorySelector<D extends SerializedData>(
   client: StarlightClient,
   model: string
-): ProxiedModelCategorySelector<D> {
+): DynamicModelCategorySelector<D> {
   const selector: ModelCategorySelector = {
     list(options): Promise<StarlightListResponse<ModelCategory>> {
       return client.get(`/models/${model}/categories`, options)
@@ -30,7 +30,7 @@ export default function makeModelCategorySelector<D extends SerializedData>(
 
       return Reflect.get(target, prop)
     },
-  }) as ProxiedModelCategorySelector<D>
+  }) as DynamicModelCategorySelector<D>
 }
 
-export { ModelCategorySelector, ProxiedModelCategorySelector }
+export { ModelCategorySelector, DynamicModelCategorySelector }

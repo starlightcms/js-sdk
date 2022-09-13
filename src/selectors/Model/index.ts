@@ -5,12 +5,12 @@ import {
   StarlightListResponse,
   WorkspaceModelDefinition,
 } from '../../types'
-import { ModelSelector, ProxiedModelSelector } from './types'
+import { ModelSelector, DynamicModelSelector } from './types'
 import makeModelInstance from '../../instances/Model'
 
 export default function makeModelSelector<D extends WorkspaceModelDefinition>(
   client: StarlightClient
-): ProxiedModelSelector<D> {
+): DynamicModelSelector<D> {
   const modelClient: ModelSelector = {
     list(): Promise<StarlightListResponse<Model>> {
       return client.get('/models')
@@ -29,7 +29,7 @@ export default function makeModelSelector<D extends WorkspaceModelDefinition>(
 
       return Reflect.get(target, prop)
     },
-  }) as ProxiedModelSelector<D>
+  }) as DynamicModelSelector<D>
 }
 
-export { ModelSelector, ProxiedModelSelector }
+export { ModelSelector, DynamicModelSelector }

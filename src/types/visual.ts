@@ -1,7 +1,7 @@
 /**
  * All supported block types.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  * @internal
  */
 export type BlockType =
@@ -15,7 +15,7 @@ export type BlockType =
 /**
  * Base interface for types that represent block data.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface BlockData {
   [key: string]: unknown
@@ -25,7 +25,7 @@ export interface BlockData {
  * Represents a Paragraph block, which is the default block type used
  * for text content in the Visual Editor.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface ParagraphBlock extends BlockData {
   text: string
@@ -34,7 +34,7 @@ export interface ParagraphBlock extends BlockData {
 /**
  * Represents a Header block, which is used to render h1 through h6 HTML elements.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface HeaderBlock extends BlockData {
   text: string
@@ -44,7 +44,7 @@ export interface HeaderBlock extends BlockData {
 /**
  * Represents a Quote block, which is used to render a blockquote HTML element.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface QuoteBlock extends BlockData {
   text: string
@@ -55,7 +55,7 @@ export interface QuoteBlock extends BlockData {
 /**
  * Represents an image file, used in Image blocks.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  * @internal
  */
 type ImageFile = {
@@ -66,7 +66,7 @@ type ImageFile = {
 /**
  * Represents an Image block, which is used to render img or picture HTML elements.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface ImageBlock extends BlockData {
   id: number
@@ -81,7 +81,7 @@ export interface ImageBlock extends BlockData {
  * Represents an HTML block, which is used to render custom HTML code. Mainly
  * used to place embeds or heavily customized content structures.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface HTMLBlock extends BlockData {
   html: string
@@ -90,7 +90,7 @@ export interface HTMLBlock extends BlockData {
 /**
  * Represents a list item, which is used by List blocks.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  * @internal
  */
 interface ListItem {
@@ -101,7 +101,7 @@ interface ListItem {
 /**
  * Represents a List block, which is used to render ol or ul HTML elements.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface ListBlock extends BlockData {
   style: 'ordered' | 'unordered'
@@ -113,7 +113,7 @@ export interface ListBlock extends BlockData {
  * specific type and some data associated with it. For instance, a Paragraph
  * block has text data, an Image block has a file path and image metadata, etc.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface VisualDataBlock<D extends BlockData = BlockData> {
   id: string
@@ -126,7 +126,7 @@ export interface VisualDataBlock<D extends BlockData = BlockData> {
  * field. It's an object-based data representation made out of "blocks". Each
  * block has a type string and some data associated with it.
  *
- * @category Visual Data Blocks
+ * @group Visual Data Blocks
  */
 export interface VisualData {
   time?: number

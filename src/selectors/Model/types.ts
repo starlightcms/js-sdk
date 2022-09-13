@@ -4,14 +4,14 @@ import {
   StarlightListResponse,
   WorkspaceModelDefinition,
 } from '../../types'
-import { ProxiedModelInstance } from '../../instances/Model'
+import { DynamicModelInstance } from '../../instances/Model'
 
 export interface ModelSelector {
   list(): Promise<StarlightListResponse<Model>>
   get(slug: string): Promise<StarlightItemResponse<Model>>
 }
 
-export type ProxiedModelSelector<T extends WorkspaceModelDefinition> =
+export type DynamicModelSelector<T extends WorkspaceModelDefinition> =
   ModelSelector & {
-    [K in keyof T]: ProxiedModelInstance<T[K]>
+    [K in keyof T]: DynamicModelInstance<T[K]>
   }

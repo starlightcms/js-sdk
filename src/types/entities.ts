@@ -12,7 +12,7 @@ interface StarlightEntity {
 /**
  * Represents a Model Category entity returned by the API.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface ModelCategory extends StarlightEntity {
   title: string
@@ -23,7 +23,7 @@ export interface ModelCategory extends StarlightEntity {
 /**
  * Represents a Media File entity returned by the API.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface MediaFile extends StarlightEntity {
   variation: string
@@ -37,7 +37,7 @@ export interface MediaFile extends StarlightEntity {
 /**
  * Represents a Media Object entity returned by the API.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface MediaObject extends StarlightEntity {
   name: string
@@ -51,7 +51,7 @@ export interface MediaObject extends StarlightEntity {
 /**
  * Represents an Author entity returned by the API.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface Author {
   id: number
@@ -61,7 +61,7 @@ export interface Author {
 /**
  * Represents a Model entity returned by the API.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface Model extends StarlightEntity {
   title: string
@@ -128,7 +128,7 @@ export type ModelFieldOptions<D extends SerializedData> = {
  *
  * See {@apilink DefaultModelDefinition} for more info.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface Entry<D extends SerializedData>
   extends Omit<StarlightEntity, 'created_at'> {
@@ -172,7 +172,7 @@ export interface Entry<D extends SerializedData>
  * import these types in other files on your project. See
  * {@apilink DefaultModelDefinition} for more info.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface Singleton<D extends SerializedData>
   extends Omit<StarlightEntity, 'created_at'> {
@@ -186,13 +186,15 @@ export interface Singleton<D extends SerializedData>
  * Currently supported Collection types. This type is mainly used to provide
  * autocompletion on IDEs, since it lets users use any string as well as the
  * known supported types.
+ *
+ * @internal
  */
 export type CollectionTypes = 'entry' | 'singleton' | 'media' | string
 
 /**
  * Represents a Collection entity returned by the API.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface Collection<T extends CollectionTypes = string>
   extends StarlightEntity {
@@ -215,7 +217,7 @@ type RelationTypes =
 /**
  * Represents a Relation entity returned by the API.
  *
- * @category API Entities
+ * @group API Entities
  */
 export interface Relation<T extends RelationTypes> {
   /**
