@@ -20,5 +20,5 @@ export interface CollectionSelector {
 }
 
 export type DynamicCollectionSelector = CollectionSelector & {
-  [key: string]: CollectionInstance
+  [key: string]: CollectionInstance<unknown>
 }

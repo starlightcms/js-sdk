@@ -192,6 +192,35 @@ export interface Singleton<D extends SerializedData>
 export type CollectionTypes = 'entry' | 'singleton' | 'media' | string
 
 /**
+ * Currently supported Collection entities. This type is mainly used to infer
+ * the collection type string (see {@link CollectionTypes}) from the type of
+ * entity that that Collection holds.
+ *
+ * @internal
+ */
+export type CollectionEntityTypes =
+  | Entry<never>
+  | Singleton<never>
+  | MediaObject
+  | unknown
+
+/**
+ * Infers a Collection type from an entity type. See {@link CollectionTypes} and
+ * {@link CollectionEntityTypes} to know more.
+ *
+ * @internal
+ */
+export type CollectionTypeMapper<T extends CollectionEntityTypes> =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends Entry<any>
+    ? 'entry'
+    : T extends Singleton<any> // eslint-disable-line @typescript-eslint/no-explicit-any
+    ? 'singleton'
+    : T extends MediaObject
+    ? 'media'
+    : string
+
+/**
  * Represents a Collection entity returned by the API.
  *
  * @group API Entities

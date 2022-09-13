@@ -93,7 +93,7 @@ export interface HTMLBlock extends BlockData {
  * @group Visual Data Blocks
  * @internal
  */
-interface ListItem {
+export interface ListItem {
   content: string
   items?: ListItem[]
 }

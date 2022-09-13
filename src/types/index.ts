@@ -1,4 +1,4 @@
-import { CollectionTypes, SerializedData } from './entities'
+import { CollectionEntityTypes, SerializedData } from './entities'
 import { DynamicModelSelector } from '../selectors/Model'
 import { DynamicModelInstance } from '../instances/Model'
 import { SingletonSelector } from '../selectors/Singleton'
@@ -49,8 +49,31 @@ export interface StarlightClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition
 > {
   /**
-   * Updates this client's configuration. See {@link StarlightConfig} to see all
+   * Updates the client configuration. See {@link StarlightConfig} to see all
    * the available options.
+   *
+   * If you want to use the {@apilink default | default SDK client}, you need to
+   * set its workspace using this method in your application. You should run
+   * this method only once, and as soon as possible in your application
+   * lifecycle. For instance, when using React:
+   *
+   * ```js
+   * // src/index.js
+   * import { createRoot } from "react-dom/client"
+   * import Starlight from '@starlightcms/js-sdk'
+   * import MyApp from './MyApp.js'
+   *
+   * // We only need to run this once. In this case, we're
+   * // running it before initializing our React app.
+   * Starlight.configure({
+   *   workspace: '1234567890'
+   * })
+   *
+   * const rootElement = document.getElementById("root")
+   * const root = createRoot(rootElement)
+   *
+   * root.render(<App />)
+   * ```
    *
    * @param config A configuration object. Required.
    * @category Other Methods
@@ -196,7 +219,7 @@ export interface StarlightClient<
    *
    * @category Instance Methods
    */
-  collection<T extends CollectionTypes = string>(
+  collection<T extends CollectionEntityTypes>(
     slug: string | number
   ): CollectionInstance<T>
 
@@ -260,10 +283,11 @@ export type DynamicStarlightClient<T extends WorkspaceModelDefinition> =
  * This interface represents an API response that returns a single entity, like
  * a single {@link Entry} or a single {@link MediaObject}, for instance.
  *
- * It contains only one parameter: `data`. This parameter type is generic and
+ * It contains only one field: `data`. This field type is generic and
  * depends on the kind of request that was made to the API.
  *
- * All SDK request methods that return a single item will return this interface.
+ * All SDK request methods that returna single entity
+ * will return this interface.
  *
  * @group Client
  */
@@ -390,7 +414,7 @@ export interface StarlightListResponse<T> {
  * // Now, helloWorld type is Entry<PostsFields>.
  * const helloWorld = response.data
  *
- * // Which means we can safely access its data, and TypeScript will
+ * // Which means we can safely access its data, and IDEs will
  * // auto-complete the data field name below:
  * console.log(helloWorld.data.featured_image)
  * ```

@@ -14,6 +14,45 @@ import makeMediaSelector from './selectors/Media'
 import makeSearchSelector from './selectors/Search'
 import makeCollectionInstance from './instances/Collection'
 
+/**
+ * Returns a new {@link DynamicStarlightClient}, which is a
+ * {@link StarlightClient} with support to create
+ * {@apilink ModelInstance | ModelInstances} using the dynamic syntax. To learn
+ * which methods a client supports, see {@link StarlightClient}.
+ *
+ * This function accepts a {@link StarlightConfig} object and can be used to
+ * create new clients that connect to a single Starlight workspace. Each client
+ * returned by this function is separate and independent from the others.
+ *
+ * If you only need to make requests to a single workspace, it's probably easier
+ * to use the SDK's default client. To use the default client, you only need to
+ * import the default object exported by the SDK:
+ *
+ *  ```ts
+ * // `Starlight` below is the default StarlightClient.
+ * import Starlight from '@starlightcms/js-sdk'
+ * ```
+ *
+ * See {@link default} for more info on how to use the default client.
+ *
+ * @example
+ * Creating a new client and exporting it.
+ *  ```ts
+ * import { makeStarlightClient } from '@starlightcms/js-sdk'
+ *
+ * const BlogClient = makeStarlightClient({
+ *   workspace: '123123123'
+ * })
+ *
+ * // Feel free to export the new client so your application can use it.
+ * export default BlogClient
+ * ```
+ *
+ * @param config The client configuration object. You need to provide at least
+ * the `workspace` property. See {@link StarlightConfig} to view all the
+ * available options.
+ * @group Client
+ */
 export function makeClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition
 >(config: StarlightConfig = {}): DynamicStarlightClient<D> {
