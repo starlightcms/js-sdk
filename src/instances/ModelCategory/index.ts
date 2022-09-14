@@ -5,8 +5,9 @@ import {
   StarlightClient,
   StarlightItemResponse,
   StarlightListResponse,
+  WithQueryableFields,
 } from '../../types'
-import { ModelCategoryInstance, ModelCategoryEntryListOptions } from './types'
+import { ModelCategoryInstance, ModelCategoryEntryListParams } from './types'
 
 export default function makeModelCategoryInstance<D extends SerializedData>(
   client: StarlightClient,
@@ -18,7 +19,7 @@ export default function makeModelCategoryInstance<D extends SerializedData>(
       return client.get(`/models/${model}/categories/${category}`)
     },
     entries(
-      options: ModelCategoryEntryListOptions<D>
+      options: ModelCategoryEntryListParams & WithQueryableFields<D>
     ): Promise<StarlightListResponse<Entry<D>>> {
       return client.get(
         `/models/${model}/categories/${category}/entries`,
@@ -28,4 +29,4 @@ export default function makeModelCategoryInstance<D extends SerializedData>(
   }
 }
 
-export { ModelCategoryInstance }
+export { ModelCategoryInstance, ModelCategoryEntryListParams }

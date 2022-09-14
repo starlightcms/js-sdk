@@ -1,5 +1,5 @@
 import { CollectionEntityTypes, StarlightClient } from '../../types'
-import { CollectionInstance } from './types'
+import { CollectionInstance, ListCollectionItemsParams } from './types'
 
 export default function makeCollectionInstance<
   T extends CollectionEntityTypes = unknown
@@ -15,4 +15,4 @@ export default function makeCollectionInstance<
   }
 }
 
-export { CollectionInstance }
+export { CollectionInstance, ListCollectionItemsParams }

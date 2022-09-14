@@ -1,6 +1,6 @@
 import {
   Entry,
-  ModelFieldOptions,
+  QueryableFields,
   SerializedData,
   StarlightItemResponse,
   StarlightListResponse,
@@ -21,7 +21,7 @@ export type ListEntriesOptions<D extends SerializedData> = {
     | 'views:asc'
     | 'views:desc'
   except?: number
-} & ModelFieldOptions<D>
+} & QueryableFields<D>
 
 export type GetEntryParams = {
   preview?: string

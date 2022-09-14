@@ -16,15 +16,37 @@ export * from './selectors'
 /**
  * This is a utility type that allows any string to be used as a URL, but
  * provides a default one which can be used by IDEs to provide auto-completion.
+ * The default URL points to version 2 of the Query API.
  */
 export type BaseUrl = 'https://query.starlight.sh/v2' | string
 
 /**
+ * The available options to configure a {@link StarlightClient}.
+ *
+ * `workspace` is required when creating new clients or configuring the
+ * {@apilink default | default client}.
  * @group Client
  */
 export type StarlightConfig = {
+  /**
+   * The ID of the workspace that the client should use to request data.
+   *
+   * Note: the current APIs only support using workspace IDs as identifiers,
+   * and **not** slugs. Slug support will be added in the future. You can find
+   * the workspace ID in the left-side menu on the Starlight interface or below
+   * the workspace name in the workspace list.
+   */
   workspace?: string
+  /**
+   * The Starlight Query API URL, including the version, and without a trailing
+   * slash. Defaults to the production Query API URL.
+   *
+   * You only need to set this if you're not using Starlight's production APIs.
+   */
   baseUrl?: BaseUrl
+  /**
+   * When true, logs all API requests in the console. Defaults to false.
+   */
   debug?: boolean
 }
 
@@ -75,7 +97,8 @@ export interface StarlightClient<
    * root.render(<App />)
    * ```
    *
-   * @param config A configuration object. Required.
+   * @param config A configuration object. See {@link StarlightConfig} to view
+   * all available options.
    * @category Other Methods
    */
   configure(config: StarlightConfig): void
@@ -102,7 +125,7 @@ export interface StarlightClient<
   getBaseUrl(): string
 
   /**
-   * Returns a Promise that results in a response or throws an StarlightError.
+   * Returns a Promise that results in a response or throws a StarlightError.
    * The response will be the parsed JSON data sent by the API.
    *
    * This method is used internally by all Selectors and Instances to request
@@ -217,6 +240,16 @@ export interface StarlightClient<
    *
    * See {@link CollectionInstance} for more info.
    *
+   * @example Typing the returned CollectionInstance.
+   * ```ts
+   * import Starlight, { MediaObject } from '@starlightcms/js-sdk'
+   *
+   * const response = await Starlight.collection<MediaObject>('carousel-images').items()
+   * ```
+   *
+   * @typeParam T - The type of entity this Collection holds. You can pass this
+   * type parameter to correctly type the response of the
+   * {@apilink CollectionInstance.items} method.
    * @category Instance Methods
    */
   collection<T extends CollectionEntityTypes>(
@@ -263,7 +296,10 @@ export interface StarlightClient<
 /**
  * This type adds support for the dynamic syntax to the StarlightClient
  * interface, which allows users to create {@link ModelInstance}s dynamically.
- * See {@link StarlightClient} to learn which methods it provides.
+ * See {@link StarlightClient} to learn which methods it provides. Also see
+ * {@doclink requesting-data/requests-and-responses#dynamic-instances | Dynamic Instances}
+ * documentation to learn more about the dynamic syntax.
+ *
  *
  * This allows TypeScript to correctly type all models defined by the user
  * in the DefaultModelDefinition type, aside from letting the user using any
@@ -496,4 +532,51 @@ export interface DefaultModelDefinition extends WorkspaceModelDefinition {}
  */
 export interface WorkspaceModelDefinition {
   [slug: string]: SerializedData
+}
+
+/**
+ * Base parameters used by most SDK `list()` methods.
+ *
+ * @group Request Options
+ */
+export interface BaseListParameters {
+  /**
+   * The page requested.
+   */
+  page?: number
+  /**
+   * The limit of items per page.
+   */
+  limit?: number
+  /**
+   * A search query string.
+   *
+   * For instance, searching for "out" will match both "check out!" and
+   * "about us". Search is canse-insensitive.
+   */
+  query?: string
+  /**
+   * A search query string that matches a specific word within boundaries.
+   * Search is not canse-sensitive.
+   *
+   * For instance, searching for "phone" will match "This is my phone!"
+   * but won't match "This is my telephone!".
+   */
+  'query:word'?: string
+  /**
+   * A comma-separated list of fields to look up on when searching using
+   * `query` or `query:word`. If undefined, all text fields will be searched on,
+   * including Visual Editor fields. Search is not canse-sensitive.
+   *
+   * For instance, to limit search on the "content" and "summary" fields of a
+   * model, pass `'content,summary'`.
+   */
+  fields?: string
+  /**
+   * If defined, removes the given item from the list. Useful to create "related
+   * posts" lists.
+   *
+   * Note: this field only accepts IDs, and not slugs. Only one ID is allowed.
+   */
+  except?: number
 }

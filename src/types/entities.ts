@@ -70,21 +70,90 @@ export interface Model extends StarlightEntity {
 }
 
 /**
- * Represents content data returned by either an Entry or
- * Singleton entity from the API.
+ * Represents content data returned by either an {@link Entry} or
+ * {@link Singleton} entity from the API.
+ *
+ * This is a utility type used internally by the SDK and you don't
+ * need to use it. Its purpose is to constraint Entry and Singleton
+ * data to the shape of a JS object.
+ *
+ * @category Internal Types
  */
 export type SerializedData = Record<string, unknown> | undefined
 
 /**
  * Utility type that creates a string map of all fields of the given
- * SerializedData type with the `field` suffix. This is only useful to create
- * request methods that support field querying using the "field:foo" syntax.
+ * SerializedData type with the `field:` prefix. This syntax allows to filter
+ * specific fields when listing {@apilink Entry | Entries}:
  *
- * @internal
+ * - Text fields can be filtered by a string query. This works just like
+ *   passing a `query` parameter, but it only applies to one field.
+ * - Boolean fields can be filtered by "true" or "false".
+ *
+ * If a request uses this type, it means that this syntax can be used in their
+ * parameters:
+ *
+ * ```ts
+ * import Starlight from '@starlightcms/js-sdk'
+ *
+ * // Filtering with the "filter:" syntax on a supported method:
+ * const response = await Starlight.posts.entries.list({
+ *   'field:content': 'hello world',
+ *   'field:is_featured': true,
+ * })
+ * ```
+ *
+ * @remark
+ * This type receives a {@link SerializedData}-like structure, like an object.
+ * For instance, for an {@link Entry} with fields "content" and "summary",
+ * the generated type would look like this:
+ *
+ * ```ts
+ * type GeneratedType = {
+ *   'field:content'?: string
+ *   'field:summary'?: string
+ * }
+ * ```
+ *
+ * Note that QueryableFields receive a {@link SerializedData}, not an
+ * {@link Entry}:
+ *
+ * ```ts
+ * import { VisualField, StringField } from '@starlightcms/js-sdk'
+ *
+ * type EntryFields = {
+ *   content: VisualField
+ *   summary: StringField
+ * }
+ *
+ * type MyEntry = Entry<EntryFields>
+ *
+ * // Error TS2344: Type does not satisfy the constraint 'SerializedData'
+ * type GeneratedType = QueryableFields<MyEntry>
+ *
+ * // Works!
+ * type GeneratedType = QueryableFields<EntryFields>
+ * ```
+ *
+ * This type is only useful to request methods that support
+ * field querying using the "field:foo" syntax.
+ *
+ * @category Internal Types
  */
-export type ModelFieldOptions<D extends SerializedData> = {
+export type QueryableFields<D extends SerializedData> = {
   [K in keyof D as `field:${string & K}`]?: string
 }
+
+/**
+ * Utility type that return {@link QueryableFields} if the given type T
+ * is an {@link Entry} or a {@link Singleton}, but generates an empty object
+ * otherwise.
+ *
+ * @category Internal Types
+ */
+export type WithQueryableFields<T> = T extends Entry<never> | Singleton<never>
+  ? QueryableFields<Pick<T, 'data'>>
+  : Record<string, never>
 
 /**
  * Represents an Entry entity returned by the API.
@@ -222,6 +291,9 @@ export type CollectionTypeMapper<T extends CollectionEntityTypes> =
 
 /**
  * Represents a Collection entity returned by the API.
+ *
+ * You can request collections using a {@link CollectionInstance} or a
+ * {@link CollectionSelector}.
  *
  * @group API Entities
  */

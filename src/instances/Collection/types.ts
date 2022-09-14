@@ -1,20 +1,25 @@
 import {
+  BaseListParameters,
   Collection,
   CollectionEntityTypes,
   CollectionTypeMapper,
-  Entry,
-  ModelFieldOptions,
-  Singleton,
   StarlightItemResponse,
   StarlightListResponse,
+  WithQueryableFields,
 } from '../../types'
 
-export type ListCollectionItemsOptions<T> = {
-  page?: number
-  limit?: number
-  query?: string
-  'query:word'?: string
-  fields?: string
+/**
+ * Request parameters for listing collection items.
+ *
+ * Used by {@apilink CollectionInstance.items}.
+ *
+ * @group Request Options
+ */
+export interface ListCollectionItemsParams extends BaseListParameters {
+  /**
+   * Define how entries will be ordered. Check this field type to see the
+   * allowed options.
+   */
   order?:
     | 'title:asc'
     | 'title:desc'
@@ -22,14 +27,16 @@ export type ListCollectionItemsOptions<T> = {
     | 'published_at:desc'
     | 'views:asc'
     | 'views:desc'
-  except?: number
-} & (T extends Entry<never> | Singleton<never>
-  ? ModelFieldOptions<Pick<T, 'data'>>
-  : Record<string, never>)
+}
 
 /**
  * An Instance that provide methods to request information and items from
- * {@apilink Collection | Collections}.
+ * a specific {@link Collection}.
+ *
+ * You can access a CollectionInstance using
+ * {@apilink StarlightClient.collection}.
+ *
+ * To list workspace collections, use a {@link CollectionSelector}.
  *
  * @group Instances
  */
@@ -47,7 +54,7 @@ export interface CollectionInstance<C extends CollectionEntityTypes> {
   get(): Promise<StarlightItemResponse<Collection<CollectionTypeMapper<C>>>>
 
   /**
-   * Returns a {@link StarlightListResponse} with the list of items of the given
+   * Returns a {@link StarlightListResponse} with the list of items of this
    * {@link Collection}. The returned list type depends on the collection type:
    * a list of {@apilink Entry | Entries} for a collection of type `entry`, a
    * list of {@apilink MediaObject | MediaObjects} for a collection o type
@@ -72,9 +79,12 @@ export interface CollectionInstance<C extends CollectionEntityTypes> {
    * const response = await Starlight.collection<Entry<NewsPostType>>('featured-news').items()
    * ```
    *
-   * @param options
+   * @param options An optional object of request parameters. See
+   * {@link ListCollectionItemsParams} for all available options. `field:foo`
+   * syntax is also supported, see {@link QueryableFields} for more info.
    */
   items(
-    options?: ListCollectionItemsOptions<C>
+    options?: ListCollectionItemsParams & WithQueryableFields<C>
   ): Promise<StarlightListResponse<C>>
 }
+0
