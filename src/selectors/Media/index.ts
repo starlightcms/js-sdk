@@ -9,8 +9,8 @@ export default function makeMediaSelector(
       return client.get('/media')
     },
 
-    get(slug) {
-      return client.get(`/media/${slug}`)
+    get(id) {
+      return client.get(`/media/${id}`)
     },
   }
 }

@@ -1,11 +1,12 @@
 import {
-  BaseListParameters,
+  BaseRequestParameters,
   Entry,
   ModelCategory,
+  QueryableFields,
+  QueryableRequestParameters,
   SerializedData,
   StarlightItemResponse,
   StarlightListResponse,
-  WithQueryableFields,
 } from '../../types'
 
 /**
@@ -13,9 +14,11 @@ import {
  *
  * Used by {@apilink ModelCategoryInstance.entries}.
  *
- * @group Request Options
+ * @group Request Parameters
  */
-export interface ModelCategoryEntryListParams extends BaseListParameters {
+export interface ModelCategoryEntryListParams
+  extends BaseRequestParameters,
+    QueryableRequestParameters {
   /**
    * Define how entries will be ordered. Check this field type to see the
    * allowed options.
@@ -36,6 +39,8 @@ export interface ModelCategoryEntryListParams extends BaseListParameters {
  * You can access a ModelCategoryInstance using
  * {@apilink ModelInstance.category} or using the dynamic syntax on a
  * {@link DynamicModelInstance}. Usage examples will use the dynamic syntax.
+ *
+ * To list all categories from a model, use a {@link ModelCategorySelector}.
  *
  * @group Instances
  */
@@ -78,6 +83,6 @@ export interface ModelCategoryInstance<D extends SerializedData> {
    * syntax is also supported, see {@link QueryableFields} for more info.
    */
   entries(
-    options?: ModelCategoryEntryListParams & WithQueryableFields<D>
+    options?: ModelCategoryEntryListParams & QueryableFields<D>
   ): Promise<StarlightListResponse<Entry<D>>>
 }

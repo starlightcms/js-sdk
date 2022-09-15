@@ -96,14 +96,22 @@ export type SerializedData = Record<string, unknown> | undefined
  * ```ts
  * import Starlight from '@starlightcms/js-sdk'
  *
- * // Filtering with the "filter:" syntax on a supported method:
  * const response = await Starlight.posts.entries.list({
+ *   // EntrySelector.list() supports the "field:foo" syntax:
  *   'field:content': 'hello world',
  *   'field:is_featured': true,
+ *
+ *   // EntrySelector.list() also support other parameters,
+ *   // which are passed in this object too:
+ *   page: 42,
+ *   limit: 20,
  * })
  * ```
  *
  * @remark
+ *
+ * The information below is only useful for SDK maintainers.
+ *
  * This type receives a {@link SerializedData}-like structure, like an object.
  * For instance, for an {@link Entry} with fields "content" and "summary",
  * the generated type would look like this:
@@ -115,7 +123,7 @@ export type SerializedData = Record<string, unknown> | undefined
  * }
  * ```
  *
- * Note that QueryableFields receive a {@link SerializedData}, not an
+ * However, note that QueryableFields receive a {@link SerializedData}, not an
  * {@link Entry}:
  *
  * ```ts
@@ -141,7 +149,7 @@ export type SerializedData = Record<string, unknown> | undefined
  * @category Internal Types
  */
 export type QueryableFields<D extends SerializedData> = {
-  [K in keyof D as `field:${string & K}`]?: string
+  [K in keyof D as `field:${string & K}`]?: string | boolean
 }
 
 /**
@@ -149,9 +157,14 @@ export type QueryableFields<D extends SerializedData> = {
  * is an {@link Entry} or a {@link Singleton}, but generates an empty object
  * otherwise.
  *
+ * Fun fact: internally, Entries and Singletons have parent Models,
+ * which is why they are called "modelables" here.
+ *
  * @category Internal Types
  */
-export type WithQueryableFields<T> = T extends Entry<never> | Singleton<never>
+export type WithQueryableFieldsOnModelables<T> = T extends
+  | Entry<never>
+  | Singleton<never>
   ? QueryableFields<Pick<T, 'data'>>
   : Record<string, never>
 

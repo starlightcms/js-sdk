@@ -1,11 +1,12 @@
 import {
-  BaseListParameters,
+  BaseRequestParameters,
   Collection,
   CollectionEntityTypes,
   CollectionTypeMapper,
+  QueryableRequestParameters,
   StarlightItemResponse,
   StarlightListResponse,
-  WithQueryableFields,
+  WithQueryableFieldsOnModelables,
 } from '../../types'
 
 /**
@@ -13,9 +14,11 @@ import {
  *
  * Used by {@apilink CollectionInstance.items}.
  *
- * @group Request Options
+ * @group Request Parameters
  */
-export interface ListCollectionItemsParams extends BaseListParameters {
+export interface ListCollectionItemsParams
+  extends BaseRequestParameters,
+    QueryableRequestParameters {
   /**
    * Define how entries will be ordered. Check this field type to see the
    * allowed options.
@@ -36,7 +39,7 @@ export interface ListCollectionItemsParams extends BaseListParameters {
  * You can access a CollectionInstance using
  * {@apilink StarlightClient.collection}.
  *
- * To list workspace collections, use a {@link CollectionSelector}.
+ * To list all workspace collections, use a {@link CollectionSelector}.
  *
  * @group Instances
  */
@@ -84,7 +87,7 @@ export interface CollectionInstance<C extends CollectionEntityTypes> {
    * syntax is also supported, see {@link QueryableFields} for more info.
    */
   items(
-    options?: ListCollectionItemsParams & WithQueryableFields<C>
+    options?: ListCollectionItemsParams & WithQueryableFieldsOnModelables<C>
   ): Promise<StarlightListResponse<C>>
 }
 0

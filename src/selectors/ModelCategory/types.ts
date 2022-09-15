@@ -1,4 +1,5 @@
 import {
+  BaseRequestParameters,
   ModelCategory,
   SerializedData,
   StarlightItemResponse,
@@ -6,20 +7,64 @@ import {
 } from '../../types'
 import { ModelCategoryInstance } from '../../instances/ModelCategory'
 
-export type ListModelCategoriesOptions = {
-  query?: string
-  page?: number
-  limit?: number
+export interface ListModelCategoriesOptions extends BaseRequestParameters {
+  /**
+   * Define how items will be ordered. Check this field type to see the
+   * allowed options.
+   */
   order?: 'title:asc' | 'title:desc' | 'entry_count:asc' | 'entry_count:desc'
 }
 
+/**
+ * A Selector that provide methods to list and request information on
+ * {@apilink ModelCategory | ModelCategories}.
+ *
+ * You can use a ModelCategorySelector by accessing
+ * {@apilink ModelInstance.categories}.
+ *
+ * @group Selectors
+ */
 export interface ModelCategorySelector {
   list(
     options?: ListModelCategoriesOptions
   ): Promise<StarlightListResponse<ModelCategory>>
+
+  /**
+   * Returns a {@link StarlightItemResponse} with a single {@link ModelCategory}.
+   *
+   * @example Requesting information from a category "premium" from a model of slug "plans".
+   * ```ts
+   * import Starlight from '@starlightcms/js-sdk'
+   *
+   * const response = await Starlight.plans.premium.get()
+   * ```
+   *
+   * @param slug The category slug.
+   */
   get(slug: string): Promise<StarlightItemResponse<ModelCategory>>
 }
 
+/**
+ * A Selector that provide all {@link ModelCategorySelector} methods and adds
+ * support for creating {@apilink ModelCategoryInstance | ModelCategoryInstances}
+ * using the dynamic syntax.
+ *
+ * See {@link ModelCategorySelector} to view all available methods. You can use
+ * a DynamicModelCategorySelector by accessing {@apilink ModelInstance.categories}.
+ *
+ * See {@doclink requesting-data/requests-and-responses#dynamic-instances | Dynamic Instances}
+ * documentation to learn more about the dynamic syntax.
+ *
+ * @example Accessing a ModelCategorySelector using the dynamic syntax on a model of slug "posts"
+ * ```ts
+ * import Starlight from '@starlightcms/js-sdk'
+ *
+ * // "articles" below will be a ModelCategorySelector.
+ * const response = await Starlight.posts.categories.articles.list()
+ * ```
+ *
+ * @category Instances
+ */
 export type DynamicModelCategorySelector<D extends SerializedData> =
   ModelCategorySelector & {
     [slug: string]: ModelCategoryInstance<D>

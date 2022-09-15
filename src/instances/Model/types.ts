@@ -11,6 +11,8 @@ import { ModelCategoryInstance } from '../ModelCategory'
  * using the dynamic syntax on a {@link DynamicStarlightClient}. Usage
  * examples will use the dynamic syntax.
  *
+ * To list all workspace models, use a {@link ModelSelector}.
+ *
  * @group Instances
  */
 export interface ModelInstance<D extends SerializedData> {
@@ -89,7 +91,7 @@ export interface ModelInstance<D extends SerializedData> {
  * import Starlight from '@starlightcms/js-sdk'
  *
  * // "articles" below will be a ModelCategoryInstance.
- * const response = await Starlight.model('posts').articles.list()
+ * const response = await Starlight.posts.articles.list()
  * ```
  *
  * @category Instances

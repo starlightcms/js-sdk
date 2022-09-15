@@ -295,7 +295,8 @@ export interface StarlightClient<
 
 /**
  * This type adds support for the dynamic syntax to the StarlightClient
- * interface, which allows users to create {@link ModelInstance}s dynamically.
+ * interface, which allows users to create
+ * {@apilink DynamicModelInstance| DynamicModelInstances} dynamically.
  * See {@link StarlightClient} to learn which methods it provides. Also see
  * {@doclink requesting-data/requests-and-responses#dynamic-instances | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
@@ -535,11 +536,11 @@ export interface WorkspaceModelDefinition {
 }
 
 /**
- * Base parameters used by most SDK `list()` methods.
+ * Request parameters used by most SDK `list()` methods.
  *
- * @group Request Options
+ * @group Request Parameters
  */
-export interface BaseListParameters {
+export interface BaseRequestParameters {
   /**
    * The page requested.
    */
@@ -555,6 +556,14 @@ export interface BaseListParameters {
    * "about us". Search is canse-insensitive.
    */
   query?: string
+}
+
+/**
+ * Request parameters used by most SDK methods that support advanced querying.
+ *
+ * @group Request Parameters
+ */
+export interface QueryableRequestParameters {
   /**
    * A search query string that matches a specific word within boundaries.
    * Search is not canse-sensitive.

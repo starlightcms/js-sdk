@@ -14,7 +14,7 @@ export default function makeModelCategorySelector<D extends SerializedData>(
 ): DynamicModelCategorySelector<D> {
   const selector: ModelCategorySelector = {
     list(options): Promise<StarlightListResponse<ModelCategory>> {
-      return client.get(`/models/${model}/categories`, options)
+      return client.get(`/models/${model}/categories`, { ...options })
     },
 
     get(slug): Promise<StarlightItemResponse<ModelCategory>> {
