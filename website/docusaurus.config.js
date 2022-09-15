@@ -10,7 +10,7 @@ const path = require('path')
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Starlight JS SDK',
-  tagline: 'The official Starlight SDK for JavaScript',
+  tagline: 'Documentação oficial do Starlight SDK para JavaScript',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -23,6 +23,7 @@ const config = {
   },
 
   plugins: [
+    'docusaurus-plugin-sass',
     [
       'docusaurus-plugin-typedoc-api',
       {
@@ -44,6 +45,7 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          blogSidebarTitle: 'Posts recentes',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -75,7 +77,7 @@ const config = {
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/starlightcms/js-sdk',
             label: 'GitHub',
             position: 'right',
           },
@@ -85,46 +87,33 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Documentação',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Guia',
                 to: '/docs/intro',
               },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'API',
+                to: '/api',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'Starlight',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'Site',
+                href: 'https://starlight.sh',
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/starlightcms',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Starlight`,
       },
       docs: {
         sidebar: {

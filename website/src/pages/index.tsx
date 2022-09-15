@@ -3,23 +3,27 @@ import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
-import HomepageFeatures from '@site/src/components/HomepageFeatures'
-
-import styles from './index.module.css'
+import styles from './index.module.scss'
+import StarlightLogo from '@site/static/img/logo-complete.svg'
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext()
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            Docusaurus Tutorial - 5min ⏱️
+        <div className={styles.heroHeader}>
+          <StarlightLogo />
+          <div />
+          <h3>JavaScript SDK</h3>
+        </div>
+        <h1 className={styles.heroTitle}>
+          O SDK oficial do Starlight para sites e aplicações JS
+        </h1>
+        <div className={styles.heroDetails}>
+          <code>
+            <pre>npm i @starlightcms/js-sdk</pre>
+          </code>
+          <Link className="button button--primary" to="/docs/intro">
+            Documentação
           </Link>
         </div>
       </div>
@@ -31,12 +35,12 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      title={`Início | ${siteConfig.title}`}
+      description={siteConfig.tagline}
+      wrapperClassName={styles.mainWrapper}
     >
-      <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        <HomepageHeader />
       </main>
     </Layout>
   )
