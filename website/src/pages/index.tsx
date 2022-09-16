@@ -16,7 +16,7 @@ function HomepageHeader() {
           <h3>JavaScript SDK</h3>
         </div>
         <h1 className={styles.heroTitle}>
-          O SDK oficial do Starlight para sites e aplicações JS
+          O SDK oficial do Starlight para sites e aplicações JavaScript
         </h1>
         <div className={styles.heroDetails}>
           <code>

@@ -8,15 +8,13 @@
 
 .heroBanner {
     position: relative;
-    padding: 4rem 0;
+    padding: 10rem 0;
     text-align: center;
     background-color: transparent;
     overflow: hidden;
-}
 
-@media screen and (max-width: 996px) {
-    .heroBanner {
-        padding: 2rem;
+    @media screen and (max-width: 996px) {
+        padding: 6rem 2rem;
     }
 }
 
@@ -30,8 +28,8 @@
     }
 
     > div {
-        height: 50px;
         width: 2px;
+        height: 50px;
         margin: 0 1.5rem;
         background-color: #DDE0E4;
     }
@@ -39,6 +37,16 @@
     > h3 {
         margin: 0;
         color: hsla(215, 12%, 35%, 1);
+    }
+
+    @media screen and (max-width: 599px) {
+        flex-direction: column;
+
+        > div {
+            width: 8rem;
+            height: 2px;
+            margin: 1rem 0;
+        }
     }
 }
 
@@ -65,6 +73,15 @@
     > a {
         align-self: stretch;
         padding: 9px 18px;
+    }
+
+    @media screen and (max-width: 996px) {
+        flex-direction: column;
+
+        > code {
+            width: 100%;
+            margin: 0 0 1rem 0;
+        }
     }
 }
 

@@ -41,4 +41,4 @@ lhe ajudar e, se necessário, atualizar a documentação de acordo.
 primeiro site. Além de documentação, estamos criando vários recursos novos para o Starlight, e esperamos poder mostrar
 (e documentar!) tudo isso em breve.
 
-Obrigado por ler essa introdução, e até já! 😁
+Obrigado por ler essa introdução, e nos vemos por aí! 😁
