@@ -11,7 +11,7 @@ const collection =
 const singleton =
   'Singletons representam estruturas de dados únicas numa aplicação, como uma página, menus, ou configurações de SEO.'
 const slug =
-  'Slugs são identificadores únicos usados por todos os tipos de dado no Starlight. Geralmente é usado em URLs para identificar um dado.'
+  'Slugs são identificadores únicos usados por todos os tipos de dado no Starlight. São utilizados em URLs para identificar dados.'
 
 const jargon = {
   modelo: model,

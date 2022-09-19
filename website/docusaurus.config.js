@@ -11,7 +11,7 @@ const path = require('path')
 const config = {
   title: 'Starlight JS SDK',
   tagline: 'Documentação oficial do Starlight SDK para JavaScript',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://js.sdk.starlight.sh',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -97,13 +97,17 @@ const config = {
                 label: 'API',
                 to: '/api',
               },
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
             ],
           },
           {
             title: 'Starlight',
             items: [
               {
-                label: 'Site',
+                label: 'Conheça o Starlight',
                 href: 'https://starlight.sh',
               },
               {

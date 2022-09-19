@@ -18,4 +18,4 @@ export default function makeSearchSelector(
   }
 }
 
-export { SearchSelector }
+export { SearchSelector, SearchEntriesParams }

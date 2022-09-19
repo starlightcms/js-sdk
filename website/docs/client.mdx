@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Cliente
 
 Um cliente do Starlight provê, dentre outras coisas, vários métodos para requisitar dados de uma área de trabalho no
@@ -54,6 +58,13 @@ Por exemplo, em aplicações React, você pode configurar o cliente global no me
 da sua aplicação usando `ReactDOM.createRoot()`.
 A [página do método `configure()` na API](/api/interface/StarlightClient#configure) contém um exemplo disso.
 
+:::info Versão da API
+
+Por padrão, o SDK requisita dados do Starlight utilizando a versão 2 da Query API. Isso pode ser configurado
+alterando o parâmetro `baseUrl` ao usar o método `configure()`.
+
+:::
+
 :::caution Identificador do workspace
 
 Atualmente, a versão 2 das APIs do Starlight só identificam áreas de trabalho utilizando seus IDs. O suporte à *slugs*
@@ -76,7 +87,7 @@ const NewClient = makeStarlightClient({
 })
 ```
 
-A [função `makeStarlightClient()`](/api/function/makeStarlightClient) recebe as mesmas configurações que o método
+A [função `makeStarlightClient()`](/api/function/makeStarlightClient) recebe os mesmos parâmetros que o método
 `configure()` explicado na seção acima, mas retorna uma instância única, separada do cliente global. Depois de criado,
 você pode exportar esse cliente para ser usado no resto da sua aplicação.
 

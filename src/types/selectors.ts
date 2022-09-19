@@ -11,5 +11,5 @@ export {
 } from '../selectors/Collection'
 export { EntrySelector } from '../selectors/Entry'
 export { MediaSelector } from '../selectors/Media'
-export { SearchSelector } from '../selectors/Search'
+export { SearchSelector, SearchEntriesParams } from '../selectors/Search'
 export { SingletonSelector } from '../selectors/Singleton'

@@ -553,7 +553,7 @@ export interface BaseRequestParameters {
    * A search query string.
    *
    * For instance, searching for "out" will match both "check out!" and
-   * "about us". Search is canse-insensitive.
+   * "about us". Search is not case-sensitive.
    */
   query?: string
 }
@@ -566,7 +566,7 @@ export interface BaseRequestParameters {
 export interface QueryableRequestParameters {
   /**
    * A search query string that matches a specific word within boundaries.
-   * Search is not canse-sensitive.
+   * Search is not case-sensitive.
    *
    * For instance, searching for "phone" will match "This is my phone!"
    * but won't match "This is my telephone!".
@@ -575,7 +575,7 @@ export interface QueryableRequestParameters {
   /**
    * A comma-separated list of fields to look up on when searching using
    * `query` or `query:word`. If undefined, all text fields will be searched on,
-   * including Visual Editor fields. Search is not canse-sensitive.
+   * including Visual Editor fields. Search is not case-sensitive.
    *
    * For instance, to limit search on the "content" and "summary" fields of a
    * model, pass `'content,summary'`.

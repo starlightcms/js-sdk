@@ -1,0 +1,56 @@
+---
+sidebar_position: 6
+---
+
+# Busca
+
+Você pode realizar buscas em uma *área de trabalho* utilizando um [SearchSelector](/api/interface/SearchSelector).
+O tipo dos objetos retornados pelo SearchSelector depende do método utilizado.
+
+Atualmente, o SearchSelector suporta buscas por *entradas* de *modelos*.
+
+## SearchSelector
+
+<APILink to="/api/interface/SearchSelector"/>
+
+SearchSelectors são úteis para criar buscas "gerais" na sua aplicação, como uma busca por *entradas* que englobam
+todos os *modelos* da sua área de trabalho, ou apenas alguns modelos específicos. Para buscas que englobam apenas um
+modelo, é recomendado utilizar [o método `list()` de um ModelInstance](/api/interface/ModelInstance), que provê mais
+opções de filtragem do que o SearchSelector.
+
+Para utilizar um SearchSelector, basta acessar a propriedade `search` de um cliente do SDK:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// A propriedade search é um SearchSelector
+const search = Starlight.search
+```
+
+Em geral, você não precisa utilizar um SearchSelector como no exemplo acima. Você pode simplesmente encadear seus
+métodos para requisitar o que você precisa. Por exemplo:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// Buscar por entradas entre todos os modelos da área de trabalho.
+const response = await Starlight.search.entries({
+  query: 'hello world'
+})
+
+// Buscar por entrada em modelos específicos.
+const response = await Starlight.search.entries({
+  query: 'hello world',
+  models: 'posts,magazines,videos'
+})
+
+// Buscar por entrada em modelos e categorias específicas.
+const response = await Starlight.search.entries({
+  query: 'hello world',
+  models: 'posts,magazines,videos',
+  categories: 'science,fun-facts'
+})
+```
+
+O método `entries()` suporta uma variedade de parâmetros para filtrar e paginar as entradas retornadas. Verifique a
+[página da interface SearchEntriesParams](/api/interface/SearchEntriesParams) para saber quais parâmetros estão disponíveis.

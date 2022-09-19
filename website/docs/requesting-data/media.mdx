@@ -1,0 +1,43 @@
+---
+sidebar_position: 5
+---
+
+# Mídia
+
+Você pode requisitar arquivos de mídia facilmente utilizando um [MediaSelector](/api/interface/MediaSelector). Os
+métodos desse Selector retornam objetos do tipo [MediaObject](/api/interface/MediaObject).
+
+Geralmente, você não precisa utilizar o SDK para requisitar dados sobre arquivos de mídia, já que esses já são
+retornados por outras entidades que utilizam os arquivos. Por exemplo, uma *entrada* de um *modelo* que retorna uma
+"imagem destacada" já retorna todos os dados do arquivo de mídia selecionado. Assim, não é necessário requisitar esses
+dados novamente. O mesmo acontece em arquivos de mídia usados no editor de texto visual do Starlight, e seus dados
+são incluídos juntos ao conteúdo.
+
+## MediaSelector
+
+<APILink to="/api/interface/MediaSelector"/>
+
+MediaSelectors são utilizados para listar e requisitar arquivos de mídia de uma *área de trabalho*. Para usar um
+MediaSelector, basta acessar a propriedade `media` de um cliente do SDK:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// A propriedade media é um MediaSelector
+const media = Starlight.media
+```
+
+Em geral, você não precisa utilizar um MediaSelector como no exemplo acima. Você pode simplesmente encadear seus
+métodos para requisitar o que você precisa. Por exemplo:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// Listar todos os arquivos de mídia da área de trabalho.
+const response = await Starlight.media.list()
+
+// Requisitar os dados de um arquivo de mídia específico.
+// Note que arquivos de mídia precisam ser requisitados usando seus IDs.
+const response = await Starlight.media.get('1234567890')
+```
+
