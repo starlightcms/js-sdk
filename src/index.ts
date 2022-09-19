@@ -4,9 +4,10 @@ export * from './types'
 
 /**
  * This is the default object exported by the SDK module, which is a
- * pre-created {@link StarlightClient}. If your application only requests
- * data from a single Starlight workspace, using this client is easier than
- * creating a new one using {@link makeStarlightClient}.
+ * pre-created {@link StarlightClient}. In the docs, this is called the "global
+ * SDK client". If your application only requests data from a single Starlight
+ * workspace, using this client is easier than creating
+ * a new one using {@link makeStarlightClient}.
  *
  * Using the default client is as easy as importing the SDK:
  *
@@ -17,7 +18,7 @@ export * from './types'
  * const response = await Starlight.posts.entries.list()
  * ```
  *
- * You need to configure the default workspace once before using it, however.
+ * You need to configure the default workspace before using it.
  * See {@apilink StarlightClient.configure} to learn more.
  *
  * @group Client

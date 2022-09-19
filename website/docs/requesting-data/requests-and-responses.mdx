@@ -77,10 +77,10 @@ Atualmente, você pode criar essas Instances:
 - ModelCategoryInstance (para *categorias de modelo*)
 - CollectionInstance (para *coleções*)
 
-### Instances dinâmicas {#dynamic-instances}
+### Sintaxe dinâmica {#dynamic-syntax}
 
-Para facilitar o desenvolvimento e simplificar a sintaxe do SDK, você pode criar algumas Instances usando apenas o
-*slug* do dado que você quer requisitar. Vamos retomar ao último exemplo:
+Para facilitar o desenvolvimento e simplificar a sintaxe do SDK, você pode criar alguns Selectors e Instances usando
+apenas o *slug* do dado que você quer requisitar. Vamos retomar ao último exemplo:
 
 ```js
 import Starlight from '@starlightcms/js-sdk'
@@ -101,7 +101,7 @@ const response = await Starlight.posts.entries.get('hello-world')
 
 Bem mais simples, não acha? Com essa sintaxe, é possível escrever linhas menores e mais fluidas.
 
-:::info Slugs de instâncias dinâmicas
+:::info Sintaxe dinâmica e métodos do SDK
 
 No exemplo acima, utilizamos a sintaxe dinâmica para criar um ModelInstance para um modelo de slug `posts`. Tenha em
 mente que, caso o modelo requisitado use um slug com um nome igual a um método do cliente do SDK, o método do cliente
@@ -124,7 +124,8 @@ Essa limitação vale para qualquer parte do SDK que aceita a sintaxe dinâmica,
 
 :::
 
-Você também pode criar ModelCategoryInstances e CollectionInstances com essa sintaxe:
+Você também pode criar outros tipos de Selectors e Instance usando essa sintaxe,
+como ModelCategoryInstances e CollectionInstances:
 
 ```js
 import Starlight from '@starlightcms/js-sdk'
@@ -146,8 +147,8 @@ const response = await Starlight.posts.articles.entries() // Mágica dupla!
 ```
 
 Note que você só pode usar essa sintaxe diretamente no cliente para criar ModelInstances. Para criar outros tipos de
-Instances, você usa essa sintaxe em objetos que dão suporte à ela. Nas próximas páginas, você vai entender quais objetos
-suportam essa sintaxe, e qual Instance é retornada quando você a usa.
+Selectors e Instances, você usa essa sintaxe em objetos que dão suporte à ela. Nas próximas páginas, você vai entender
+onde essa sintaxe é suportada, e qual tipo de objeto é retornado quando você a usa.
 
 #### Slugs dinâmicos {#dynamic-slugs}
 
@@ -204,6 +205,8 @@ conexão com a Internet.
 
 ### StarlightItemResponse {#starlight-item-response}
 
+<APILink to="/api/interface/StarlightItemResponse"/>
+
 Esse tipo de resposta é retornado por métodos que requisitam "dados específicos" da área de trabalho. Por exemplo, ao
 requisitar uma *entrada* de um *modelo*, apenas um item será retornado, e o método utilizado retornará um
 StarlightItemResponse com esse item. Por exemplo:
@@ -237,6 +240,8 @@ const entry = response.data
 ```
 
 ### StarlightListResponse {#starlight-list-response}
+
+<APILink to="/api/interface/StarlightListResponse"/>
 
 Esse tipo de resposta é retornado por métodos que listam dados da área de trabalho atual. Ou seja, qualquer resposta das
 APIs do Starlight que retornam um array de dados vão retornar um StarlightListResponse em caso de sucesso. Por exemplo:
@@ -285,6 +290,8 @@ const entries = response.data
 ```
 
 ### StarlightError {#starlight-error}
+
+<APILink to="/api/class/StarlightError"/>
 
 Internamente, os métodos que fazem requisições às APIs do Starlight utilizam a [Fetch API](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API)
 do navegador ou do Node. Caso algum erro aconteça nessa requisição, seja por conta de algum problema de conexão com à

@@ -83,7 +83,7 @@ export interface CollectionSelector {
  *
  * See {@link CollectionSelector} to view all available methods.
  *
- * See {@doclink requesting-data/requests-and-responses#dynamic-instances | Dynamic Instances}
+ * See {@doclink requesting-data/requests-and-responses#dynamic-syntax | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
  *
  * @example Accessing a CollectionInstance using the dynamic syntax.

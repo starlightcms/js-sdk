@@ -94,7 +94,7 @@ export interface StarlightClient<
    * const rootElement = document.getElementById("root")
    * const root = createRoot(rootElement)
    *
-   * root.render(<App />)
+   * root.render(<MyApp />)
    * ```
    *
    * @param config A configuration object. See {@link StarlightConfig} to view
@@ -157,7 +157,7 @@ export interface StarlightClient<
 
   /**
    * Returns a {@link DynamicModelSelector}, which is a {@link ModelSelector}
-   * with support for creating {@link ModelInstance}s using the dynamic syntax.
+   * with support for creating {@apilink ModelInstance | ModelInstances} using the dynamic syntax.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -177,7 +177,7 @@ export interface StarlightClient<
   /**
    * Returns a {@link DynamicModelInstance}, which is a
    * {@link ModelInstance} with support for creating
-   * {@link ModelCategoryInstance}s using the dynamic syntax. For instance:
+   * {@apilink ModelCategoryInstance | ModelCategoryInstances} using the dynamic syntax. For instance:
    *
    * ```ts
    * import Starlight from '@starlightcms/js-sdk'
@@ -212,7 +212,7 @@ export interface StarlightClient<
   /**
    * Returns a {@link DynamicCollectionSelector}, which is a
    * {@link CollectionSelector} with support for creating
-   * {@link CollectionInstance}s using the dynamic syntax.
+   * {@apilink CollectionInstance | CollectionInstances} using the dynamic syntax.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -298,7 +298,7 @@ export interface StarlightClient<
  * interface, which allows users to create
  * {@apilink DynamicModelInstance| DynamicModelInstances} dynamically.
  * See {@link StarlightClient} to learn which methods it provides. Also see
- * {@doclink requesting-data/requests-and-responses#dynamic-instances | Dynamic Instances}
+ * {@doclink requesting-data/requests-and-responses#dynamic-syntax | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
  *
  *

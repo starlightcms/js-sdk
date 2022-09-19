@@ -1,0 +1,80 @@
+---
+sidebar_position: 4
+---
+
+# Coleções
+
+Você pode requisitar *coleções* facilmente utilizando um [CollectionSelector](/api/interface/CollectionSelector) ou um
+[CollectionInstance](/api/interface/CollectionInstance). O objeto CollectionSelector é usado para listar e requisitar
+informações gerais sobre as coleções de uma *área de trabalho*, enquanto o CollectionInstance provê métodos para
+requisitar informações e listar os itens de uma coleção específica.
+
+Nos dois casos, seus métodos retornam objetos do tipo [Collection](/api/interface/Collection), com exceção do método
+[`CollectionInstance.items()`](/api/interface/CollectionInstance#items), que retorna objetos de tipos variados
+dependendo do tipo de coleção.
+
+## CollectionSelector
+
+<APILink to="/api/interface/CollectionSelector"/>
+
+CollectionSelectors são utilizados para listar e requisitar *coleções* específicos
+dentro de uma *área de trabalho*. Para usar um SingletonSelector, basta acessar
+a propriedade `singletons` de um cliente do SDK:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// A propriedade singletons é um SingletonSelector
+const modelSelector = Starlight.singletons
+```
+
+Em geral, você não precisa utilizar um SingletonSelector como no exemplo acima. Você pode simplesmente encadear seus
+métodos para requisitar o que você precisa. Por exemplo:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// Listar todos os singletons da área de trabalho
+const response = await Starlight.singletons.list()
+
+// Requisitar os dados de um singleton específico
+const response = await Starlight.singletons.get('home')
+```
+
+## CollectionInstance
+
+<APILink to="/api/interface/CollectionInstance"/>
+
+CollectionInstances são utilizados para requisitar informações e itens de uma *coleção* específica.
+
+Existem duas maneiras de utilizar CollectionInstances: utilizando
+[o método `collection()` de um StarlightClient](/api/interface/StarlightClient#collection) ou utilizando a
+[sintaxe dinâmica](./requests-and-responses#dynamic-syntax) da
+[propriedade `collections` de um StarlightClient](/api/interface/StarlightClient#collections). Por exemplo, você pode
+criar um CollectionInstance para uma coleção de slug `events` dessas duas maneiras:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// As duas linhas são equivalentes.
+const collectionInstance = Starlight.collection('events') // Usando o método `collection()`
+const collectionInstance = Starlight.collections.events // Dinamicamente
+```
+
+Assim como CollectionSelectors, você também não precisa usar CollectionInstances como no exemplo acima: é mais prático
+encadear os métodos que você precisa em uma só linha:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// Listar os itens de uma coleção. As duas linhas são equivalentes.
+const response = await Starlight.collection('events').items()
+const response = await Starlight.collections.events.items()
+```
+
+O método `items()` suporte uma gama de parâmetros para filtrar e buscar itens. Consulte a
+[página da API sobre o método `items()`](/api/interface/CollectionInstance#items) para mais informações.
+
+Além disso, um CollectionInstance pode ser utilizado para requisitar informações da coleção em si, como seu título e sua
+quantidade de itens. Consulte a
+[página da API sobre o método `get()` do CollectionInstance](/api/interface/CollectionInstance#get) para mais informações.

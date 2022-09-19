@@ -10,6 +10,8 @@ Existem duas maneiras de interagir com um cliente do Starlight:
 
 ## Cliente global do SDK {#global-client}
 
+<APILink to="/api#default"/>
+
 O JS SDK provê um cliente pré-configurado globalmente para usar na sua aplicação. Para usá-lo, basta importar o <i>default export</i>
 do SDK:
 
@@ -35,7 +37,7 @@ import BlogClient from '@starlightcms/js-sdk'
 ### Configurando o cliente global {#configuring-the-global-client}
 
 Antes de começar a utilizar o cliente global do SDK, você precisa configurar qual *área de trabalho* deve ser utilizada
-para requisitar dados. Utilize o método `configure()` para isso:
+para requisitar dados. Utilize o [método `configure()` do StarlightClient](/api/interface/StarlightClient#configure) para isso:
 
 ```js
 import Starlight from '@starlightcms/js-sdk'
@@ -45,11 +47,14 @@ Starlight.configure({
 })
 ```
 
+Você pode verificar todas as opções disponíveis na [página da API sobre o StarlightConfig](/api#StarlightConfig).
+
 A configuração do cliente global só precisa ser feita uma vez, idealmente no início do ciclo de vida da sua aplicação.
 Por exemplo, em aplicações React, você pode configurar o cliente global no mesmo arquivo onde você instancia a raíz
 da sua aplicação usando `ReactDOM.createRoot()`.
+A [página do método `configure()` na API](/api/interface/StarlightClient#configure) contém um exemplo disso.
 
-:::caution Identificador
+:::caution Identificador do workspace
 
 Atualmente, a versão 2 das APIs do Starlight só identificam áreas de trabalho utilizando seus IDs. O suporte à *slugs*
 ainda não foi implementado.
@@ -71,9 +76,9 @@ const NewClient = makeStarlightClient({
 })
 ```
 
-A função `makeStarlightClient` recebe as mesmas configurações que o método `configure()` do cliente global e retorna uma
-instância única, separada do cliente global. Depois de criado, você pode exportar esse cliente para ser usado no resto
-da sua aplicação.
+A [função `makeStarlightClient()`](/api/function/makeStarlightClient) recebe as mesmas configurações que o método
+`configure()` explicado na seção acima, mas retorna uma instância única, separada do cliente global. Depois de criado,
+você pode exportar esse cliente para ser usado no resto da sua aplicação.
 
 ## Requisições retornam Promises {#requests-return-promises}
 
@@ -163,6 +168,6 @@ const entry = await requestEntry('hello-world')
 ```
 
 O StarlightError é um objeto com um parâmetro `response`, que é a resposta retornada pelo método `fetch` do navegador
-(ou do Node, caso você faça a requisição do lado do servidor). Para mais informações sobre a resposta, dê uma olhada
-[nessa página do MDN sobre o objeto Response](https://developer.mozilla.org/en-US/docs/Web/API/Response). Você também
-pode aprender mais sobre o StarlightError [nessa página do guia](../requesting-data/requests-and-responses#starlight-error).
+(ou do Node, caso você faça a requisição do lado do servidor). Para mais informações sobre esse erro, dê uma olhada
+[nessa página do guia sobre respostas](./requesting-data/requests-and-responses#starlight-error) e
+[nessa página da API que detalha o StarlightError](/api/class/StarlightError).

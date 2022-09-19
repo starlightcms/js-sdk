@@ -7,14 +7,16 @@ sidebar_position: 2
 Com o SDK do Starlight, você pode listar *modelos*, requisitar os dados de um modelo específico, ou utilizar uma instância
 de um modelo para requisitar suas *entradas* e *categorias*.
 
-O SDK provê dois objetos para trabalhar com modelos: ModelSelectors e ModelInstances. ModelSelectors são usados para
-listar e requisitar as informações dos modelos da sua *área de trabalho*. Porém, para acessar suas entradas e
-categorias, você precisa utilizar um ModelInstance.
+O SDK provê dois objetos para trabalhar com modelos: [ModelSelectors](/api/interface/ModelSelector) e
+[ModelInstances](/api/interface/ModelInstance). ModelSelectors são usados para listar e requisitar as informações dos
+modelos da sua *área de trabalho*. Porém, para acessar suas entradas e categorias, você precisa utilizar um ModelInstance.
 
 ## ModelSelector {#model-selector}
 
+<APILink to="/api/interface/ModelSelector"/>
+
 ModelSelectors são utilizados para listar modelos e requisitar seus dados. Para usar um ModelSelector, basta acessar a
-propriedade `models` do SDK:
+[propriedade `models` de um StarlightClient](/api/interface/StarlightClient#models):
 
 ```js
 import Starlight from '@starlightcms/js-sdk'
@@ -38,17 +40,20 @@ const response = await Starlight.models.get('posts')
 
 ## ModelInstance {#model-instance}
 
+<APILink to="/api/interface/ModelInstance"/>
+
 ModelInstances são utilizados para requisitar dados de um *modelo* específico, suas *entradas*, e suas *categorias*.
 
-Existem duas maneiras de utilizar ModelInstances: utilizando o método `model` ou utilizando a
-[sintaxe dinâmica](../requests-and-responses#dynamic-instances) de um cliente do SDK. Por exemplo, você pode requisitar
+Existem duas maneiras de utilizar ModelInstances: utilizando
+[o método `model()` de um StarlightClient](/api/interface/StarlightClient#model) ou utilizando a
+[sintaxe dinâmica](./requests-and-responses#dynamic-syntax) de um cliente do SDK. Por exemplo, você pode requisitar
 os dados de um modelo de *slug* `posts` dessas duas maneiras:
 
 ```js
 import Starlight from '@starlightcms/js-sdk'
 
 // As duas linhas são equivalentes.
-const modelInstance = Starlight.model('posts') // Usando o método `model`
+const modelInstance = Starlight.model('posts') // Usando o método `model()`
 const modelInstance = Starlight.posts // Dinamicamente
 ```
 
@@ -65,8 +70,8 @@ const response = await Starlight.posts.get()
 
 ### Entradas
 
-Para listar e requisitar *entradas* de um *modelo*, você pode utilizar a propriedade `entries` de um ModelInstance, que
-é um objeto do tipo EntrySelector.
+Para listar e requisitar *entradas* de um *modelo*, você pode utilizar a
+[propriedade `entries` de um ModelInstance](/api/interface/ModelInstance#entries), que é um objeto do tipo EntrySelector.
 
 Para listar entradas, utilize o método `list()` de um EntrySelector. Você pode passar um objeto de parâmetros para
 configurar vários aspectos da listagem, como paginação, filtragem por categoria, busca por palavra-chave, dentre outros.

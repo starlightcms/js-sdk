@@ -49,7 +49,8 @@ export interface MediaObject extends StarlightEntity {
 }
 
 /**
- * Represents an Author entity returned by the API.
+ * Represents an Author entity returned by the API. Authors are returned in
+ * {@link Entry} requests.
  *
  * @group API Entities
  */

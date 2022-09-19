@@ -7,7 +7,7 @@ const entry =
 const modelCategory =
   'Categorias são usadas para organizar as entradas de um modelo em grupos.'
 const collection =
-  'Coleções são usadas para organizar entradas, singletons ou mídia em um grupo.'
+  'Coleções são usadas para organizar entradas, singletons ou mídia em em listas.'
 const singleton =
   'Singletons representam estruturas de dados únicas numa aplicação, como uma página, menus, ou configurações de SEO.'
 const slug =
