@@ -298,7 +298,7 @@ export interface StarlightClient<
  * interface, which allows users to create
  * {@apilink DynamicModelInstance| DynamicModelInstances} dynamically.
  * See {@link StarlightClient} to learn which methods it provides. Also see
- * {@doclink requesting-data/requests-and-responses#dynamic-syntax | Dynamic Instances}
+ * {@doclink requests-and-responses#dynamic-syntax | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
  *
  *

@@ -52,7 +52,7 @@ export interface ModelCategorySelector {
  * See {@link ModelCategorySelector} to view all available methods. You can use
  * a DynamicModelCategorySelector by accessing {@apilink ModelInstance.categories}.
  *
- * See {@doclink requesting-data/requests-and-responses#dynamic-syntax | Dynamic Instances}
+ * See {@doclink requests-and-responses#dynamic-syntax | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
  *
  * @example Accessing a ModelCategorySelector using the dynamic syntax on a model of slug "posts"

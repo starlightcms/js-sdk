@@ -83,7 +83,7 @@ export interface ModelInstance<D extends SerializedData> {
  *
  * See {@link ModelInstance} to view all available methods.
  *
- * See {@doclink requesting-data/requests-and-responses#dynamic-syntax | Dynamic Instances}
+ * See {@doclink requests-and-responses#dynamic-syntax | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
  *
  * @example Accessing a ModelCategoryInstance using the dynamic syntax.
