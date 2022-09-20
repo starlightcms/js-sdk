@@ -1,41 +1,26 @@
-# Website
+# JavaScript SDK Documentation
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+This folder contains the JavaScript SDK documentation website. It's built using Docusaurus 2.
 
-### Installation
+You can check out the latest built documentation at
+[https://js.sdk.starlight.sh](https://js.sdk.starlight.sh/), which follows the `main` branch.
 
-```
-$ yarn
-```
+## Suggestions
 
-### Local Development
+If you find any typos or confusing sections in our docs, feel free to
+[open an issue](https://github.com/starlightcms/js-sdk/issues) pointing out the issue.
 
-```
-$ yarn start
-```
+You can also use the "Edit this page" button found in all our guide pages. API pages don't have this button, since
+they are auto-generated from code, but feel free to [open an issue](https://github.com/starlightcms/js-sdk/issues)
+and link the relevant API page instead.
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+## Why not use Starlight for the content?
 
-### Build
+Great question!
 
-```
-$ yarn build
-```
+With our documentation websites, we strive to always provide up-to-date content. Since documentation content is tightly
+coupled with code implementation, it makes more sense to keep both in a single place, which makes it easier to update
+documentation as part of the development process.
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+This way, when we commit new code to the repository, we can make sure that we've updated the docs accordingly before
+merging any changes into release branches.

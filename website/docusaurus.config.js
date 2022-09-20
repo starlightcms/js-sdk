@@ -60,7 +60,7 @@ const config = {
       navbar: {
         title: 'JavaScript SDK',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Starlight JavaScript SDK logo',
           src: 'img/logo.svg',
         },
         items: [
