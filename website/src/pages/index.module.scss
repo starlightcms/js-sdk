@@ -1,6 +1,4 @@
 .mainWrapper {
-    background: hsla(215, 20%, 98%, 1);
-
     > main {
         height: 100%;
     }
@@ -25,18 +23,24 @@
 
     > svg {
         height: 40px;
+
+        :global(.sl-logo-typography) {
+            [data-theme='dark'] & {
+                fill: var(--ifm-color-emphasis-800);
+            }
+        }
     }
 
     > div {
         width: 2px;
         height: 50px;
         margin: 0 1.5rem;
-        background-color: #DDE0E4;
+        background-color: var(--ifm-color-emphasis-200);
     }
 
     > h3 {
         margin: 0;
-        color: hsla(215, 12%, 35%, 1);
+        color: var(--ifm-color-emphasis-800);
     }
 
     @media screen and (max-width: 599px) {
