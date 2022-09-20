@@ -21,7 +21,7 @@ Aliás, o intuito desse "blog" não é exatamente de dar notícias. No futuro, a
 relacionados ao JS SDK diretamente, como notas de atualização e guias sobre novas funções. Mas, agora no início da
 nossa plataforma de documentação, achamos que é mais simples para você procurar novidades por aqui.
 
-# Aberto a todos
+## Aberto a todos
 
 Essa documentação, assim como o código do SDK em si, é 100% open-source. Você pode dar uma olhada em todo o código
 no [repositório do JS SDK](https://github.com/starlightcms/js-sdk) (o código desse site fica na pasta `website`). 
@@ -35,7 +35,7 @@ Se você tiver alguma dúvida, mas não souber bem o que sugerir, fique a vontad
 [issue no repositório do SDK](https://github.com/starlightcms/js-sdk/issues) explicando seu problema. Assim podemos
 lhe ajudar e, se necessário, atualizar a documentação de acordo.
 
-# Mãos na massa
+## Mãos na massa
 
 É isso! Estamos apenas começando nosso trabalho de documentação, e estamos muito felizes de poder compartilhar esse
 primeiro site. Além de documentação, estamos criando vários recursos novos para o Starlight, e esperamos poder mostrar
