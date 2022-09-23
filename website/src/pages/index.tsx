@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import Link from '@docusaurus/Link'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
+import IconExternalLink from '@theme/Icon/ExternalLink'
 import styles from './index.module.scss'
 import StarlightLogo from '@site/static/img/logo-complete.svg'
 
@@ -24,6 +25,12 @@ function HomepageHeader() {
           </code>
           <Link className="button button--primary" to="/docs/intro">
             Documentação
+          </Link>
+        </div>
+        <div className={styles.reactTip}>
+          Usando React? Dê uma olhada no{' '}
+          <Link href="https://react.sdk.starlight.sh/" target="_blank">
+            React SDK <IconExternalLink />
           </Link>
         </div>
       </div>
