@@ -22,7 +22,8 @@
     "docs:serve": "npm run serve -w website",
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "files": [
     "dist/**/*"
@@ -45,13 +46,18 @@
     "@types/node": "^16.10.1",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
+    "@vitest/coverage-c8": "^0.24.3",
+    "cross-fetch": "^3.1.5",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^7.0.2",
+    "jsdom": "^20.0.1",
     "lint-staged": "^11.1.2",
+    "msw": "^0.47.4",
     "prettier": "2.4.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.4.3",
-    "rimraf": "^3.0.2"
+    "vitest": "^0.24.3"
   },
   "lint-staged": {
     "*.{ts}": [
