@@ -23,7 +23,9 @@
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "type-check": "tsc --pretty --noEmit",
+    "lint": "eslint"
   },
   "files": [
     "dist/**/*"
@@ -61,6 +63,7 @@
   },
   "lint-staged": {
     "*.{ts}": [
+      "vitest",
       "eslint --cache --fix",
       "prettier --write"
     ]
