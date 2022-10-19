@@ -72,6 +72,12 @@ export function makeClient<
     },
 
     getBaseUrl() {
+      if (!workspace.length) {
+        throw new Error(
+          'No workspace defined. Use the `configure()` method on the Starlight client to define one.'
+        )
+      }
+
       return `${baseUrl}/workspaces/${workspace}`
     },
 
