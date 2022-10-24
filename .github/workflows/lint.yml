@@ -1,0 +1,33 @@
+name: js-lint
+
+on:
+    pull_request:
+        paths:
+            - '.github/workflows/js-lint.yml'
+            - '**/*.js'
+            - '**/*.jsx'
+            - '**/*.ts'
+            - '**/*.tsx'
+
+jobs:
+    JsLint:
+        name: Lint javascript and typescript files
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '16'
+
+            - name: Checkout repository
+              uses: actions/checkout@v2
+              with:
+                  # Ensures the entire repo is checked out (including tags)
+                  fetch-depth: 0
+
+            # Cache and install node_modules
+            - uses: bahmutov/npm-install@v1
+              with:
+                install-command: npm ci
+
+            - name: GitHub Action for Javascript linting
+              run: npm run lint
