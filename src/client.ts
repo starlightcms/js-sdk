@@ -55,7 +55,9 @@ import makeCollectionInstance from './instances/Collection'
  */
 export function makeClient<
   D extends WorkspaceModelDefinition = DefaultModelDefinition
->(config: StarlightConfig = {}): DynamicStarlightClient<D> {
+>(
+  config: StarlightConfig = {}
+): DynamicStarlightClient<D & WorkspaceModelDefinition> {
   let baseUrl = config.baseUrl ?? 'https://query.starlight.sh/v2'
   let workspace = config.workspace ?? ''
   let debug = config.debug ?? false
@@ -142,5 +144,5 @@ export function makeClient<
 
       return Reflect.get(target, prop)
     },
-  }) as DynamicStarlightClient<D>
+  }) as DynamicStarlightClient<D & WorkspaceModelDefinition>
 }

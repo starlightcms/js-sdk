@@ -541,6 +541,7 @@ export interface WorkspaceModelDefinition {
  * @group Request Parameters
  */
 export interface BaseRequestParameters {
+  [key: string]: string | number | boolean | undefined
   /**
    * The page requested.
    */
