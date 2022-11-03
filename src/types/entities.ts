@@ -166,8 +166,8 @@ export type QueryableFields<D extends SerializedData> = {
 export type WithQueryableFieldsOnModelables<T> = T extends
   | Entry<never>
   | Singleton<never>
-  ? QueryableFields<Pick<T, 'data'>>
-  : Record<string, never>
+  ? QueryableFields<T['data']>
+  : never
 
 /**
  * Represents an Entry entity returned by the API.
