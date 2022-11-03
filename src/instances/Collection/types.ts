@@ -87,7 +87,6 @@ export interface CollectionInstance<C extends CollectionEntityTypes> {
    * syntax is also supported, see {@link QueryableFields} for more info.
    */
   items(
-    options?: ListCollectionItemsParams & WithQueryableFieldsOnModelables<C>
+    options?: ListCollectionItemsParams | WithQueryableFieldsOnModelables<C>
   ): Promise<StarlightListResponse<C>>
 }
-0
