@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/starlightcms/js-sdk#readme",
   "devDependencies": {
-    "@types/node": "^16.10.1",
+    "@types/node": "^18.11.10",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "@vitest/coverage-c8": "^0.24.3",
