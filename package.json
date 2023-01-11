@@ -63,7 +63,7 @@
   },
   "lint-staged": {
     "*.{ts}": [
-      "vitest",
+      "vitest --passWithNoTests",
       "eslint --cache --fix",
       "prettier --write"
     ]

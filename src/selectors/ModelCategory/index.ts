@@ -5,7 +5,11 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
-import { ModelCategorySelector, DynamicModelCategorySelector } from './types'
+import {
+  ModelCategorySelector,
+  DynamicModelCategorySelector,
+  ListModelCategoriesOptions,
+} from './types'
 import makeModelCategoryInstance from '../../instances/ModelCategory'
 
 export default function makeModelCategorySelector<D extends SerializedData>(
@@ -33,4 +37,8 @@ export default function makeModelCategorySelector<D extends SerializedData>(
   }) as DynamicModelCategorySelector<D>
 }
 
-export { ModelCategorySelector, DynamicModelCategorySelector }
+export {
+  ModelCategorySelector,
+  DynamicModelCategorySelector,
+  ListModelCategoriesOptions,
+}

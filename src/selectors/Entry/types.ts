@@ -37,6 +37,27 @@ export interface ListEntriesParams
     | 'published_at:desc'
     | 'views:asc'
     | 'views:desc'
+  /**
+   * When false, the returned entries won't have any data attached to them,
+   * even if their Model have listable fields. Defaults to true.
+   */
+  data?: boolean
+  /**
+   * When given, return entries published before the given date. Should be an
+   * ISO 8601 date string.
+   *
+   * Tip: in JavaScript, you can get an ISO 8601 date string by using
+   * [Date.toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString).
+   */
+  published_before?: string
+  /**
+   * When given, return entries published after the given date. Should be an
+   * ISO 8601 date string.
+   *
+   * Tip: in JavaScript, you can get an ISO 8601 date string by using
+   * [Date.toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString).
+   */
+  published_after?: string
 }
 
 /**
