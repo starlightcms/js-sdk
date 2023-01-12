@@ -5,7 +5,7 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
-import { EntrySelector } from './types'
+import { EntrySelector, ListEntriesParams } from './types'
 
 export default function makeEntrySelector<D extends SerializedData>(
   client: StarlightClient,
@@ -26,4 +26,4 @@ export default function makeEntrySelector<D extends SerializedData>(
   }
 }
 
-export { EntrySelector }
+export { EntrySelector, ListEntriesParams }

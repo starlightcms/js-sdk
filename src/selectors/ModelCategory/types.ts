@@ -7,12 +7,29 @@ import {
 } from '../../types'
 import { ModelCategoryInstance } from '../../instances/ModelCategory'
 
+/**
+ * Request parameters for listing model categories.
+ *
+ * Used by {@apilink ModelCategorySelector.list}.
+ *
+ * @group Request Parameters
+ */
 export interface ListModelCategoriesOptions extends BaseRequestParameters {
   /**
    * Define how items will be ordered. Check this field type to see the
    * allowed options.
    */
-  order?: 'title:asc' | 'title:desc' | 'entry_count:asc' | 'entry_count:desc'
+  order?:
+    | 'title:asc'
+    | 'title:desc'
+    | 'entry_count:asc'
+    | 'entry_count:desc'
+    | 'slug:asc'
+    | 'slug:desc'
+    | 'created_at:asc'
+    | 'created_at:desc'
+    | 'updated_at:asc'
+    | 'updated_at:desc'
 }
 
 /**
@@ -25,6 +42,20 @@ export interface ListModelCategoriesOptions extends BaseRequestParameters {
  * @group Selectors
  */
 export interface ModelCategorySelector {
+  /**
+   * Returns a {@link StarlightListResponse} with a list of
+   * {@apilink ModelCategory | ModelCategories}.
+   *
+   * @example Requesting all categories from a model.
+   * ```ts
+   * import Starlight from '@starlightcms/js-sdk'
+   *
+   * const response = await Starlight.posts.categories.list()
+   * ```
+   *
+   * @param options An optional object of request parameters. See
+   * {@link ListModelCategoriesOptions} for all available options.
+   */
   list(
     options?: ListModelCategoriesOptions
   ): Promise<StarlightListResponse<ModelCategory>>
