@@ -28,7 +28,7 @@ export interface BlockData {
  * @group Visual Data Blocks
  */
 export interface ParagraphBlock extends BlockData {
-  text: string
+  text: string | null
 }
 
 /**
