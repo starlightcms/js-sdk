@@ -1,6 +1,7 @@
 import { makeClient } from './client'
 export { StarlightError } from './errors'
 export * from './types'
+export * from './utils'
 
 /**
  * This is the default object exported by the SDK module, which is a
