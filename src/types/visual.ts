@@ -53,6 +53,14 @@ export interface QuoteBlock extends BlockData {
 }
 
 /**
+ * Represents the possible block widths, used by some blocks.
+ *
+ * @group Visual Data Blocks
+ * @internal
+ */
+type BlockWidth = 'auto' | 'justify' | 'max' | string
+
+/**
  * Represents an image file, used in Image blocks.
  *
  * @group Visual Data Blocks
@@ -69,12 +77,14 @@ type ImageFile = {
  * @group Visual Data Blocks
  */
 export interface ImageBlock extends BlockData {
-  id: number
+  id: number | undefined
   url: string
   files: ImageFile[]
   caption?: string
   alt?: string
   href?: string
+  width: BlockWidth
+  variation: string | undefined
 }
 
 /**
