@@ -119,6 +119,29 @@ export interface ListBlock extends BlockData {
 }
 
 /**
+ * Represents the current supported video services, used in Video blocks.
+ *
+ * @group Visual Data Blocks
+ * @internal
+ */
+export type SupportedServices = 'youtube' | 'vimeo'
+
+/**
+ * Represents a Video block, which is used to render embed video elements.
+ *
+ * @group Visual Data Blocks
+ */
+export type VideoBlock = {
+  type: 'embed'
+  service: SupportedServices
+  videoId: string
+  url: string
+  html: string
+  width: BlockWidth
+  caption?: string
+}
+
+/**
  * A VisualDataBlock object represents a piece of content. Each block has a
  * specific type and some data associated with it. For instance, a Paragraph
  * block has text data, an Image block has a file path and image metadata, etc.
@@ -129,6 +152,7 @@ export interface VisualDataBlock<D extends BlockData = BlockData> {
   id: string
   type: BlockType
   data: D
+  width?: number
 }
 
 /**
