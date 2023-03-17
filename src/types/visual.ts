@@ -152,7 +152,6 @@ export interface VisualDataBlock<D extends BlockData = BlockData> {
   id: string
   type: BlockType
   data: D
-  width?: number
 }
 
 /**
