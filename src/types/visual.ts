@@ -85,6 +85,7 @@ export interface ImageBlock extends BlockData {
   href?: string
   width: BlockWidth
   variation: string | undefined
+  responsive: boolean
 }
 
 /**
