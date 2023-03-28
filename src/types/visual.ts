@@ -66,9 +66,11 @@ type BlockWidth = 'auto' | 'justify' | 'max' | string
  * @group Visual Data Blocks
  * @internal
  */
-type ImageFile = {
+export type ImageFile = {
   url: string
+  variation: string
   width: number
+  height: number
 }
 
 /**
