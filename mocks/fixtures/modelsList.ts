@@ -82,8 +82,9 @@ export const modelsListMock = {
     },
   ],
   links: {
-    first: 'https://query.starlight.sh/v2/workspaces/327329647/models?page=1',
-    last: 'https://query.starlight.sh/v2/workspaces/327329647/models?page=1',
+    first:
+      'https://query.starlightcms.io/v2/workspaces/327329647/models?page=1',
+    last: 'https://query.starlightcms.io/v2/workspaces/327329647/models?page=1',
     prev: null,
     next: null,
   },
@@ -98,7 +99,7 @@ export const modelsListMock = {
         active: false,
       },
       {
-        url: 'https://query.starlight.sh/v2/workspaces/327329647/models?page=1',
+        url: 'https://query.starlightcms.io/v2/workspaces/327329647/models?page=1',
         label: '1',
         active: true,
       },
@@ -108,7 +109,7 @@ export const modelsListMock = {
         active: false,
       },
     ],
-    path: 'https://query.starlight.sh/v2/workspaces/327329647/models',
+    path: 'https://query.starlightcms.io/v2/workspaces/327329647/models',
     per_page: 15,
     to: 11,
     total: 11,
