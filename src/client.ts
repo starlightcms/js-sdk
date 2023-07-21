@@ -58,7 +58,7 @@ export function makeClient<
 >(
   config: StarlightConfig = {}
 ): DynamicStarlightClient<D & WorkspaceModelDefinition> {
-  let baseUrl = config.baseUrl ?? 'https://query.starlight.sh/v2'
+  let baseUrl = config.baseUrl ?? 'https://query.starlightcms.io/v2'
   let workspace = config.workspace ?? ''
   let debug = config.debug ?? false
 

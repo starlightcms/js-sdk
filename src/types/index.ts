@@ -18,7 +18,7 @@ export * from './selectors'
  * provides a default one which can be used by IDEs to provide auto-completion.
  * The default URL points to version 2 of the Query API.
  */
-export type BaseUrl = 'https://query.starlight.sh/v2' | string
+export type BaseUrl = 'https://query.starlightcms.io/v2' | string
 
 /**
  * The available options to configure a {@link StarlightClient}.

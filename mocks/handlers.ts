@@ -15,7 +15,7 @@ interface HandlersProps {
 }
 
 const defaultProps = {
-  baseURL: 'https://query.starlight.sh/v2',
+  baseURL: 'https://query.starlightcms.io/v2',
   workspace: 'test-workspace',
 }
 
