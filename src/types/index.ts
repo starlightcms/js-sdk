@@ -6,6 +6,8 @@ import { DynamicCollectionSelector } from '../selectors/Collection'
 import { MediaSelector } from '../selectors/Media'
 import { SearchSelector } from '../selectors/Search'
 import { CollectionInstance } from '../instances/Collection'
+import { FormInstance } from '../instances/Form'
+import { DynamicFormSelector } from '../selectors/Form/types'
 
 export * from './fields'
 export * from './entities'
@@ -190,6 +192,46 @@ export interface StarlightClient<
    * @category Instance Methods
    */
   model<S extends keyof D>(slug: S): DynamicModelInstance<D[S]>
+
+  /**
+   * TODO: update documentation
+   *
+   * Returns a {@link DynamicModelSelector}, which is a {@link ModelSelector}
+   * with support for creating {@apilink ModelInstance | ModelInstances} using the dynamic syntax.
+   *
+   * This is an accessor, which means that it should be used just like a common
+   * object parameter. For instance:
+   *
+   * ```ts
+   * import Starlight from '@starlightcms/js-sdk'
+   *
+   * const response = await Starlight.models.list()
+   * ```
+   *
+   * See {@link DynamicModelSelector} for more info.
+   *
+   * @category Selector Accessors
+   */
+  get forms(): DynamicFormSelector
+
+  /**
+   * TODO: update documentation
+   *
+   * Returns a {@link DynamicModelInstance}, which is a
+   * {@link ModelInstance} with support for creating
+   * {@apilink ModelCategoryInstance | ModelCategoryInstances} using the dynamic syntax. For instance:
+   *
+   * ```ts
+   * import Starlight from '@starlightcms/js-sdk'
+   *
+   * const response = await Starlight.model('posts').entries.list()
+   * ```
+   *
+   * See {@link DynamicModelInstance} for more info.
+   *
+   * @category Instance Methods
+   */
+  form(slug: string | number): FormInstance
 
   /**
    * Returns a {@link SingletonSelector}.

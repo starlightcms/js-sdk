@@ -13,6 +13,8 @@ import makeCollectionSelector from './selectors/Collection'
 import makeMediaSelector from './selectors/Media'
 import makeSearchSelector from './selectors/Search'
 import makeCollectionInstance from './instances/Collection'
+import makeFormSelector from './selectors/Form'
+import makeFormInstance from './instances/Form'
 
 /**
  * Returns a new {@link DynamicStarlightClient}, which is a
@@ -115,6 +117,14 @@ export function makeClient<
       return makeModelInstance(this, slug as string)
     },
 
+    get forms() {
+      return makeFormSelector(this)
+    },
+
+    form(slug) {
+      return makeFormInstance(this, String(slug))
+    },
+
     get singletons() {
       return makeSingletonSelector(this)
     },
@@ -123,7 +133,7 @@ export function makeClient<
       return makeCollectionSelector(this)
     },
 
-    collection(slug: string | number) {
+    collection(slug) {
       return makeCollectionInstance(this, slug)
     },
 
