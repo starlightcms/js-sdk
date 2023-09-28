@@ -5,10 +5,8 @@ import { Form, FormSchema, StarlightItemResponse } from '../../types'
  * and its {@apilink Field | Fields}.
  *
  * You can access a FormInstance using {@apilink StarlightClient.form} or
- * using the dynamic syntax on a {@link DynamicStarlightClient}. Usage
+ * using the dynamic syntax on a {@link DynamicFormSelector}. Usage
  * examples will use the dynamic syntax.
- *
- * To list all workspace forms, use a {@link FormSelector}.
  *
  * @group Instances
  */
@@ -28,10 +26,7 @@ export interface FormInstance {
   /**
    * Returns a {@link StarlightItemResponse} with a {@link FormSchema}.
    *
-   * If you're using a {@link DynamicFormSelector}, you can use the
-   * dynamic syntax instead of this method.
-   *
-   * @example Listing the schema from a form of slug "signup".
+   * @example Listing the schema from a form of slug `signup`.
    * ```ts
    * import Starlight from '@starlightcms/js-sdk'
    *

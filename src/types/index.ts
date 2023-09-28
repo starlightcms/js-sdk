@@ -194,8 +194,8 @@ export interface StarlightClient<
   model<S extends keyof D>(slug: S): DynamicModelInstance<D[S]>
 
   /**
-   * Returns a {@link DynamicFormSelector}, which is a {@link FormSelector}
-   * with support for creating {@apilink FormInstance | FormInstances} using the dynamic syntax.
+   * Returns a {@link DynamicFormSelector}, which provides support for creating
+   * {@apilink FormInstance | FormInstances} using the dynamic syntax.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -203,7 +203,7 @@ export interface StarlightClient<
    * ```ts
    * import Starlight from '@starlightcms/js-sdk'
    *
-   * const response = await Starlight.forms.list()
+   * const response = await Starlight.forms.signup.get()
    * ```
    *
    * See {@link DynamicFormSelector} for more info.
@@ -213,9 +213,8 @@ export interface StarlightClient<
   get forms(): DynamicFormSelector
 
   /**
-   * Returns a {@link DynamicFormInstance}, which is a
-   * {@link FormInstance} with support for creating
-   * {@apilink FormCategoryInstance | FormCategoryInstances} using the dynamic syntax. For instance:
+   * Returns a {@link FormInstance}, which provides methods to retrieve basic information
+   * about a Starlight form and its schema. For instance:
    *
    * ```ts
    * import Starlight from '@starlightcms/js-sdk'
