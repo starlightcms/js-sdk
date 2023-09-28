@@ -71,6 +71,65 @@ export interface Model extends StarlightEntity {
 }
 
 /**
+ * Represents a field returned by the API in Model schemas.
+ *
+ * @group API Entities
+ */
+export interface Field {
+  title: string
+  key: string
+  type: string
+  is_required: boolean
+  is_listable: boolean
+  is_private: boolean
+  is_archived: boolean
+  rules?: {
+    [rule: string]: any
+  }
+}
+
+/**
+ * Represents a group of fields returned by the API in Model schemas.
+ *
+ * @group API Entities
+ */
+export interface FieldGroup {
+  title: string
+  type: string
+  fields: Field[]
+}
+
+/**
+ * Represents a Model schema entity returned by the API.
+ *
+ * @group API Entities
+ */
+export interface ModelSchema {
+  version: number
+  groups: FieldGroup[]
+}
+
+/**
+ * Represents a Form entity returned by the API.
+ *
+ * @group API Entities
+ */
+export interface Form extends StarlightEntity {
+  title: string
+  slug: string
+  action_url: string
+}
+
+/**
+ * Represents a Form schema entity returned by the API.
+ *
+ * @group API Entities
+ */
+export interface FormSchema extends ModelSchema {
+  action_url: string
+}
+
+/**
  * Represents content data returned by either an {@link Entry} or
  * {@link Singleton} entity from the API.
  *

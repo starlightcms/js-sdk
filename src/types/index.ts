@@ -6,6 +6,8 @@ import { DynamicCollectionSelector } from '../selectors/Collection'
 import { MediaSelector } from '../selectors/Media'
 import { SearchSelector } from '../selectors/Search'
 import { CollectionInstance } from '../instances/Collection'
+import { FormInstance } from '../instances/Form'
+import { DynamicFormSelector } from '../selectors/Form/types'
 
 export * from './fields'
 export * from './entities'
@@ -190,6 +192,41 @@ export interface StarlightClient<
    * @category Instance Methods
    */
   model<S extends keyof D>(slug: S): DynamicModelInstance<D[S]>
+
+  /**
+   * Returns a {@link DynamicFormSelector}, which provides support for creating
+   * {@apilink FormInstance | FormInstances} using the dynamic syntax.
+   *
+   * This is an accessor, which means that it should be used just like a common
+   * object parameter. For instance:
+   *
+   * ```ts
+   * import Starlight from '@starlightcms/js-sdk'
+   *
+   * const response = await Starlight.forms.signup.get()
+   * ```
+   *
+   * See {@link DynamicFormSelector} for more info.
+   *
+   * @category Selector Accessors
+   */
+  get forms(): DynamicFormSelector
+
+  /**
+   * Returns a {@link FormInstance}, which provides methods to retrieve basic information
+   * about a Starlight form and its schema. For instance:
+   *
+   * ```ts
+   * import Starlight from '@starlightcms/js-sdk'
+   *
+   * const response = await Starlight.form('signup').schema()
+   * ```
+   *
+   * See {@link DynamicFormInstance} for more info.
+   *
+   * @category Instance Methods
+   */
+  form(slug: string | number): FormInstance
 
   /**
    * Returns a {@link SingletonSelector}.
