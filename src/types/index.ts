@@ -194,10 +194,8 @@ export interface StarlightClient<
   model<S extends keyof D>(slug: S): DynamicModelInstance<D[S]>
 
   /**
-   * TODO: update documentation
-   *
-   * Returns a {@link DynamicModelSelector}, which is a {@link ModelSelector}
-   * with support for creating {@apilink ModelInstance | ModelInstances} using the dynamic syntax.
+   * Returns a {@link DynamicFormSelector}, which is a {@link FormSelector}
+   * with support for creating {@apilink FormInstance | FormInstances} using the dynamic syntax.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -205,29 +203,27 @@ export interface StarlightClient<
    * ```ts
    * import Starlight from '@starlightcms/js-sdk'
    *
-   * const response = await Starlight.models.list()
+   * const response = await Starlight.forms.list()
    * ```
    *
-   * See {@link DynamicModelSelector} for more info.
+   * See {@link DynamicFormSelector} for more info.
    *
    * @category Selector Accessors
    */
   get forms(): DynamicFormSelector
 
   /**
-   * TODO: update documentation
-   *
-   * Returns a {@link DynamicModelInstance}, which is a
-   * {@link ModelInstance} with support for creating
-   * {@apilink ModelCategoryInstance | ModelCategoryInstances} using the dynamic syntax. For instance:
+   * Returns a {@link DynamicFormInstance}, which is a
+   * {@link FormInstance} with support for creating
+   * {@apilink FormCategoryInstance | FormCategoryInstances} using the dynamic syntax. For instance:
    *
    * ```ts
    * import Starlight from '@starlightcms/js-sdk'
    *
-   * const response = await Starlight.model('posts').entries.list()
+   * const response = await Starlight.form('signup').schema()
    * ```
    *
-   * See {@link DynamicModelInstance} for more info.
+   * See {@link DynamicFormInstance} for more info.
    *
    * @category Instance Methods
    */
