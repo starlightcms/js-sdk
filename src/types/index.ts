@@ -5,7 +5,7 @@ import { SingletonSelector } from '../selectors/Singleton'
 import { DynamicCollectionSelector } from '../selectors/Collection'
 import { MediaSelector } from '../selectors/Media'
 import { SearchSelector } from '../selectors/Search'
-import { CollectionInstance } from '../instances/Collection'
+import { CollectionInstanceInterface } from '../instances/Collection'
 import { FormInstance } from '../instances/Form'
 import { DynamicFormSelector } from '../selectors/Form/types'
 
@@ -267,7 +267,7 @@ export interface StarlightClient<
   get collections(): DynamicCollectionSelector
 
   /**
-   * Returns a {@link CollectionInstance}. For instance:
+   * Returns a {@link CollectionInstanceInterface}. For instance:
    *
    * ```ts
    * import Starlight from '@starlightcms/js-sdk'
@@ -275,7 +275,7 @@ export interface StarlightClient<
    * const response = await Starlight.collection('featured-posts').items()
    * ```
    *
-   * See {@link CollectionInstance} for more info.
+   * See {@link CollectionInstanceInterface} for more info.
    *
    * @example Typing the returned CollectionInstance.
    * ```ts
@@ -291,7 +291,7 @@ export interface StarlightClient<
    */
   collection<T extends CollectionEntityTypes>(
     slug: string | number
-  ): CollectionInstance<T>
+  ): CollectionInstanceInterface<T>
 
   /**
    * Returns a {@link MediaSelector}.

@@ -1,11 +1,38 @@
 import { rest, RestHandler, MockedRequest, DefaultBodyType } from 'msw'
-import { modelsListMock } from './fixtures'
+import {
+  modelsListMock,
+  formInfo,
+  formSchema,
+  collectionInfo,
+  collectionItems,
+  collectionList,
+} from './fixtures'
 
 // All the urls and mocks
 export const handlersFixtures = [
   {
     url: '/models',
     fixture: modelsListMock,
+  },
+  {
+    url: '/forms/form1',
+    fixture: formInfo,
+  },
+  {
+    url: '/forms/form1/schema',
+    fixture: formSchema,
+  },
+  {
+    url: '/collections',
+    fixture: collectionList,
+  },
+  {
+    url: '/collections/collection1',
+    fixture: collectionInfo,
+  },
+  {
+    url: '/collections/collection1/items',
+    fixture: collectionItems,
   },
 ]
 

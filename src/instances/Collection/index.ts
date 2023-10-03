@@ -1,18 +1,39 @@
-import { CollectionEntityTypes, StarlightClient } from '../../types'
-import { CollectionInstance, ListCollectionItemsParams } from './types'
+import {
+  Collection,
+  CollectionEntityTypes,
+  CollectionTypeMapper,
+  StarlightClient,
+  StarlightItemResponse,
+  StarlightListResponse,
+  WithQueryableFieldsOnModelables,
+} from '../../types'
+import { CollectionInstanceInterface, ListCollectionItemsParams } from './types'
 
-export default function makeCollectionInstance<
-  T extends CollectionEntityTypes = unknown
->(client: StarlightClient, collection: string | number): CollectionInstance<T> {
-  return {
-    get() {
-      return client.get(`/collections/${collection}`)
-    },
+export class CollectionInstance<
+  CollectionType extends CollectionEntityTypes = unknown
+> implements CollectionInstanceInterface<CollectionType>
+{
+  client: StarlightClient
+  collection: string
 
-    items(options) {
-      return client.get(`/collections/${collection}/items`, options)
-    },
+  constructor(client: StarlightClient, collection: string) {
+    this.client = client
+    this.collection = collection
+  }
+
+  get(): Promise<
+    StarlightItemResponse<Collection<CollectionTypeMapper<CollectionType>>>
+  > {
+    return this.client.get(`/collections/${this.collection}`)
+  }
+
+  items(
+    options?:
+      | ListCollectionItemsParams
+      | WithQueryableFieldsOnModelables<CollectionType>
+  ): Promise<StarlightListResponse<CollectionType>> {
+    return this.client.get(`/collections/${this.collection}/items`, options)
   }
 }
 
-export { CollectionInstance, ListCollectionItemsParams }
+export { CollectionInstanceInterface, ListCollectionItemsParams }

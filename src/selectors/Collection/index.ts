@@ -1,33 +1,48 @@
-import { StarlightClient } from '../../types'
 import {
-  CollectionSelector,
+  Collection,
+  StarlightClient,
+  StarlightItemResponse,
+  StarlightListResponse,
+} from '../../types'
+import {
+  CollectionSelectorInterface,
   DynamicCollectionSelector,
   ListCollectionsParams,
 } from './types'
-import makeCollectionInstance from '../../instances/Collection'
+import { CollectionInstance } from '../../instances/Collection'
 
-export default function makeCollectionSelector(
+export class CollectionSelector implements CollectionSelectorInterface {
+  client: StarlightClient
+
+  constructor(client: StarlightClient) {
+    this.client = client
+  }
+
+  list(
+    options?: ListCollectionsParams
+  ): Promise<StarlightListResponse<Collection>> {
+    return this.client.get('/collections', { ...options })
+  }
+
+  get(slug: string | number): Promise<StarlightItemResponse<Collection>> {
+    return this.client.get(`/collections/${slug}`)
+  }
+}
+
+export function makeDynamicCollectionSelector(
   client: StarlightClient
 ): DynamicCollectionSelector {
-  const selector: CollectionSelector = {
-    list(options) {
-      return client.get('/collections', { ...options })
-    },
-
-    get(slug) {
-      return client.get(`/collections/${slug}`)
-    },
-  }
+  const selector = new CollectionSelector(client)
 
   return new Proxy(selector, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return makeCollectionInstance(client, prop)
+        return new CollectionInstance(client, prop)
       }
 
       return Reflect.get(target, prop)
     },
-  }) as DynamicCollectionSelector
+  }) as unknown as DynamicCollectionSelector
 }
 
-export { CollectionSelector, DynamicCollectionSelector, ListCollectionsParams }
+export { DynamicCollectionSelector, ListCollectionsParams }

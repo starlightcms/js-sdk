@@ -9,12 +9,12 @@ import { StarlightError } from './errors'
 import makeModelSelector from './selectors/Model'
 import makeModelInstance from './instances/Model'
 import makeSingletonSelector from './selectors/Singleton'
-import makeCollectionSelector from './selectors/Collection'
+import { makeDynamicCollectionSelector } from './selectors/Collection'
 import makeMediaSelector from './selectors/Media'
 import makeSearchSelector from './selectors/Search'
-import makeCollectionInstance from './instances/Collection'
-import makeFormSelector from './selectors/Form'
-import makeFormInstance from './instances/Form'
+import { CollectionInstance } from './instances/Collection'
+import { makeDynamicFormSelector } from './selectors/Form'
+import { FormInstance } from './instances/Form'
 
 /**
  * Returns a new {@link DynamicStarlightClient}, which is a
@@ -118,11 +118,11 @@ export function makeClient<
     },
 
     get forms() {
-      return makeFormSelector(this)
+      return makeDynamicFormSelector(this)
     },
 
     form(slug) {
-      return makeFormInstance(this, String(slug))
+      return new FormInstance(this, String(slug))
     },
 
     get singletons() {
@@ -130,11 +130,11 @@ export function makeClient<
     },
 
     get collections() {
-      return makeCollectionSelector(this)
+      return makeDynamicCollectionSelector(this)
     },
 
     collection(slug) {
-      return makeCollectionInstance(this, slug)
+      return new CollectionInstance(this, String(slug))
     },
 
     get media() {
