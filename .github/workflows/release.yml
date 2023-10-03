@@ -3,27 +3,22 @@ on:
   workflow_dispatch:
     inputs:
       release-type:
-        description: 'Release type (one of): patch, minor, major, prepatch, preminor, premajor, prerelease'
+        description: 'Release type'
         required: true
+        type: choice
+        default: 'major'
+        options:
+          - patch
+          - minor
+          - major
+          - prepatch
+          - preminor
+          - premajor
+          - prerelease
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      # Check if the given release level is valid
-      - name: Release level check
-        run: |
-          case "$RELEASE_LEVEL" in
-            major|minor|patch|premajor|preminor|prepatch|prerelease)
-              echo "Release-level is OK"
-              ;;
-            *)
-              echo "Unknown release-level"
-              exit 1
-              ;;
-          esac
-        env:
-          RELEASE_LEVEL: ${{ github.event.inputs.release-level }}
-
       # Checkout project repository
       - name: Checkout
         uses: actions/checkout@v4
