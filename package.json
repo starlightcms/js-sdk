@@ -1,6 +1,6 @@
 {
   "name": "@starlightcms/js-sdk",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "The Starlight SDK for JavaScript",
   "workspaces": [
     "website"
