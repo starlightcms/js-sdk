@@ -9,11 +9,24 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      # Check if the given release level is valid
+      - name: Release level check
+        run: |
+          case "$RELEASE_LEVEL" in
+            major|minor|patch|premajor|preminor|prepatch|prerelease)
+              echo "Release-level is OK"
+              ;;
+            *)
+              echo "Unknown release-level"
+              exit 1
+              ;;
+          esac
+        env:
+          RELEASE_LEVEL: ${{ github.event.inputs.release-level }}
+
       # Checkout project repository
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       # Setup Node.js environment
       - name: Setup Node.js
@@ -74,7 +87,7 @@ jobs:
 
       # Publish version to public repository
       - name: Publish
-        run: yarn publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
+        run: npm publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
