@@ -12,5 +12,9 @@ export default defineConfig({
       '**/dist/**',
       '**/.{idea,git,cache,output,temp}/**',
     ],
+    coverage: {
+      reporter: ['text', 'lcov'],
+      include: ['src'],
+    },
   },
 })
