@@ -5,7 +5,7 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
-import { ModelCategoryInstance } from '../../instances/ModelCategory'
+import { ModelCategoryInstanceInterface } from '../../instances/ModelCategory'
 
 /**
  * Request parameters for listing model categories.
@@ -41,7 +41,7 @@ export interface ListModelCategoriesOptions extends BaseRequestParameters {
  *
  * @group Selectors
  */
-export interface ModelCategorySelector {
+export interface ModelCategorySelectorInterface {
   /**
    * Returns a {@link StarlightListResponse} with a list of
    * {@apilink ModelCategory | ModelCategories}.
@@ -76,11 +76,11 @@ export interface ModelCategorySelector {
 }
 
 /**
- * A Selector that provide all {@link ModelCategorySelector} methods and adds
+ * A Selector that provide all {@link ModelCategorySelectorInterface} methods and adds
  * support for creating {@apilink ModelCategoryInstance | ModelCategoryInstances}
  * using the dynamic syntax.
  *
- * See {@link ModelCategorySelector} to view all available methods. You can use
+ * See {@link ModelCategorySelectorInterface} to view all available methods. You can use
  * a DynamicModelCategorySelector by accessing {@apilink ModelInstance.categories}.
  *
  * See {@doclink requests-and-responses#dynamic-syntax | Dynamic Instances}
@@ -97,6 +97,6 @@ export interface ModelCategorySelector {
  * @category Instances
  */
 export type DynamicModelCategorySelector<D extends SerializedData> =
-  ModelCategorySelector & {
-    [slug: string]: ModelCategoryInstance<D>
+  ModelCategorySelectorInterface & {
+    [slug: string]: ModelCategoryInstanceInterface<D>
   }

@@ -14,7 +14,7 @@ describe('CollectionSelector methods', () => {
     expect(collectionInstance).to.be.instanceOf(CollectionInstance)
   })
 
-  it('should return a specific Collection when using the get() method', async () => {
+  it('should return a Collection object when using the get() method', async () => {
     const client = makeClient({ workspace: 'test-workspace' })
     const collectionSelector = makeDynamicCollectionSelector(client)
     const response = await collectionSelector.get('collection1')

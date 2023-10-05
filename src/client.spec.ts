@@ -1,14 +1,14 @@
 import { describe, it, expect } from 'vitest'
 
 import { makeClient } from './client'
-import { modelsListMock } from '../mocks/fixtures'
+import { modelList } from '../mocks/fixtures'
 
 describe('API: address endpoint', () => {
   it('should return the proper model object', async () => {
     const Client = makeClient({ workspace: 'test-workspace' })
     const models = await Client.models.list()
 
-    expect(models).toEqual(modelsListMock)
+    expect(models).toEqual(modelList)
   })
 
   it('should throw error when no workspace is specified', async () => {

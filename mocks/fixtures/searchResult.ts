@@ -1,0 +1,158 @@
+export const searchResult = {
+  data: [
+    {
+      id: 6789012345,
+      title: 'EntryX',
+      slug: 'entryx',
+      data: {
+        cover_picture: {
+          id: 8901234567,
+          title: 'entryx-SfFZoronHn',
+          extension: 'png',
+          mime: 'image/png',
+          files: [
+            {
+              id: 8765432109,
+              variation: 'original',
+              path: 'https://media.starlightcms.io/workspaces/org1/workspace1/original/entryx-sffzoronhn.png',
+              mime: 'image/png',
+              background_color: '6d7732',
+              file_size: 3358342,
+              meta: {
+                width: 1808,
+                height: 956,
+              },
+            },
+            {
+              id: 5432109876,
+              variation: 'optimized',
+              path: 'https://media.starlightcms.io/workspaces/org1/workspace1/optimized/entryx-sffzoronhn.png',
+              mime: 'image/png',
+              background_color: '6d7732',
+              file_size: 666510,
+              meta: {
+                width: 1808,
+                height: 956,
+              },
+            },
+            {
+              id: 9876543210,
+              variation: 'thumbnail',
+              path: 'https://media.starlightcms.io/workspaces/org1/workspace1/thumbnail/entryx-sffzoronhn.png',
+              mime: 'image/png',
+              background_color: '6d7832',
+              file_size: 43143,
+              meta: {
+                width: 200,
+                height: 106,
+              },
+            },
+          ],
+          alt: 'sd',
+          description: 'asffsafas',
+          created_at: '2023-06-05T13:20:50.000000Z',
+          updated_at: '2023-06-07T19:47:15.000000Z',
+        },
+        is_available: true,
+        isbn: 'aggasga',
+        slug: 'bsdsgddgsgs',
+        titulo: 'bsdsgddgsgs',
+      },
+      author: {
+        id: 8765432190,
+        name: 'Joe',
+      },
+      model: {
+        id: 4265978130,
+        title: 'Model1',
+        slug: 'model1',
+        created_at: '2023-04-04T12:51:55.000000Z',
+        updated_at: '2023-04-10T18:59:38.000000Z',
+      },
+      category: null,
+      updated_at: '2023-08-09T19:25:59.000000Z',
+      published_at: '2023-08-09T19:25:59.000000Z',
+    },
+    {
+      id: 7654321098,
+      title: 'EntryY',
+      slug: 'entryy',
+      data: {
+        slug: 'zfsafasfa',
+        title: 'zfsafasfa',
+      },
+      author: {
+        id: 8765432190,
+        name: 'Joe',
+      },
+      model: {
+        id: 4321098765,
+        title: 'Model2',
+        slug: 'model2',
+        created_at: '2023-04-04T13:43:03.000000Z',
+        updated_at: '2023-04-04T13:43:03.000000Z',
+      },
+      category: null,
+      updated_at: '2023-06-09T17:45:53.000000Z',
+      published_at: '2023-06-09T17:45:52.000000Z',
+    },
+    {
+      id: 1098765432,
+      title: 'EntryZ',
+      slug: 'entryz',
+      data: {
+        is_available: false,
+        slug: 'asfsfafas',
+        title: 'asfsfafas',
+        year: 'fasfsa',
+      },
+      author: {
+        id: 8765432190,
+        name: 'Joe',
+      },
+      model: {
+        id: 2345678901,
+        title: 'Model3',
+        slug: 'model3',
+        created_at: '2023-04-04T13:46:07.000000Z',
+        updated_at: '2023-04-04T13:46:07.000000Z',
+      },
+      category: null,
+      updated_at: '2023-06-09T17:16:45.000000Z',
+      published_at: '2023-06-09T17:16:45.000000Z',
+    },
+  ],
+  links: {
+    first:
+      'https://query.starlightcms.io/v2/workspaces/workspace1/search/entries?page=1',
+    last: 'https://query.starlightcms.io/v2/workspaces/workspace1/search/entries?page=1',
+    prev: null,
+    next: null,
+  },
+  meta: {
+    current_page: 1,
+    from: 1,
+    last_page: 1,
+    links: [
+      {
+        url: null,
+        label: '&laquo; Previous',
+        active: false,
+      },
+      {
+        url: 'https://query.starlightcms.io/v2/workspaces/workspace1/search/entries?page=1',
+        label: '1',
+        active: true,
+      },
+      {
+        url: null,
+        label: 'Next &raquo;',
+        active: false,
+      },
+    ],
+    path: 'https://query.starlightcms.io/v2/workspaces/workspace1/search/entries',
+    per_page: 15,
+    to: 3,
+    total: 3,
+  },
+}

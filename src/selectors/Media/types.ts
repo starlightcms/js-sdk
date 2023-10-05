@@ -13,7 +13,7 @@ import {
  *
  * @group Selectors
  */
-export interface MediaSelector {
+export interface MediaSelectorInterface {
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link MediaObject}.
    *

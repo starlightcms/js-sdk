@@ -18,7 +18,7 @@ import { DynamicModelInstance } from '../../instances/Model'
  *
  * @group Selectors
  */
-export interface ModelSelector {
+export interface ModelSelectorInterface {
   /**
    * Returns a {@link StarlightListResponse} with a list of
    * {@apilink Model | Models}.
@@ -52,11 +52,11 @@ export interface ModelSelector {
 }
 
 /**
- * A Selector that provide all {@link ModelSelector} methods and adds support
+ * A Selector that provide all {@link ModelSelectorInterface} methods and adds support
  * for creating {@apilink DynamicModelInstance | DynamicModelInstances} using
  * the dynamic syntax.
  *
- * See {@link ModelSelector} to view all available methods.
+ * See {@link ModelSelectorInterface} to view all available methods.
  *
  * See {@doclink requests-and-responses#dynamic-syntax | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
@@ -72,6 +72,6 @@ export interface ModelSelector {
  * @category Selectors
  */
 export type DynamicModelSelector<T extends WorkspaceModelDefinition> =
-  ModelSelector & {
+  ModelSelectorInterface & {
     [K in keyof T]: DynamicModelInstance<T[K]>
   }

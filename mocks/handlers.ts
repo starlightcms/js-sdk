@@ -1,18 +1,45 @@
 import { rest, RestHandler, MockedRequest, DefaultBodyType } from 'msw'
 import {
-  modelsListMock,
-  formInfo,
-  formSchema,
   collectionInfo,
   collectionItems,
   collectionList,
+  entryInfo,
+  entryList,
+  formInfo,
+  formSchema,
+  mediaInfo,
+  mediaList,
+  modelCategoryEntries,
+  modelCategoryInfo,
+  modelCategoryList,
+  modelInfo,
+  modelList,
+  searchResult,
+  singletonInfo,
+  singletonList,
 } from './fixtures'
 
 // All the urls and mocks
 export const handlersFixtures = [
   {
-    url: '/models',
-    fixture: modelsListMock,
+    url: '/collections/collection1',
+    fixture: collectionInfo,
+  },
+  {
+    url: '/collections/collection1/items',
+    fixture: collectionItems,
+  },
+  {
+    url: '/collections',
+    fixture: collectionList,
+  },
+  {
+    url: '/models/model1/entries/entry1',
+    fixture: entryInfo,
+  },
+  {
+    url: '/models/model1/entries',
+    fixture: entryList,
   },
   {
     url: '/forms/form1',
@@ -23,16 +50,44 @@ export const handlersFixtures = [
     fixture: formSchema,
   },
   {
-    url: '/collections',
-    fixture: collectionList,
+    url: '/media/1234567899',
+    fixture: mediaInfo,
   },
   {
-    url: '/collections/collection1',
-    fixture: collectionInfo,
+    url: '/media',
+    fixture: mediaList,
   },
   {
-    url: '/collections/collection1/items',
-    fixture: collectionItems,
+    url: '/models/model1/categories/category1',
+    fixture: modelCategoryInfo,
+  },
+  {
+    url: '/models/model1/categories/category1/entries',
+    fixture: modelCategoryEntries,
+  },
+  {
+    url: '/models/model1/categories',
+    fixture: modelCategoryList,
+  },
+  {
+    url: '/models/model1',
+    fixture: modelInfo,
+  },
+  {
+    url: '/models',
+    fixture: modelList,
+  },
+  {
+    url: '/search/entries',
+    fixture: searchResult,
+  },
+  {
+    url: '/singletons/singleton1',
+    fixture: singletonInfo,
+  },
+  {
+    url: '/singletons',
+    fixture: singletonList,
   },
 ]
 

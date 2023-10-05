@@ -44,7 +44,7 @@ export interface ModelCategoryEntryListParams
  *
  * @group Instances
  */
-export interface ModelCategoryInstance<D extends SerializedData> {
+export interface ModelCategoryInstanceInterface<D extends SerializedData> {
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link ModelCategory}.
    *

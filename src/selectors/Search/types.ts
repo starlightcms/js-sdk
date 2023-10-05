@@ -60,7 +60,7 @@ export interface SearchEntriesParams extends BaseRequestParameters {
  *
  * @group Selectors
  */
-export interface SearchSelector {
+export interface SearchSelectorInterface {
   /**
    * Returns a {@link StarlightListResponse} with a list of
    * {@apilink Entry | Entries}. By default, entries from all models are

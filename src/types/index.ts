@@ -1,10 +1,10 @@
 import { CollectionEntityTypes, SerializedData } from './entities'
 import { DynamicModelSelector } from '../selectors/Model'
 import { DynamicModelInstance } from '../instances/Model'
-import { SingletonSelector } from '../selectors/Singleton'
+import { SingletonSelectorInterface } from '../selectors/Singleton'
 import { DynamicCollectionSelector } from '../selectors/Collection'
-import { MediaSelector } from '../selectors/Media'
-import { SearchSelector } from '../selectors/Search'
+import { MediaSelectorInterface } from '../selectors/Media'
+import { SearchSelectorInterface } from '../selectors/Search'
 import { CollectionInstanceInterface } from '../instances/Collection'
 import { FormInstance } from '../instances/Form'
 import { DynamicFormSelector } from '../selectors/Form/types'
@@ -229,7 +229,7 @@ export interface StarlightClient<
   form(slug: string | number): FormInstance
 
   /**
-   * Returns a {@link SingletonSelector}.
+   * Returns a {@link SingletonSelectorInterface}.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -240,11 +240,11 @@ export interface StarlightClient<
    * const response = await Starlight.singletons.list()
    * ```
    *
-   * See {@link SingletonSelector} for more info.
+   * See {@link SingletonSelectorInterface} for more info.
    *
    * @category Selector Accessors
    */
-  get singletons(): SingletonSelector
+  get singletons(): SingletonSelectorInterface
 
   /**
    * Returns a {@link DynamicCollectionSelector}, which is a
@@ -294,7 +294,7 @@ export interface StarlightClient<
   ): CollectionInstanceInterface<T>
 
   /**
-   * Returns a {@link MediaSelector}.
+   * Returns a {@link MediaSelectorInterface}.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -305,14 +305,14 @@ export interface StarlightClient<
    * const response = await Starlight.media.list()
    * ```
    *
-   * See {@link MediaSelector} for more info.
+   * See {@link MediaSelectorInterface} for more info.
    *
    * @category Selector Accessors
    */
-  get media(): MediaSelector
+  get media(): MediaSelectorInterface
 
   /**
-   * Returns a {@link SearchSelector}.
+   * Returns a {@link SearchSelectorInterface}.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -323,11 +323,11 @@ export interface StarlightClient<
    * const response = await Starlight.search.entries()
    * ```
    *
-   * See {@link SearchSelector} for more info.
+   * See {@link SearchSelectorInterface} for more info.
    *
    * @category Selector Accessors
    */
-  get search(): SearchSelector
+  get search(): SearchSelectorInterface
 }
 
 /**

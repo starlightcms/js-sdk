@@ -4,19 +4,19 @@ import { makeClient } from '../../client'
 import { formInfo, formSchema } from '../../../mocks/fixtures'
 
 describe('FormInstance methods', () => {
-  it("should return the proper form object (using form('formName'))", async () => {
+  it('should return a Form object when using the get() method', async () => {
     const client = makeClient({ workspace: 'test-workspace' })
     const formInstance = new FormInstance(client, 'form1')
-    const form = await formInstance.get()
+    const response = await formInstance.get()
 
-    expect(form).toEqual(formInfo)
+    expect(response).toEqual(formInfo)
   })
 
-  it("should return the proper form schema (using form('formName'))", async () => {
+  it('should return a Form schema when using the schema() method', async () => {
     const client = makeClient({ workspace: 'test-workspace' })
     const formInstance = new FormInstance(client, 'form1')
-    const form = await formInstance.schema()
+    const response = await formInstance.schema()
 
-    expect(form).toEqual(formSchema)
+    expect(response).toEqual(formSchema)
   })
 })

@@ -14,7 +14,7 @@ import {
  *
  * @group Selectors
  */
-export interface SingletonSelector {
+export interface SingletonSelectorInterface {
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link Singleton}.
    * This methods supports typing the returned Singleton by passing its data

@@ -3,8 +3,11 @@ export {
   CollectionInstanceInterface,
   ListCollectionItemsParams,
 } from '../instances/Collection'
-export { DynamicModelInstance, ModelInstance } from '../instances/Model'
 export {
-  ModelCategoryInstance,
+  DynamicModelInstance,
+  ModelInstanceInterface,
+} from '../instances/Model'
+export {
+  ModelCategoryInstanceInterface,
   ModelCategoryEntryListParams,
 } from '../instances/ModelCategory'

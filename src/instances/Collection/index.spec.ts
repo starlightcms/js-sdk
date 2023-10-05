@@ -4,19 +4,19 @@ import { makeClient } from '../../client'
 import { collectionInfo, collectionItems } from '../../../mocks/fixtures'
 
 describe('CollectionInstance methods', () => {
-  it("should return the proper collection object (using collection('collectionName'))", async () => {
+  it('should return a Collection object when using the get() method', async () => {
     const client = makeClient({ workspace: 'test-workspace' })
     const collectionInstance = new CollectionInstance(client, 'collection1')
-    const collection = await collectionInstance.get()
+    const response = await collectionInstance.get()
 
-    expect(collection).toEqual(collectionInfo)
+    expect(response).toEqual(collectionInfo)
   })
 
-  it("should return the proper collection items (using collection('collectionName'))", async () => {
+  it('should return a Collection item list when using the items() method', async () => {
     const client = makeClient({ workspace: 'test-workspace' })
     const collectionInstance = new CollectionInstance(client, 'collection1')
-    const collection = await collectionInstance.items()
+    const response = await collectionInstance.items()
 
-    expect(collection).toEqual(collectionItems)
+    expect(response).toEqual(collectionItems)
   })
 })

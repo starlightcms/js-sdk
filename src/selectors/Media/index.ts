@@ -1,18 +1,25 @@
-import { StarlightClient } from '../../types'
-import { MediaSelector } from './types'
+import {
+  MediaObject,
+  StarlightClient,
+  StarlightListResponse,
+  StarlightItemResponse,
+} from '../../types'
+import { MediaSelectorInterface } from './types'
 
-export default function makeMediaSelector(
+export class MediaSelector implements MediaSelectorInterface {
   client: StarlightClient
-): MediaSelector {
-  return {
-    list() {
-      return client.get('/media')
-    },
 
-    get(id) {
-      return client.get(`/media/${id}`)
-    },
+  constructor(client: StarlightClient) {
+    this.client = client
+  }
+
+  list(): Promise<StarlightListResponse<MediaObject>> {
+    return this.client.get('/media')
+  }
+
+  get(id: string): Promise<StarlightItemResponse<MediaObject>> {
+    return this.client.get(`/media/${id}`)
   }
 }
 
-export { MediaSelector }
+export { MediaSelectorInterface }
