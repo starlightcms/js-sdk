@@ -11,6 +11,7 @@ export type BlockType =
   | 'image'
   | 'raw'
   | 'list'
+  | 'video'
 
 /**
  * Base interface for types that represent block data.
