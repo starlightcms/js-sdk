@@ -4,7 +4,7 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
-import { CollectionInstance } from '../../instances/Collection'
+import { CollectionInstanceInterface } from '../../instances/Collection'
 
 /**
  * Request parameters for listing collections.
@@ -28,11 +28,11 @@ export interface ListCollectionsParams extends BaseRequestParameters {
  * You can use a CollectionSelector by accessing
  * {@apilink StarlightClient.collections}.
  *
- * To get items from a specific collection, use a {@link CollectionInstance}.
+ * To get items from a specific collection, use a {@link CollectionInstanceInterface}.
  *
  * @group Selectors
  */
-export interface CollectionSelector {
+export interface CollectionSelectorInterface {
   /**
    * Returns a {@link StarlightListResponse} with the list of
    * {@apilink Collection | Collections} in this workspace.
@@ -96,6 +96,6 @@ export interface CollectionSelector {
  *
  * @category Instances
  */
-export type DynamicCollectionSelector = CollectionSelector & {
-  [key: string]: CollectionInstance<unknown>
+export type DynamicCollectionSelector = CollectionSelectorInterface & {
+  [key: string]: CollectionInstanceInterface<unknown>
 }

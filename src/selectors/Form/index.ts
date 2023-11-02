@@ -1,8 +1,8 @@
 import { StarlightClient } from '../../types'
 import { DynamicFormSelector } from './types'
-import makeFormInstance from '../../instances/Form'
+import { FormInstance } from '../../instances/Form'
 
-export default function makeFormSelector(
+export function makeDynamicFormSelector(
   client: StarlightClient
 ): DynamicFormSelector {
   return new Proxy(
@@ -10,7 +10,7 @@ export default function makeFormSelector(
     {
       get(target, prop) {
         if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-          return makeFormInstance(client, prop)
+          return new FormInstance(client, prop)
         }
 
         return Reflect.get(target, prop)

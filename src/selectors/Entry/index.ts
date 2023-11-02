@@ -1,29 +1,45 @@
 import {
   Entry,
+  QueryableFields,
   SerializedData,
   StarlightClient,
   StarlightItemResponse,
   StarlightListResponse,
 } from '../../types'
-import { EntrySelector, ListEntriesParams } from './types'
+import {
+  EntrySelectorInterface,
+  GetEntryParams,
+  ListEntriesParams,
+} from './types'
 
-export default function makeEntrySelector<D extends SerializedData>(
-  client: StarlightClient,
+export class EntrySelector<D extends SerializedData>
+  implements EntrySelectorInterface<D>
+{
+  client: StarlightClient
   model: string
-): EntrySelector<D> {
-  return {
-    list(options): Promise<StarlightListResponse<Entry<D>>> {
-      return client.get(`/models/${model}/entries`, options)
-    },
 
-    get(
-      slug: string,
+  constructor(client: StarlightClient, model: string) {
+    this.client = client
+    this.model = model
+  }
+
+  list(
+    options?: ListEntriesParams & QueryableFields<D>
+  ): Promise<StarlightListResponse<Entry<D>>> {
+    return this.client.get(`/models/${this.model}/entries`, options)
+  }
+
+  get(
+    slug: string,
+    params?: GetEntryParams,
+    options?: RequestInit
+  ): Promise<StarlightItemResponse<Entry<D>>> {
+    return this.client.get(
+      `/models/${this.model}/entries/${slug}`,
       params,
       options
-    ): Promise<StarlightItemResponse<Entry<D>>> {
-      return client.get(`/models/${model}/entries/${slug}`, params, options)
-    },
+    )
   }
 }
 
-export { EntrySelector, ListEntriesParams }
+export { EntrySelectorInterface, ListEntriesParams }

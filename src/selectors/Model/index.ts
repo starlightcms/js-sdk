@@ -5,26 +5,34 @@ import {
   StarlightListResponse,
   WorkspaceModelDefinition,
 } from '../../types'
-import { ModelSelector, DynamicModelSelector } from './types'
-import makeModelInstance from '../../instances/Model'
+import { ModelSelectorInterface, DynamicModelSelector } from './types'
+import { makeDynamicModelInstance } from '../../instances/Model'
 
-export default function makeModelSelector<D extends WorkspaceModelDefinition>(
+export class ModelSelector implements ModelSelectorInterface {
   client: StarlightClient
-): DynamicModelSelector<D> {
-  const modelClient: ModelSelector = {
-    list(): Promise<StarlightListResponse<Model>> {
-      return client.get('/models')
-    },
 
-    get(slug): Promise<StarlightItemResponse<Model>> {
-      return client.get(`/models/${slug}`)
-    },
+  constructor(client: StarlightClient) {
+    this.client = client
   }
 
-  return new Proxy(modelClient, {
+  list(): Promise<StarlightListResponse<Model>> {
+    return this.client.get('/models')
+  }
+
+  get(slug: string | number): Promise<StarlightItemResponse<Model>> {
+    return this.client.get(`/models/${slug}`)
+  }
+}
+
+export function makeDynamicModelSelector<D extends WorkspaceModelDefinition>(
+  client: StarlightClient
+): DynamicModelSelector<D> {
+  const selector = new ModelSelector(client)
+
+  return new Proxy(selector, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return makeModelInstance(client, prop)
+        return makeDynamicModelInstance(client, prop)
       }
 
       return Reflect.get(target, prop)
@@ -32,4 +40,4 @@ export default function makeModelSelector<D extends WorkspaceModelDefinition>(
   }) as DynamicModelSelector<D>
 }
 
-export { ModelSelector, DynamicModelSelector }
+export { ModelSelectorInterface, DynamicModelSelector }

@@ -43,7 +43,7 @@ export interface ListCollectionItemsParams
  *
  * @group Instances
  */
-export interface CollectionInstance<C extends CollectionEntityTypes> {
+export interface CollectionInstanceInterface<C extends CollectionEntityTypes> {
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link Collection}.
    *

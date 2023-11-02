@@ -6,15 +6,15 @@ import {
   WorkspaceModelDefinition,
 } from './types'
 import { StarlightError } from './errors'
-import makeModelSelector from './selectors/Model'
-import makeModelInstance from './instances/Model'
-import makeSingletonSelector from './selectors/Singleton'
-import makeCollectionSelector from './selectors/Collection'
-import makeMediaSelector from './selectors/Media'
-import makeSearchSelector from './selectors/Search'
-import makeCollectionInstance from './instances/Collection'
-import makeFormSelector from './selectors/Form'
-import makeFormInstance from './instances/Form'
+import { makeDynamicModelSelector } from './selectors/Model'
+import { makeDynamicModelInstance } from './instances/Model'
+import { SingletonSelector } from './selectors/Singleton'
+import { makeDynamicCollectionSelector } from './selectors/Collection'
+import { MediaSelector } from './selectors/Media'
+import { SearchSelector } from './selectors/Search'
+import { CollectionInstance } from './instances/Collection'
+import { makeDynamicFormSelector } from './selectors/Form'
+import { FormInstance } from './instances/Form'
 
 /**
  * Returns a new {@link DynamicStarlightClient}, which is a
@@ -110,46 +110,46 @@ export function makeClient<
     },
 
     get models() {
-      return makeModelSelector(this)
+      return makeDynamicModelSelector(this)
     },
 
     model(slug) {
-      return makeModelInstance(this, slug as string)
+      return makeDynamicModelInstance(this, slug as string)
     },
 
     get forms() {
-      return makeFormSelector(this)
+      return makeDynamicFormSelector(this)
     },
 
     form(slug) {
-      return makeFormInstance(this, String(slug))
+      return new FormInstance(this, String(slug))
     },
 
     get singletons() {
-      return makeSingletonSelector(this)
+      return new SingletonSelector(this)
     },
 
     get collections() {
-      return makeCollectionSelector(this)
+      return makeDynamicCollectionSelector(this)
     },
 
     collection(slug) {
-      return makeCollectionInstance(this, slug)
+      return new CollectionInstance(this, String(slug))
     },
 
     get media() {
-      return makeMediaSelector(this)
+      return new MediaSelector(this)
     },
 
     get search() {
-      return makeSearchSelector(this)
+      return new SearchSelector(this)
     },
   }
 
   return new Proxy(client, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return makeModelInstance(target, prop)
+        return makeDynamicModelInstance(target, prop)
       }
 
       return Reflect.get(target, prop)

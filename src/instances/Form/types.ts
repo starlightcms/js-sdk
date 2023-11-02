@@ -10,7 +10,7 @@ import { Form, FormSchema, StarlightItemResponse } from '../../types'
  *
  * @group Instances
  */
-export interface FormInstance {
+export interface FormInstanceInterface {
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link Form}.
    *

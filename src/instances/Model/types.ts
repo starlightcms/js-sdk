@@ -1,7 +1,7 @@
 import { Model, SerializedData, StarlightItemResponse } from '../../types'
-import { EntrySelector } from '../../selectors/Entry'
+import { EntrySelectorInterface } from '../../selectors/Entry'
 import { DynamicModelCategorySelector } from '../../selectors/ModelCategory'
-import { ModelCategoryInstance } from '../ModelCategory'
+import { ModelCategoryInstanceInterface } from '../ModelCategory'
 
 /**
  * An Instance that provide methods to request information from a {@link Model},
@@ -15,7 +15,7 @@ import { ModelCategoryInstance } from '../ModelCategory'
  *
  * @group Instances
  */
-export interface ModelInstance<D extends SerializedData> {
+export interface ModelInstanceInterface<D extends SerializedData> {
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link Model}.
    *
@@ -29,7 +29,7 @@ export interface ModelInstance<D extends SerializedData> {
   get(): Promise<StarlightItemResponse<Model>>
 
   /**
-   * Returns a {@link ModelCategoryInstance}.
+   * Returns a {@link ModelCategoryInstanceInterface}.
    *
    * If you're using a {@link DynamicModelInstance}, you can use the
    * dynamic syntax instead of this method.
@@ -43,10 +43,10 @@ export interface ModelInstance<D extends SerializedData> {
    *
    * @param slug The category slug.
    */
-  category(slug: string): ModelCategoryInstance<D>
+  category(slug: string): ModelCategoryInstanceInterface<D>
 
   /**
-   * Returns an {@link EntrySelector}.
+   * Returns an {@link EntrySelectorInterface}.
    *
    * This is an accessor, which means that it should be used just like a common
    * object parameter. For instance:
@@ -58,7 +58,7 @@ export interface ModelInstance<D extends SerializedData> {
    * const response = await Starlight.posts.entries.list()
    * ```
    */
-  get entries(): EntrySelector<D>
+  get entries(): EntrySelectorInterface<D>
 
   /**
    * Returns a {@link DynamicModelCategorySelector}.
@@ -77,11 +77,11 @@ export interface ModelInstance<D extends SerializedData> {
 }
 
 /**
- * An Instance that provide all {@link ModelInstance} methods and adds support
+ * An Instance that provide all {@link ModelInstanceInterface} methods and adds support
  * for creating {@apilink ModelCategoryInstance | ModelCategoryInstances} using
  * the dynamic syntax.
  *
- * See {@link ModelInstance} to view all available methods.
+ * See {@link ModelInstanceInterface} to view all available methods.
  *
  * See {@doclink requests-and-responses#dynamic-syntax | Dynamic Instances}
  * documentation to learn more about the dynamic syntax.
@@ -97,6 +97,6 @@ export interface ModelInstance<D extends SerializedData> {
  * @category Instances
  */
 export type DynamicModelInstance<D extends SerializedData> =
-  ModelInstance<D> & {
-    [key: string]: ModelCategoryInstance<D>
+  ModelInstanceInterface<D> & {
+    [key: string]: ModelCategoryInstanceInterface<D>
   }

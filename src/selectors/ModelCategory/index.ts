@@ -6,39 +6,51 @@ import {
   StarlightListResponse,
 } from '../../types'
 import {
-  ModelCategorySelector,
+  ModelCategorySelectorInterface,
   DynamicModelCategorySelector,
   ListModelCategoriesOptions,
 } from './types'
-import makeModelCategoryInstance from '../../instances/ModelCategory'
+import { ModelCategoryInstance } from '../../instances/ModelCategory'
 
-export default function makeModelCategorySelector<D extends SerializedData>(
+export class ModelCategorySelector implements ModelCategorySelectorInterface {
+  client: StarlightClient
+  model: string
+
+  constructor(client: StarlightClient, model: string) {
+    this.client = client
+    this.model = model
+  }
+
+  list(
+    options: ListModelCategoriesOptions | undefined
+  ): Promise<StarlightListResponse<ModelCategory>> {
+    return this.client.get(`/models/${this.model}/categories`, { ...options })
+  }
+
+  get(slug: string): Promise<StarlightItemResponse<ModelCategory>> {
+    return this.client.get(`/models/${this.model}/categories/${slug}`)
+  }
+}
+
+export function makeDynamicModelCategorySelector<D extends SerializedData>(
   client: StarlightClient,
   model: string
 ): DynamicModelCategorySelector<D> {
-  const selector: ModelCategorySelector = {
-    list(options): Promise<StarlightListResponse<ModelCategory>> {
-      return client.get(`/models/${model}/categories`, { ...options })
-    },
-
-    get(slug): Promise<StarlightItemResponse<ModelCategory>> {
-      return client.get(`/models/${model}/categories/${slug}`)
-    },
-  }
+  const selector = new ModelCategorySelector(client, model)
 
   return new Proxy(selector, {
     get(target, prop) {
       if (typeof prop === 'string' && !Reflect.has(target, prop)) {
-        return makeModelCategoryInstance(client, model, prop)
+        return new ModelCategoryInstance(client, model, prop)
       }
 
       return Reflect.get(target, prop)
     },
-  }) as DynamicModelCategorySelector<D>
+  }) as unknown as DynamicModelCategorySelector<D>
 }
 
 export {
-  ModelCategorySelector,
+  ModelCategorySelectorInterface,
   DynamicModelCategorySelector,
   ListModelCategoriesOptions,
 }

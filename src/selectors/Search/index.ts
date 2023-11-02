@@ -4,18 +4,20 @@ import {
   StarlightClient,
   StarlightListResponse,
 } from '../../types'
-import { SearchEntriesParams, SearchSelector } from './types'
+import { SearchEntriesParams, SearchSelectorInterface } from './types'
 
-export default function makeSearchSelector(
+export class SearchSelector implements SearchSelectorInterface {
   client: StarlightClient
-): SearchSelector {
-  return {
-    entries<T extends SerializedData = Record<string, unknown>>(
-      options: SearchEntriesParams
-    ): Promise<StarlightListResponse<Entry<T>>> {
-      return client.get('/search/entries', { ...options })
-    },
+
+  constructor(client: StarlightClient) {
+    this.client = client
+  }
+
+  entries<T extends SerializedData = Record<string, unknown>>(
+    options?: SearchEntriesParams
+  ): Promise<StarlightListResponse<Entry<T>>> {
+    return this.client.get('/search/entries', { ...options })
   }
 }
 
-export { SearchSelector, SearchEntriesParams }
+export { SearchSelectorInterface, SearchEntriesParams }

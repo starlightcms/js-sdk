@@ -85,7 +85,7 @@ export type GetEntryParams = {
  *
  * @group Selectors
  */
-export interface EntrySelector<D extends SerializedData> {
+export interface EntrySelectorInterface<D extends SerializedData> {
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link Entry}.
    * Supports revision previewing by passing a `preview` parameter.
