@@ -11,6 +11,15 @@ export type BlockType =
   | 'image'
   | 'raw'
   | 'list'
+  | 'video'
+
+/**
+ * Represents the possible alignments, used by some blocks.
+ *
+ * @group Visual Data Blocks
+ * @internal
+ */
+export type Alignment = 'start' | 'center' | 'end' | 'justify'
 
 /**
  * Base interface for types that represent block data.
@@ -29,6 +38,7 @@ export interface BlockData {
  */
 export interface ParagraphBlock extends BlockData {
   text: string | null
+  alignment: Alignment
 }
 
 /**
@@ -39,6 +49,7 @@ export interface ParagraphBlock extends BlockData {
 export interface HeaderBlock extends BlockData {
   text: string
   level: number
+  alignment: Alignment
 }
 
 /**
@@ -88,6 +99,7 @@ export interface ImageBlock extends BlockData {
   width: BlockWidth
   variation: string | undefined
   responsive: boolean
+  alignment: Alignment
 }
 
 /**
@@ -142,6 +154,7 @@ export type VideoBlock = {
   html: string
   width: BlockWidth
   caption?: string
+  alignment: Alignment
 }
 
 /**
