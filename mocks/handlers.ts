@@ -1,4 +1,4 @@
-import { rest, RestHandler, MockedRequest, DefaultBodyType } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { modelsListMock } from './fixtures'
 
 // All the urls and mocks
@@ -23,12 +23,12 @@ const defaultProps = {
 export const createHandlers = ({
   baseURL,
   workspace,
-}: HandlersProps = defaultProps): RestHandler<
-  MockedRequest<DefaultBodyType>
->[] => {
+}: HandlersProps = defaultProps) => {
   const workspaceURL = `${baseURL}/workspaces/${workspace}`
 
   return handlersFixtures.map(({ url, fixture }) =>
-    rest.get(`${workspaceURL}${url}`, (req, res, ctx) => res(ctx.json(fixture)))
+    http.get(`${workspaceURL}${url}`, () => {
+      return HttpResponse.json(fixture)
+    }),
   )
 }

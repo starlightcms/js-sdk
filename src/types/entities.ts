@@ -84,7 +84,7 @@ export interface Field {
   is_private: boolean
   is_archived: boolean
   rules?: {
-    [rule: string]: any
+    [rule: string]: unknown
   }
 }
 
@@ -272,8 +272,10 @@ export type WithQueryableFieldsOnModelables<T> = T extends
  *
  * @group API Entities
  */
-export interface Entry<D extends SerializedData>
-  extends Omit<StarlightEntity, 'created_at'> {
+export interface Entry<D extends SerializedData> extends Omit<
+  StarlightEntity,
+  'created_at'
+> {
   title: string
   slug: string
   data: D
@@ -316,8 +318,10 @@ export interface Entry<D extends SerializedData>
  *
  * @group API Entities
  */
-export interface Singleton<D extends SerializedData>
-  extends Omit<StarlightEntity, 'created_at'> {
+export interface Singleton<D extends SerializedData> extends Omit<
+  StarlightEntity,
+  'created_at'
+> {
   title: string
   slug: string
   data: D
@@ -357,10 +361,10 @@ export type CollectionTypeMapper<T extends CollectionEntityTypes> =
   T extends Entry<any>
     ? 'entry'
     : T extends Singleton<any> // eslint-disable-line @typescript-eslint/no-explicit-any
-    ? 'singleton'
-    : T extends MediaObject
-    ? 'media'
-    : string
+      ? 'singleton'
+      : T extends MediaObject
+        ? 'media'
+        : string
 
 /**
  * Represents a Collection entity returned by the API.
@@ -370,8 +374,9 @@ export type CollectionTypeMapper<T extends CollectionEntityTypes> =
  *
  * @group API Entities
  */
-export interface Collection<T extends CollectionTypes = string>
-  extends StarlightEntity {
+export interface Collection<
+  T extends CollectionTypes = string,
+> extends StarlightEntity {
   title: string
   slug: string
   type: T
@@ -402,12 +407,12 @@ export interface Relation<T extends RelationTypes> {
   type: T extends Entry<never>
     ? 'entry'
     : T extends Singleton<never>
-    ? 'singleton'
-    : T extends MediaObject
-    ? 'media'
-    : T extends Collection
-    ? 'collection'
-    : string
+      ? 'singleton'
+      : T extends MediaObject
+        ? 'media'
+        : T extends Collection
+          ? 'collection'
+          : string
   id: number
   object: T
 }
