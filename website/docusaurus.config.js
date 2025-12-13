@@ -41,12 +41,9 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/starlightcms/js-sdk/tree/main/website/',
-          remarkPlugins: [[rehypeJargon, { jargon }]],
+          remarkPlugins: [rehypeJargon, { jargon }],
         },
-        blog: {
-          showReadingTime: true,
-          blogSidebarTitle: 'Posts recentes',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -75,7 +72,6 @@ const config = {
             label: 'API',
             position: 'left',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/starlightcms/js-sdk',
             label: 'GitHub',
@@ -96,10 +92,6 @@ const config = {
               {
                 label: 'API',
                 to: '/api',
-              },
-              {
-                label: 'Blog',
-                to: '/blog',
               },
             ],
           },
