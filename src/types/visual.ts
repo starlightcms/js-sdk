@@ -11,6 +11,43 @@ export type BlockType =
   | 'image'
   | 'raw'
   | 'list'
+  | 'video'
+
+/**
+ * Represents the possible block widths, used by some blocks.
+ *
+ * @group Visual Data Blocks
+ * @internal
+ */
+type BlockWidth = 'auto' | 'justify' | 'max' | string
+
+/**
+ * Alignable block type extension
+ *
+ * @group Visual Data Blocks
+ * @internal
+ */
+export type AlignableBlock<Base> = Base & {
+  alignment: Alignment
+}
+
+/**
+ * Represents the possible alignments, used by some blocks.
+ *
+ * @group Visual Data Blocks
+ * @internal
+ */
+export type Alignment = 'start' | 'center' | 'end' | 'justify'
+
+/**
+ * Stretchable block type extension
+ *
+ * @group Visual Data Blocks
+ * @internal
+ */
+export type StretchableBlock<Base> = Base & {
+  isStretched: boolean
+}
 
 /**
  * Base interface for types that represent block data.
@@ -27,7 +64,11 @@ export interface BlockData {
  *
  * @group Visual Data Blocks
  */
-export interface ParagraphBlock extends BlockData {
+export type ParagraphBlock = StretchableBlock<
+  AlignableBlock<BaseParagraphBlock>
+>
+
+interface BaseParagraphBlock extends BlockData {
   text: string | null
 }
 
@@ -36,7 +77,9 @@ export interface ParagraphBlock extends BlockData {
  *
  * @group Visual Data Blocks
  */
-export interface HeaderBlock extends BlockData {
+export type HeaderBlock = StretchableBlock<AlignableBlock<BaseHeaderBlock>>
+
+interface BaseHeaderBlock extends BlockData {
   text: string
   level: number
 }
@@ -51,14 +94,6 @@ export interface QuoteBlock extends BlockData {
   caption: string
   alignment: 'left' | 'center'
 }
-
-/**
- * Represents the possible block widths, used by some blocks.
- *
- * @group Visual Data Blocks
- * @internal
- */
-type BlockWidth = 'auto' | 'justify' | 'max' | string
 
 /**
  * Represents an image file, used in Image blocks.
@@ -78,7 +113,9 @@ export type ImageFile = {
  *
  * @group Visual Data Blocks
  */
-export interface ImageBlock extends BlockData {
+export type ImageBlock = StretchableBlock<AlignableBlock<BaseImageBlock>>
+
+interface BaseImageBlock extends BlockData {
   id: number | undefined
   url: string
   files: ImageFile[]
@@ -96,7 +133,9 @@ export interface ImageBlock extends BlockData {
  *
  * @group Visual Data Blocks
  */
-export interface HTMLBlock extends BlockData {
+export type HTMLBlock = StretchableBlock<BaseHTMLBlock>
+
+interface BaseHTMLBlock extends BlockData {
   html: string
 }
 
@@ -116,7 +155,9 @@ export interface ListItem {
  *
  * @group Visual Data Blocks
  */
-export interface ListBlock extends BlockData {
+export type ListBlock = StretchableBlock<BaseListBlock>
+
+interface BaseListBlock extends BlockData {
   style: 'ordered' | 'unordered'
   items: ListItem[]
 }
@@ -134,7 +175,9 @@ export type SupportedServices = 'youtube' | 'vimeo'
  *
  * @group Visual Data Blocks
  */
-export type VideoBlock = {
+export type VideoBlock = StretchableBlock<AlignableBlock<BaseVideoBlock>>
+
+interface BaseVideoBlock extends BlockData {
   type: 'embed'
   service: SupportedServices
   videoId: string
@@ -142,6 +185,7 @@ export type VideoBlock = {
   html: string
   width: BlockWidth
   caption?: string
+  alignment: Alignment
 }
 
 /**

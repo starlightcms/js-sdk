@@ -70,7 +70,7 @@ export type StarlightConfig = {
  * @group Client
  */
 export interface StarlightClient<
-  D extends WorkspaceModelDefinition = DefaultModelDefinition
+  D extends WorkspaceModelDefinition = DefaultModelDefinition,
 > {
   /**
    * Updates the client configuration. See {@link StarlightConfig} to see all
@@ -154,7 +154,7 @@ export interface StarlightClient<
   get<T = Record<string, unknown>>(
     path: string,
     params?: Record<string, string | number | boolean | undefined>,
-    options?: RequestInit
+    options?: RequestInit,
   ): Promise<T>
 
   /**
@@ -222,7 +222,7 @@ export interface StarlightClient<
    * const response = await Starlight.form('signup').schema()
    * ```
    *
-   * See {@link DynamicFormInstance} for more info.
+   * See {@link FormInstance} for more info.
    *
    * @category Instance Methods
    */
@@ -290,7 +290,7 @@ export interface StarlightClient<
    * @category Instance Methods
    */
   collection<T extends CollectionEntityTypes>(
-    slug: string | number
+    slug: string | number,
   ): CollectionInstance<T>
 
   /**
@@ -560,7 +560,7 @@ export interface StarlightListResponse<T> {
  *
  *  @group Client
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface DefaultModelDefinition extends WorkspaceModelDefinition {}
 
 /**
