@@ -7,15 +7,15 @@ import {
 import makeCollectionInstance from '../../instances/Collection'
 
 export default function makeCollectionSelector(
-  client: StarlightClient
+  client: StarlightClient,
 ): DynamicCollectionSelector {
   const selector: CollectionSelector = {
-    list(options) {
-      return client.get('/collections', { ...options })
+    list(params, options) {
+      return client.get('/collections', params, options)
     },
 
-    get(slug) {
-      return client.get(`/collections/${slug}`)
+    get(slug, params, options) {
+      return client.get(`/collections/${slug}`, params, options)
     },
   }
 

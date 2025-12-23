@@ -1,8 +1,9 @@
 import {
-  BaseRequestParameters,
+  ListRequestParameters,
   Collection,
   StarlightItemResponse,
   StarlightListResponse,
+  BaseRequestParameters,
 } from '../../types'
 import { CollectionInstance } from '../../instances/Collection'
 
@@ -13,7 +14,7 @@ import { CollectionInstance } from '../../instances/Collection'
  *
  * @group Request Parameters
  */
-export interface ListCollectionsParams extends BaseRequestParameters {
+export interface ListCollectionsParams extends ListRequestParameters {
   /**
    * Define how items will be ordered. Check this field type to see the
    * allowed options.
@@ -54,11 +55,15 @@ export interface CollectionSelector {
    * })
    * ```
    *
-   * @param options An optional object of request parameters. See
-   * {@link ListCollectionsParams} for all available options.
+   * @param params An optional object of request parameters. See
+   * {@link ListCollectionsParams} for all available parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
   list(
-    options?: ListCollectionsParams
+    params?: ListCollectionsParams,
+    options?: RequestInit,
   ): Promise<StarlightListResponse<Collection>>
 
   /**
@@ -72,8 +77,16 @@ export interface CollectionSelector {
    * ```
    *
    * @param slug The collection slug.
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(slug: string | number): Promise<StarlightItemResponse<Collection>>
+  get(
+    slug: string | number,
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<Collection>>
 }
 
 /**

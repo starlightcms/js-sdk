@@ -1,5 +1,5 @@
 import {
-  BaseRequestParameters,
+  ListRequestParameters,
   Collection,
   CollectionEntityTypes,
   CollectionTypeMapper,
@@ -7,6 +7,7 @@ import {
   StarlightItemResponse,
   StarlightListResponse,
   WithQueryableFieldsOnModelables,
+  BaseRequestParameters,
 } from '../../types'
 
 /**
@@ -17,8 +18,7 @@ import {
  * @group Request Parameters
  */
 export interface ListCollectionItemsParams
-  extends BaseRequestParameters,
-    QueryableRequestParameters {
+  extends ListRequestParameters, QueryableRequestParameters {
   /**
    * Define how entries will be ordered. Check this field type to see the
    * allowed options.
@@ -53,8 +53,16 @@ export interface CollectionInstance<C extends CollectionEntityTypes> {
    *
    * const response = await Starlight.collection('featured-news').get()
    * ```
+   *
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(): Promise<StarlightItemResponse<Collection<CollectionTypeMapper<C>>>>
+  get(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<Collection<CollectionTypeMapper<C>>>>
 
   /**
    * Returns a {@link StarlightListResponse} with the list of items of this
@@ -82,11 +90,15 @@ export interface CollectionInstance<C extends CollectionEntityTypes> {
    * const response = await Starlight.collection<Entry<NewsPostType>>('featured-news').items()
    * ```
    *
-   * @param options An optional object of request parameters. See
-   * {@link ListCollectionItemsParams} for all available options. `field:foo`
+   * @param params An optional object of request parameters. See
+   * {@link ListCollectionItemsParams} for all available parameters. `field:foo`
    * syntax is also supported, see {@link QueryableFields} for more info.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
   items(
-    options?: ListCollectionItemsParams | WithQueryableFieldsOnModelables<C>
+    params?: ListCollectionItemsParams | WithQueryableFieldsOnModelables<C>,
+    options?: RequestInit,
   ): Promise<StarlightListResponse<C>>
 }

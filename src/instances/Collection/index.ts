@@ -2,15 +2,15 @@ import { CollectionEntityTypes, StarlightClient } from '../../types'
 import { CollectionInstance, ListCollectionItemsParams } from './types'
 
 export default function makeCollectionInstance<
-  T extends CollectionEntityTypes = unknown
+  T extends CollectionEntityTypes = unknown,
 >(client: StarlightClient, collection: string | number): CollectionInstance<T> {
   return {
-    get() {
-      return client.get(`/collections/${collection}`)
+    get(params, options) {
+      return client.get(`/collections/${collection}`, params, options)
     },
 
-    items(options) {
-      return client.get(`/collections/${collection}/items`, options)
+    items(params, options) {
+      return client.get(`/collections/${collection}/items`, params, options)
     },
   }
 }

@@ -2,15 +2,15 @@ import { StarlightClient } from '../../types'
 import { SingletonSelector } from './types'
 
 export default function makeSingletonSelector(
-  client: StarlightClient
+  client: StarlightClient,
 ): SingletonSelector {
   return {
-    list() {
-      return client.get('/singletons')
+    list(params, options) {
+      return client.get('/singletons', params, options)
     },
 
-    get(slug) {
-      return client.get(`/singletons/${slug}`)
+    get(slug, params, options) {
+      return client.get(`/singletons/${slug}`, params, options)
     },
   }
 }

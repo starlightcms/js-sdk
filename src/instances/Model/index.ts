@@ -1,37 +1,28 @@
-import {
-  Model,
-  SerializedData,
-  StarlightClient,
-  StarlightItemResponse,
-} from '../../types'
+import { SerializedData, StarlightClient } from '../../types'
 import { DynamicModelInstance, ModelInstance } from './types'
-import makeEntrySelector, { EntrySelector } from '../../selectors/Entry'
-import makeModelCategorySelector, {
-  DynamicModelCategorySelector,
-} from '../../selectors/ModelCategory'
-import makeModelCategoryInstance, {
-  ModelCategoryInstance,
-} from '../ModelCategory'
+import makeEntrySelector from '../../selectors/Entry'
+import makeModelCategorySelector from '../../selectors/ModelCategory'
+import makeModelCategoryInstance from '../ModelCategory'
 
 export default function makeModelInstance<D extends SerializedData>(
   client: StarlightClient,
-  model: string
+  model: string,
 ): DynamicModelInstance<D> {
-  const instance = {
-    get(): Promise<StarlightItemResponse<Model>> {
-      return client.get(`/models/${model}`)
+  const instance: ModelInstance<D> = {
+    get(params, options) {
+      return client.get(`/models/${model}`, params, options)
     },
 
-    category(slug: string): ModelCategoryInstance<D> {
-      return makeModelCategoryInstance(client, model, slug)
+    category(slug: string) {
+      return makeModelCategoryInstance<D>(client, model, slug)
     },
 
-    get entries(): EntrySelector<D> {
+    get entries() {
       return makeEntrySelector<D>(client, model)
     },
 
-    get categories(): DynamicModelCategorySelector<D> {
-      return makeModelCategorySelector(client, model)
+    get categories() {
+      return makeModelCategorySelector<D>(client, model)
     },
   }
 

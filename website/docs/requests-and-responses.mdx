@@ -8,7 +8,8 @@ toc_max_heading_level: 4
 O JS SDK segue alguns padrões para facilitar seu uso:
 - Requisições são feitas utilizando Selectors ou Instances
 - Respostas seguem um padrão onde o dado requisitado é retornado no parâmetro `data`
-- Todos os métodos de requisição retornam Promises.
+- Todos os métodos do SDK utilizam [fetch](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch)
+e retornam Promises.
 
 Para saber mais sobre os dois primeiros padrões, continue lendo essa página. Porém, para entender as Promises retornadas
 pelas requisições, você pode dar uma olhada na [página sobre clientes do SDK](./client#requests-return-promises).
@@ -26,7 +27,7 @@ dado que você precisa requisitar.
 padrão na maneira como o SDK é estruturado, e conhecer essa estrutura pode ser útil para lembrar rapidamente qual método
 do SDK utilizar para requisitar um dado específico.
 
-Além disso, **na maioria dos casos, você não precisa criar Selectors ou Instances** para utilizá-los. Em vários casos,
+**Geralmente, você não precisa criar Selectors ou Instances** para utilizá-los. Em vários casos,
 o cliente do SDK cria esses objetos para você dinamicamente, e vamos explicar como isso funciona nas seções abaixo.
 
 ### Selectors
@@ -190,7 +191,7 @@ de criar Instances é mais natural, já que estamos apenas chamando um método d
 ## Respostas {#responses}
 
 Como explicamos anteriormente, [todos os métodos que requisitam dados do Starlight retornam Promises](./client#requests-return-promises).
-Ao retornarem, essas Promises contém um desses três tipos:
+Ao retornarem, essas Promises resolvem para um desses três tipos:
 
 - [StarlightItemResponse](#starlight-item-response)
 - [StarlightListResponse](#starlight-list-response)

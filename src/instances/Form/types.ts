@@ -1,4 +1,9 @@
-import { Form, FormSchema, StarlightItemResponse } from '../../types'
+import {
+  BaseRequestParameters,
+  Form,
+  FormSchema,
+  StarlightItemResponse,
+} from '../../types'
 
 /**
  * An Instance that provide methods to request information from a {@link Form}
@@ -20,8 +25,16 @@ export interface FormInstance {
    *
    * const response = await Starlight.forms.signup.get()
    * ```
+   *
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(): Promise<StarlightItemResponse<Form>>
+  get(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<Form>>
 
   /**
    * Returns a {@link StarlightItemResponse} with a {@link FormSchema}.
@@ -33,7 +46,13 @@ export interface FormInstance {
    * const response = await Starlight.forms.signup.schema()
    * ```
    *
-   * @param slug The category slug.
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  schema(): Promise<StarlightItemResponse<FormSchema>>
+  schema(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<FormSchema>>
 }
