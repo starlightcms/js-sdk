@@ -56,9 +56,9 @@ import makeFormInstance from './instances/Form'
  * @group Client
  */
 export function makeClient<
-  D extends WorkspaceModelDefinition = DefaultModelDefinition
+  D extends WorkspaceModelDefinition = DefaultModelDefinition,
 >(
-  config: StarlightConfig = {}
+  config: StarlightConfig = {},
 ): DynamicStarlightClient<D & WorkspaceModelDefinition> {
   let baseUrl = config.baseUrl ?? 'https://query.starlightcms.io/v2'
   let workspace = config.workspace ?? ''
@@ -78,7 +78,7 @@ export function makeClient<
     getBaseUrl() {
       if (!workspace.length) {
         throw new Error(
-          'No workspace defined. Use the `configure()` method on the Starlight client to define one.'
+          'No workspace defined. Use the `configure()` method on the Starlight client to define one.',
         )
       }
 
@@ -86,13 +86,17 @@ export function makeClient<
     },
 
     async get(path, params = {}, options) {
-      const filteredParams = Object.keys(params).reduce((accumulator, key) => {
-        const param = params[key]
+      const filteredParams = Object.keys(params).reduce(
+        (accumulator, key) => {
+          const param = params[key]
 
-        if (param || param === false) accumulator[key] = String(param)
+          if (param || param === false || param === 0)
+            accumulator[key] = String(param)
 
-        return accumulator
-      }, {} as Record<string, string>)
+          return accumulator
+        },
+        {} as Record<string, string>,
+      )
 
       const searchParams = new URLSearchParams(filteredParams).toString()
       const finalPath = searchParams ? `${path}?${searchParams}` : path

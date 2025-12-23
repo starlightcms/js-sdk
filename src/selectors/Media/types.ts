@@ -1,4 +1,5 @@
 import {
+  BaseRequestParameters,
   MediaObject,
   StarlightItemResponse,
   StarlightListResponse,
@@ -27,8 +28,16 @@ export interface MediaSelector {
    * ```
    *
    * @param id The media object ID.
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(id: number | string): Promise<StarlightItemResponse<MediaObject>>
+  get(
+    id: number | string,
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<MediaObject>>
 
   /**
    * Returns a {@link StarlightListResponse} with the list of
@@ -40,6 +49,14 @@ export interface MediaSelector {
    *
    * const response = await Starlight.media.list()
    * ```
+   *
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  list(): Promise<StarlightListResponse<MediaObject>>
+  list(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightListResponse<MediaObject>>
 }

@@ -1,21 +1,16 @@
-import {
-  Form,
-  FormSchema,
-  StarlightClient,
-  StarlightItemResponse,
-} from '../../types'
+import { StarlightClient } from '../../types'
 import { FormInstance } from './types'
 
 export default function makeFormInstance(
   client: StarlightClient,
-  form: string
+  form: string,
 ): FormInstance {
   return {
-    get(): Promise<StarlightItemResponse<Form>> {
-      return client.get(`/forms/${form}`)
+    get(params, options) {
+      return client.get(`/forms/${form}`, params, options)
     },
-    schema(): Promise<StarlightItemResponse<FormSchema>> {
-      return client.get(`/forms/${form}/schema`)
+    schema(params, options) {
+      return client.get(`/forms/${form}/schema`, params, options)
     },
   }
 }

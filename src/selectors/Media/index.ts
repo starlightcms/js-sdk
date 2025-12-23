@@ -2,15 +2,15 @@ import { StarlightClient } from '../../types'
 import { MediaSelector } from './types'
 
 export default function makeMediaSelector(
-  client: StarlightClient
+  client: StarlightClient,
 ): MediaSelector {
   return {
-    list() {
-      return client.get('/media')
+    list(params, options) {
+      return client.get('/media', params, options)
     },
 
-    get(id) {
-      return client.get(`/media/${id}`)
+    get(id, params, options) {
+      return client.get(`/media/${id}`, params, options)
     },
   }
 }

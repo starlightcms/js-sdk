@@ -112,15 +112,16 @@ const entry = await requestEntry('hello-world')
 ```
 
 Note que usamos a palavra-chave `async` do JavaScript ao utilizar o método `get()` na linha 5. Fizemos isso porque
-**todos os métodos do SDK que fazem requisições ao Starlight retornam Promises**. Isso quer dizer que você também pode
-usar a sintaxe `.then()` ao invés de `async/await`, se preferir.
+**todos os métodos do SDK que fazem requisições ao Starlight utilizam a
+[Fetch API](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch) por baixo dos panos e retornam
+Promises**. Isso quer dizer que você também pode usar a sintaxe `.then()` ao invés de `async/await`, se preferir.
 
 :::tip nota sobre async/await nesse guia
 
 A maioria dos exemplos desse guia usa a sintaxe `async/await` fora de funções `async`. Isso só é possível em ambientes
 que dão suporte a [top-level await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await#top_level_await).
 Todos os navegadores modernos dão suporte a esse recurso, mas caso você tenha problemas rodando os exemplos desse guia
-localmente, basta colocar os exemplos dentro de uma função assíncrona:
+localmente, basta inserir os exemplos numa função assíncrona:
 
 ```js
 import Starlight from '@starlightcms/js-sdk'
@@ -142,6 +143,25 @@ requestPosts()
 ```
 
 :::
+
+## Configurando as requisições do SDK
+
+Como comentamos na seção anterior, o SDK utiliza a [Fetch API](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch)
+para fazer todas as suas requisições. Isso quer dizer que você pode passar opções para modificar como a
+função `fetch` faz uma requisição:
+
+```js
+import Starlight from '@starlightcms/js-sdk'
+
+// O último parâmetro é um objeto de opções do fetch
+const response = await Starlight.posts.entries.list({ page: 1 }, { cache: 'force-cache' })
+```
+
+Todos os métodos do SDK que fazem requisições às APIs do Starlight aceitam um objeto de configurações do fetch como
+último parâmetro. Esse objeto será repassado diretamente à função `fetch` sem nenhuma modificação.
+
+Dê uma olhada na página da MDN sobre as [opções da função fetch (em inglês)](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit)
+para aprender mais sobre todas as opções disponíveis.
 
 ## Tratando erros nas requisições {#handling-errors}
 

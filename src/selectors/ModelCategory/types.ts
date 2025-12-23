@@ -1,5 +1,6 @@
 import {
   BaseRequestParameters,
+  ListRequestParameters,
   ModelCategory,
   SerializedData,
   StarlightItemResponse,
@@ -14,7 +15,7 @@ import { ModelCategoryInstance } from '../../instances/ModelCategory'
  *
  * @group Request Parameters
  */
-export interface ListModelCategoriesOptions extends BaseRequestParameters {
+export interface ListModelCategoriesOptions extends ListRequestParameters {
   /**
    * Define how items will be ordered. Check this field type to see the
    * allowed options.
@@ -53,11 +54,15 @@ export interface ModelCategorySelector {
    * const response = await Starlight.posts.categories.list()
    * ```
    *
-   * @param options An optional object of request parameters. See
-   * {@link ListModelCategoriesOptions} for all available options.
+   * @param params An optional object of request parameters. See
+   * {@link ListModelCategoriesOptions} for all available parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
   list(
-    options?: ListModelCategoriesOptions
+    params?: ListModelCategoriesOptions,
+    options?: RequestInit,
   ): Promise<StarlightListResponse<ModelCategory>>
 
   /**
@@ -71,8 +76,16 @@ export interface ModelCategorySelector {
    * ```
    *
    * @param slug The category slug.
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(slug: string): Promise<StarlightItemResponse<ModelCategory>>
+  get(
+    slug: string,
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<ModelCategory>>
 }
 
 /**

@@ -1,5 +1,5 @@
 import {
-  BaseRequestParameters,
+  ListRequestParameters,
   Entry,
   SerializedData,
   StarlightListResponse,
@@ -12,7 +12,7 @@ import {
  *
  * @group Request Parameters
  */
-export interface SearchEntriesParams extends BaseRequestParameters {
+export interface SearchEntriesParams extends ListRequestParameters {
   /**
    * A comma-separated list of models. Only entries in these models
    * will be returned. If undefined, entries from all
@@ -92,10 +92,14 @@ export interface SearchSelector {
    * })
    * ```
    *
-   * @param options An optional object of request parameters. See
-   * {@link SearchEntriesParams} for all available options.
+   * @param params An optional object of request parameters. See
+   * {@link SearchEntriesParams} for all available parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
   entries<T extends SerializedData = Record<string, unknown>>(
-    options?: SearchEntriesParams
+    params?: SearchEntriesParams,
+    options?: RequestInit,
   ): Promise<StarlightListResponse<Entry<T>>>
 }

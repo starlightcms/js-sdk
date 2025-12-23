@@ -1,5 +1,5 @@
 import {
-  BaseRequestParameters,
+  ListRequestParameters,
   Entry,
   ModelCategory,
   QueryableFields,
@@ -7,6 +7,7 @@ import {
   SerializedData,
   StarlightItemResponse,
   StarlightListResponse,
+  BaseRequestParameters,
 } from '../../types'
 
 /**
@@ -17,8 +18,7 @@ import {
  * @group Request Parameters
  */
 export interface ModelCategoryEntryListParams
-  extends BaseRequestParameters,
-    QueryableRequestParameters {
+  extends ListRequestParameters, QueryableRequestParameters {
   /**
    * Define how entries will be ordered. Check this field type to see the
    * allowed options.
@@ -54,8 +54,16 @@ export interface ModelCategoryInstance<D extends SerializedData> {
    *
    * const response = await Starlight.posts.articles.get()
    * ```
+   *
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(): Promise<StarlightItemResponse<ModelCategory>>
+  get(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<ModelCategory>>
 
   /**
    * Returns a {@link StarlightListResponse} with the list of entries of this
@@ -78,11 +86,16 @@ export interface ModelCategoryInstance<D extends SerializedData> {
    * })
    * ```
    *
-   * @param options An optional object of request parameters. See
-   * {@link ModelCategoryEntryListParams} for all available options. `field:foo`
-   * syntax is also supported, see {@link QueryableFields} for more info.
+   * @param params An optional object of request parameters. See
+   * {@link ModelCategoryEntryListParams} for all available parameters.
+   * `field:foo` syntax is also supported, see {@link QueryableFields}
+   * for more info.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
   entries(
-    options?: ModelCategoryEntryListParams & QueryableFields<D>
+    params?: ModelCategoryEntryListParams & QueryableFields<D>,
+    options?: RequestInit,
   ): Promise<StarlightListResponse<Entry<D>>>
 }
