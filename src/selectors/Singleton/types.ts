@@ -1,4 +1,5 @@
 import {
+  BaseRequestParameters,
   SerializedData,
   Singleton,
   StarlightItemResponse,
@@ -43,9 +44,15 @@ export interface SingletonSelector {
    * ```
    * @typeParam D - The type of the returned Singleton's `data` property.
    * @param slug The singleton slug.
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
   get<D extends SerializedData>(
-    slug: string
+    slug: string,
+    params?: BaseRequestParameters,
+    options?: RequestInit,
   ): Promise<StarlightItemResponse<Singleton<D>>>
 
   /**
@@ -58,6 +65,14 @@ export interface SingletonSelector {
    *
    * const response = await Starlight.singletons.list()
    * ```
+   *
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  list(): Promise<StarlightListResponse<Singleton<Record<string, unknown>>>>
+  list(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightListResponse<Singleton<Record<string, unknown>>>>
 }

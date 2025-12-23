@@ -1,4 +1,9 @@
-import { Model, SerializedData, StarlightItemResponse } from '../../types'
+import {
+  BaseRequestParameters,
+  Model,
+  SerializedData,
+  StarlightItemResponse,
+} from '../../types'
 import { EntrySelector } from '../../selectors/Entry'
 import { DynamicModelCategorySelector } from '../../selectors/ModelCategory'
 import { ModelCategoryInstance } from '../ModelCategory'
@@ -25,8 +30,16 @@ export interface ModelInstance<D extends SerializedData> {
    *
    * const response = await Starlight.posts.get()
    * ```
+   *
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(): Promise<StarlightItemResponse<Model>>
+  get(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<Model>>
 
   /**
    * Returns a {@link ModelCategoryInstance}.

@@ -1,28 +1,22 @@
+import { SerializedData, StarlightClient } from '../../types'
 import {
-  ModelCategory,
-  SerializedData,
-  StarlightClient,
-  StarlightItemResponse,
-  StarlightListResponse,
-} from '../../types'
-import {
-  ModelCategorySelector,
   DynamicModelCategorySelector,
   ListModelCategoriesOptions,
+  ModelCategorySelector,
 } from './types'
 import makeModelCategoryInstance from '../../instances/ModelCategory'
 
 export default function makeModelCategorySelector<D extends SerializedData>(
   client: StarlightClient,
-  model: string
+  model: string,
 ): DynamicModelCategorySelector<D> {
   const selector: ModelCategorySelector = {
-    list(options): Promise<StarlightListResponse<ModelCategory>> {
-      return client.get(`/models/${model}/categories`, { ...options })
+    list(params, options) {
+      return client.get(`/models/${model}/categories`, params, options)
     },
 
-    get(slug): Promise<StarlightItemResponse<ModelCategory>> {
-      return client.get(`/models/${model}/categories/${slug}`)
+    get(slug, params, options) {
+      return client.get(`/models/${model}/categories/${slug}`, params, options)
     },
   }
 

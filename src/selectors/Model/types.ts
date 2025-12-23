@@ -1,4 +1,5 @@
 import {
+  BaseRequestParameters,
   Model,
   StarlightItemResponse,
   StarlightListResponse,
@@ -29,8 +30,16 @@ export interface ModelSelector {
    *
    * const response = await Starlight.models.list()
    * ```
+   *
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  list(): Promise<StarlightListResponse<Model>>
+  list(
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightListResponse<Model>>
 
   /**
    * Returns a {@link StarlightItemResponse} with a single {@link Model}.
@@ -47,8 +56,16 @@ export interface ModelSelector {
    * ```
    *
    * @param slug The model slug.
+   * @param params An optional object of request parameters.
+   * @param options An optional object of fetch options. See
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/RequestInit} for
+   * more info.
    */
-  get(slug: string): Promise<StarlightItemResponse<Model>>
+  get(
+    slug: string,
+    params?: BaseRequestParameters,
+    options?: RequestInit,
+  ): Promise<StarlightItemResponse<Model>>
 }
 
 /**

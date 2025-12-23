@@ -153,7 +153,7 @@ export interface StarlightClient<
    */
   get<T = Record<string, unknown>>(
     path: string,
-    params?: Record<string, string | number | boolean | undefined>,
+    params?: BaseRequestParameters,
     options?: RequestInit,
   ): Promise<T>
 
@@ -573,12 +573,21 @@ export interface WorkspaceModelDefinition {
 }
 
 /**
- * Request parameters used by most SDK `list()` methods.
+ * An object that accepts any string, number and boolean values.
+ * Used as the base for most request parameter interfaces in the SDK.
  *
  * @group Request Parameters
  */
 export interface BaseRequestParameters {
   [key: string]: string | number | boolean | undefined
+}
+
+/**
+ * Request parameters used by most SDK `list()` methods.
+ *
+ * @group Request Parameters
+ */
+export interface ListRequestParameters extends BaseRequestParameters {
   /**
    * The page requested.
    */
