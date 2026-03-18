@@ -93,7 +93,7 @@ export interface Field {
  *
  * @group API Entities
  */
-export interface FieldGroup {
+export interface SchemaFieldGroup {
   title: string
   type: string
   fields: Field[]
@@ -106,7 +106,7 @@ export interface FieldGroup {
  */
 export interface ModelSchema {
   version: number
-  groups: FieldGroup[]
+  groups: SchemaFieldGroup[]
 }
 
 /**
