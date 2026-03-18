@@ -9,11 +9,13 @@ import { CollectionInstance } from '../instances/Collection'
 import { FormInstance } from '../instances/Form'
 import { DynamicFormSelector } from '../selectors/Form/types'
 
-export * from './fields'
 export * from './entities'
-export * from './visual'
+export * from './fields'
+export * from './groups'
 export * from './instances'
 export * from './selectors'
+export * from './utilities'
+export * from './visual'
 
 /**
  * This is a utility type that allows any string to be used as a URL, but
@@ -475,11 +477,13 @@ export interface StarlightListResponse<T> {
  * data definition type to the EntrySelector when requesting something:
  *
  *  ```ts
- * import Starlight, { VisualField, MediaField } from '@starlightcms/js-sdk'
+ * import Starlight, { Group, VisualField, MediaField } from '@starlightcms/js-sdk'
  *
  * type PostFields = {
- *   featured_image: MediaField
- *   content: VisualField
+ *   info: Group<{
+ *     featured_image: MediaField
+ *     content: VisualField
+ *   }>
  * }
  *
  * // response type will now be StarlightItemResponse<Entry<PostsFields>>.
@@ -490,17 +494,19 @@ export interface StarlightListResponse<T> {
  *
  * // Which means we can safely access its data, and IDEs will
  * // auto-complete the data field name below:
- * console.log(helloWorld.data.featured_image)
+ * console.log(helloWorld.data.info.featured_image)
  * ```
  *
- * Note that we used "Fields" to define our data shape. We recommend using these
- * types, which are exported by this SDK, because they map to the field types
- * available in the Starlight admin when creating models, and should simplify
- * the type definition process. All available Field types are documented in the
- * {@apilink BooleanField | Data Fields section of this API}.
+ * Note that we used **Groups** and **Fields** to define our data shape. We
+ * recommend using these types, which are exported by this SDK, because they map
+ * to the group and field types available in the Starlight admin when creating
+ * models, and should simplify the type definition process. All available Group
+ * and Field types are documented in the
+ * {@apilink BooleanField | Data Fields} and
+ * {@apilink Group | Data Groups} sections of this API.
  *
  * However, passing model definition types around your application is not ideal,
- * and actually unnecessary. Using the DefaultModelDefinition type, all model
+ * and actually unnecessary. Using the `DefaultModelDefinition` type, all model
  * definitions can be automatically inferred.
  *
  * To get started, you need to create a
@@ -518,23 +524,39 @@ export interface StarlightListResponse<T> {
  * Here's a complete exemple defining two models, Posts and Magazines:
  *
  * ```ts
- * import { StringField, VisualField, MediaField } from '@starlightcms/js-sdk'
+ * import {
+ *   Group,
+ *   RepeaterGroup,
+ *   StringField,
+ *   VisualField,
+ *   MediaField
+ * } from '@starlightcms/js-sdk'
  *
  * type PostFields = {
- *   featured_image: MediaField
- *   content: VisualField
+ *   info: Group<{
+ *     featured_image: MediaField
+ *     content: VisualField
+ *   }>
  * }
  *
  * type MagazineFields = {
- *   cover_image: MediaField
- *   content: VisualField
- *   issue_number: StringField
- *   issue_year: StringField
+ *   info: Group<{
+ *     cover_image: MediaField
+ *     content: VisualField
+ *   }>
+ *   page_previews: RepeaterGroup<{
+ *     image: MediaField
+ *     description: StringField
+ *   }>
+ *   metadata: Group<{
+ *     issue_number: StringField
+ *     issue_year: StringField
+ *   }>
  * }
  *
  * declare module '@starlightcms/js-sdk' {
  *   export interface DefaultModelDefinition {
- *     // Notice that each key in this interface is a Model slug!
+ *     // Notice how each key in this interface is a Model slug!
  *     posts: PostFields
  *     magazines: MagazineFields
  *   }
@@ -542,20 +564,21 @@ export interface StarlightListResponse<T> {
  * ```
  *
  * After creating this file, types should be automatically inferred without the
- * need to pass these types around:
+ * need to pass them around:
  *
  *  ```ts
  * import Starlight from '@starlightcms/js-sdk'
  *
  * // response type will be StarlightItemResponse<Entry<PostsFields>>,
- * // which was implicitly inferred by the SDK!
+ * // which was implicitly inferred by the SDK because of the `posts`
+ * // property we added to the `DefaultModelDefinition` above.
  * const response = await Starlight.posts.entries.get('hello-world')
  *
  * // helloWorld type is Entry<PostsFields>
  * const helloWorld = response.data
  *
  * // Auto-complete will work just as before when we explicitly type the Entry!
- * console.log(helloWorld.data.featured_image)
+ * console.log(helloWorld.data.info.featured_image)
  * ```
  *
  *  @group Client

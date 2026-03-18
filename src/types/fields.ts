@@ -13,7 +13,7 @@ import { VisualData } from './visual'
 export type BooleanField = boolean
 
 /**
- * Represents a HTML Field returned by the API.
+ * Represents an HTML Field returned by the API.
  *
  * Field types are used to type Entry and Singleton objects when requesting
  * them using some SDK methods. See {@apilink DefaultModelDefinition}
