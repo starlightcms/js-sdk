@@ -7,18 +7,7 @@
  *
  * @group Data Groups
  */
-export type Group<Fields extends Record<string, unknown>> = Fields
-
-/**
- * Represents a Legacy Group returned by the API.
- *
- * Group types are used to type Entry and Singleton objects when requesting
- * them using some SDK methods. See {@apilink DefaultModelDefinition}
- * for more info.
- *
- * @group Data Groups
- */
-export type LegacyGroup<Fields extends Record<string, unknown>> = Fields
+export type Group<Fields extends Record<string, unknown>> = Fields | undefined
 
 /**
  * Represents a Repeater Group returned by the API.
@@ -37,3 +26,4 @@ export type LegacyGroup<Fields extends Record<string, unknown>> = Fields
 export type RepeaterGroup<Fields extends Record<string, unknown>> =
   | Fields[]
   | null
+  | undefined
