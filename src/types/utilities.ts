@@ -7,7 +7,7 @@ import { RepeaterGroup } from './groups'
  * the `Foo` type. This is useful to "pick" the type of the content held
  * by items of a Repeater Group.
  *
- * @group Utilities
+ * @group Utility Types
  */
 export type RepeaterItem<
   Repeater extends RepeaterGroup<Record<string, unknown>>,
