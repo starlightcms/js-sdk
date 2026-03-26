@@ -1,5 +1,5 @@
-import { SerializedData, StarlightClient } from '../../types'
-import { DynamicModelInstance, ModelInstance } from './types'
+import type { SerializedData, StarlightClient } from '../../types'
+import type { DynamicModelInstance, ModelInstance } from './types'
 import makeEntrySelector from '../../selectors/Entry'
 import makeModelCategorySelector from '../../selectors/ModelCategory'
 import makeModelCategoryInstance from '../ModelCategory'

@@ -1,5 +1,5 @@
-import { StarlightClient } from '../../types'
-import {
+import type { StarlightClient } from '../../types'
+import type {
   CollectionSelector,
   DynamicCollectionSelector,
   ListCollectionsParams,

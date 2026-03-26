@@ -3,7 +3,7 @@ import { DynamicFormSelector } from './types'
 import makeFormInstance from '../../instances/Form'
 
 export default function makeFormSelector(
-  client: StarlightClient
+  client: StarlightClient,
 ): DynamicFormSelector {
   return new Proxy(
     {},
@@ -15,6 +15,6 @@ export default function makeFormSelector(
 
         return Reflect.get(target, prop)
       },
-    }
+    },
   )
 }

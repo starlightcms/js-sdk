@@ -1,5 +1,5 @@
-import { StarlightClient, WorkspaceModelDefinition } from '../../types'
-import { DynamicModelSelector, ModelSelector } from './types'
+import type { StarlightClient, WorkspaceModelDefinition } from '../../types'
+import type { DynamicModelSelector, ModelSelector } from './types'
 import makeModelInstance from '../../instances/Model'
 
 export default function makeModelSelector<D extends WorkspaceModelDefinition>(

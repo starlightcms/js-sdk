@@ -1,16 +1,16 @@
 // Selector types are exported here so they are visible in the API docs.
-export {
+export type {
   ModelCategorySelector,
   DynamicModelCategorySelector,
   ListModelCategoriesOptions,
 } from '../selectors/ModelCategory'
-export { ModelSelector, DynamicModelSelector } from '../selectors/Model'
-export {
+export type { ModelSelector, DynamicModelSelector } from '../selectors/Model'
+export type {
   CollectionSelector,
   DynamicCollectionSelector,
   ListCollectionsParams,
 } from '../selectors/Collection'
-export { EntrySelector, ListEntriesParams } from '../selectors/Entry'
-export { MediaSelector } from '../selectors/Media'
-export { SearchSelector, SearchEntriesParams } from '../selectors/Search'
-export { SingletonSelector } from '../selectors/Singleton'
+export type { EntrySelector, ListEntriesParams } from '../selectors/Entry'
+export type { MediaSelector } from '../selectors/Media'
+export type { SearchSelector, SearchEntriesParams } from '../selectors/Search'
+export type { SingletonSelector } from '../selectors/Singleton'

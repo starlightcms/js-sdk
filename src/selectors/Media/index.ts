@@ -1,5 +1,5 @@
-import { StarlightClient } from '../../types'
-import { MediaSelector } from './types'
+import type { StarlightClient } from '../../types'
+import type { MediaSelector } from './types'
 
 export default function makeMediaSelector(
   client: StarlightClient,
