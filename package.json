@@ -41,6 +41,9 @@
     "url": "https://github.com/starlightcms/js-sdk/issues"
   },
   "homepage": "https://github.com/starlightcms/js-sdk#readme",
+  "dependencies": {
+    "type-fest": "5.5.0"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",

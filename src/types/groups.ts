@@ -7,7 +7,9 @@
  *
  * @group Data Groups
  */
-export type Group<Fields extends Record<string, unknown>> = Fields | undefined
+export type Group<Fields extends Record<string, unknown>> =
+  | { [Property in keyof Fields]: Fields[Property] }
+  | undefined
 
 /**
  * Represents a Repeater Group returned by the API.
@@ -24,6 +26,6 @@ export type Group<Fields extends Record<string, unknown>> = Fields | undefined
  * @group Data Groups
  */
 export type RepeaterGroup<Fields extends Record<string, unknown>> =
-  | Fields[]
+  | Array<{ [Property in keyof Fields]: Fields[Property] }>
   | null
   | undefined
