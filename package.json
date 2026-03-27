@@ -17,9 +17,6 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "docs": "npm start -w website",
-    "docs:build": "npm run build -w website",
-    "docs:serve": "npm run serve -w website",
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
     "test": "vitest",
