@@ -1,5 +1,5 @@
-import { SerializedData, StarlightClient } from '../../types'
-import { EntrySelector, ListEntriesParams } from './types'
+import type { SerializedData, StarlightClient } from '../../types'
+import type { EntrySelector, ListEntriesParams } from './types'
 
 export default function makeEntrySelector<D extends SerializedData>(
   client: StarlightClient,

@@ -1,22 +1,22 @@
 {
   "name": "@starlightcms/js-sdk",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "description": "The Starlight SDK for JavaScript",
-  "main": "dist/cjs/index.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
   "exports": {
-    "require": "./dist/cjs/index.js",
-    "import": "./dist/esm/index.js"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
   },
   "sideEffects": false,
   "scripts": {
-    "build": "rimraf dist && npm run build:cjs && npm run build:esm",
-    "build:esm": "tsc --module esnext --outDir dist/esm",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
-    "dev": "tsc --watch --module esnext --outDir dist/esm",
-    "dev:cjs": "tsc --watch --module commonjs --outDir dist/cjs",
-    "docs": "npm start -w website",
-    "docs:build": "npm run build -w website",
-    "docs:serve": "npm run serve -w website",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
     "test": "vitest",
@@ -56,9 +56,14 @@
     "lint-staged": "^11.1.2",
     "msw": "^2.12.4",
     "prettier": "^3.7.4",
-    "rimraf": "^3.0.2",
+    "tsdown": "^0.21.5",
+    "type-fest": "5.5.0",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15"
+  },
+  "inlinedDependencies": {
+    "tagged-tag": "1.0.0",
+    "type-fest": "5.5.0"
   },
   "lint-staged": {
     "*.{ts}": [

@@ -10,7 +10,7 @@ import { VisualData } from './visual'
  *
  * @group Data Fields
  */
-export type BooleanField = boolean
+export type BooleanField = boolean | undefined
 
 /**
  * Represents an HTML Field returned by the API.
@@ -21,7 +21,7 @@ export type BooleanField = boolean
  *
  * @group Data Fields
  */
-export type HtmlField = string
+export type HtmlField = string | undefined
 
 /**
  * Represents a Media Field returned by the API.
@@ -32,7 +32,7 @@ export type HtmlField = string
  *
  * @group Data Fields
  */
-export type MediaField = MediaObject
+export type MediaField = MediaObject | undefined
 
 /**
  * Represents a Relation Field returned by the API.
@@ -43,7 +43,7 @@ export type MediaField = MediaObject
  *
  * @group Data Fields
  */
-export type RelationField<T> = Relation<T>
+export type RelationField<T> = Relation<T> | undefined
 
 /**
  * Represents a String Field returned by the API.
@@ -54,7 +54,7 @@ export type RelationField<T> = Relation<T>
  *
  * @group Data Fields
  */
-export type StringField = string
+export type StringField = string | undefined
 
 /**
  * Represents a Text Field returned by the API.
@@ -65,7 +65,7 @@ export type StringField = string
  *
  * @group Data Fields
  */
-export type TextField = string
+export type TextField = string | undefined
 
 /**
  * Represents a Visual Field returned by the API.
@@ -76,4 +76,59 @@ export type TextField = string
  *
  * @group Data Fields
  */
-export type VisualField = VisualData
+export type VisualField = VisualData | undefined
+
+/**
+ * Represents an Integer Field returned by the API.
+ *
+ * Field types are used to type Entry and Singleton objects when requesting
+ * them using some SDK methods. See {@apilink DefaultModelDefinition}
+ * for more info.
+ *
+ * @group Data Fields
+ */
+export type IntegerField = number | undefined
+
+/**
+ * Represents a Float Field returned by the API.
+ *
+ * Field types are used to type Entry and Singleton objects when requesting
+ * them using some SDK methods. See {@apilink DefaultModelDefinition}
+ * for more info.
+ *
+ * @group Data Fields
+ */
+export type FloatField = number | undefined
+
+/**
+ * Represents a Decimal Field returned by the API.
+ *
+ * Field types are used to type Entry and Singleton objects when requesting
+ * them using some SDK methods. See {@apilink DefaultModelDefinition}
+ * for more info.
+ *
+ * @group Data Fields
+ */
+export type DecimalField = number | undefined
+
+export type SelectFieldOptions = {
+  /**
+   * Indicates if the Select Field accepts multiple selected choices.
+   *
+   * @default false
+   */
+  multiple?: boolean
+}
+
+/**
+ * Represents a Select Field returned by the API.
+ *
+ * Field types are used to type Entry and Singleton objects when requesting
+ * them using some SDK methods. See {@apilink DefaultModelDefinition}
+ * for more info.
+ *
+ * @group Data Fields
+ */
+export type SelectField<
+  Options extends SelectFieldOptions = { multiple: false },
+> = (Options['multiple'] extends false ? string : string | string[]) | undefined

@@ -1,5 +1,8 @@
-import { SerializedData, StarlightClient } from '../../types'
-import { ModelCategoryEntryListParams, ModelCategoryInstance } from './types'
+import type { SerializedData, StarlightClient } from '../../types'
+import type {
+  ModelCategoryEntryListParams,
+  ModelCategoryInstance,
+} from './types'
 
 export default function makeModelCategoryInstance<D extends SerializedData>(
   client: StarlightClient,

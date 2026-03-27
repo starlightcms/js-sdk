@@ -1,5 +1,5 @@
-import { StarlightClient } from '../../types'
-import { FormInstance } from './types'
+import type { StarlightClient } from '../../types'
+import type { FormInstance } from './types'
 
 export default function makeFormInstance(
   client: StarlightClient,

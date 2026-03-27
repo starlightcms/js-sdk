@@ -1,5 +1,5 @@
-import { StarlightClient } from '../../types'
-import { SingletonSelector } from './types'
+import type { StarlightClient } from '../../types'
+import type { SingletonSelector } from './types'
 
 export default function makeSingletonSelector(
   client: StarlightClient,

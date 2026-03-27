@@ -1,5 +1,5 @@
-import { SerializedData, StarlightClient } from '../../types'
-import {
+import type { SerializedData, StarlightClient } from '../../types'
+import type {
   DynamicModelCategorySelector,
   ListModelCategoriesOptions,
   ModelCategorySelector,

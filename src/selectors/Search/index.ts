@@ -1,5 +1,5 @@
-import { StarlightClient } from '../../types'
-import { SearchEntriesParams, SearchSelector } from './types'
+import type { StarlightClient } from '../../types'
+import type { SearchEntriesParams, SearchSelector } from './types'
 
 export default function makeSearchSelector(
   client: StarlightClient,
