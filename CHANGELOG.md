@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `IntegerField`, `DecimalField`, `FloatField` and `SelectField` types to represent new data types supported by Starlight 
 - `GetFromStructure` utility to retrieve Group and Field types deeply nested into a structure definition type
-- `getMediaFile` and `getMediaSource` functions now accept a string or and array of strings in the `variation` argument
+- `getMediaFile` and `getMediaSource` functions now accept a string or an array of strings in the `variation` argument
 
 
 ### Changed
